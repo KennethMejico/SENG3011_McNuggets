@@ -1,4 +1,4 @@
-# SENG3011_McNuggets/README
+# SENG3011_McNuggets
 This file will describe content at each deliverable
 
 DELIVERABLE 1
