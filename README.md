@@ -1,5 +1,9 @@
 # SENG3011_McNuggets
 ## Project Overview
+Ever since COVID-19's breakout, more awareness and emphasis has been placed on the effectiveness of communication and knowledge of disease and outbreaks. The **McNuggets** aim to to develop a platform that would contribute to an alert society with complete access to vital health information. This platform will automate the extraction of data from available sources in order to produce the following information for the public:
+* Outbreak alerts: Important notifications regarding outbreaks of a new disease, existing disease in a new area, etc.
+* Watching briefs: Analysis on serious outbreaks, involving origins, symptoms, treatments, fatality rate, etc.
+* Digest: Newsletters available to inform policy makers, government and other stakeholders about outbreaks.
 ### Members:
 | Name               | zID      |
 | ------------------ |----------|
@@ -8,12 +12,6 @@
 | Liam Staples       | z5254570 |
 | Luke Junsuo Chen   | z5264602 |
 | Vicknesh Ravikumar | z5255879 |
-
-### Overview:
-Ever since COVID-19's breakout, more awareness and emphasis has been placed on the effectiveness of communication and knowledge of disease and outbreaks. The **McNuggets** aim to to develop a platform that would contribute to an alert society with complete access to vital health information. This platform will automate the extraction of data from available sources in order to produce the following information for the public:
-* Outbreak alerts: Important notifications regarding outbreaks of a new disease, existing disease in a new area, etc.
-* Watching briefs: Analysis on serious outbreaks, involving origins, symptoms, treatments, fatality rate, etc.
-* Digest: Newsletters available to inform policy makers, government and other stakeholders about outbreaks.
 
 ## Deliverable 1
 ### Design Details
