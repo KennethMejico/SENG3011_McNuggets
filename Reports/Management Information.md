@@ -1,6 +1,6 @@
-# Management Information
+# Management Information 🍔
 ## Deliverables 
-### Deliverable 1
+### Deliverable 1 🍟
 For deliverable 1, we had initially sorted out meeting times that we could use for peer programming, standups, admin work, questions, and other miscellaneous enquiries. These meeting times are as follows (flexible and are subject to change):
 * Tuesday 13:00 - 14:20
 * Sunday 21:00 - 22:00
