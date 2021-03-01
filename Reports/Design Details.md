@@ -113,7 +113,7 @@ Question: *Present and justify implementation language, development and deployme
 These are the languages we have experience in:
 | Name | Vicknesh | James | Luke | Kenneth | Liam |
 |------|----------|-------|------|---------|------|
-| Languages | <ul><li>C#</li><li>Java</li><li>JavaScript</li><li>(Vue/React)</li><li>Python</li></ul> | <ul><li>Java</li><li>Python</li><li>C</li><li>HTML5/JavaScript</li><li>C#</li><li>C++</li><li>SQL</li><li>Bash</li></ul> | <ul><li>C#</li><li>Python</li><li>C</li><li>JavaScript</li><li></ul> | <ul><li>Python</li><li>C</li><li>Perl</li><li>Java</li><li>MIPS</li><li>Shell</li><li>SQL</li></ul> | <ul><li>Python</li><li>Java</li><li>Perl</li><li>JavaScript</li><li>C</li></ul> |
+| Languages | <ul><li>C#</li><li>Java</li><li>JavaScript</li><li>(Vue/React)</li><li>Python</li></ul> | <ul><li>Java</li><li>Python</li><li>C</li><li>HTML5/JavaScript</li><li>C#</li><li>C++</li><li>SQL</li><li>Bash</li></ul> | <ul><li>C#</li><li>Python</li><li>C</li><li>JavaScript</li></ul> | <ul><li>Python</li><li>C</li><li>Perl</li><li>Java</li><li>MIPS</li><li>Shell</li><li>SQL</li></ul> | <ul><li>Python</li><li>Java</li><li>Perl</li><li>JavaScript</li><li>C</li></ul> |
 
 Pros and Cons of Languages for APIs:
 | Language | Pros | Cons |
