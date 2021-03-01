@@ -1,0 +1,139 @@
+<script>
+        var edate 				= '';
+		var return_map 			= '';
+		var feed_id 			= 1;
+		var seltype 			= 'latest';		
+		var postHeading			= '';
+
+		var seltypes 			= ['latest','plant','topical','errata'];	
+		var keyword 			= '';
+		var diesesIds 			= '';
+		var feedLists 			= {};
+
+		feedLists['latest'] 	= feed_id;
+		feedLists['plant'] 		= 1;
+		feedLists['topical'] 	= 1;
+		feedLists['errata'] 	= 95;
+
+	$(function(){			
+		$('.lds-dual-ring').show();
+		$('.lds-ring').show();		
+		get_latest_post(edate, return_map, feed_id, seltype);
+	})
+		
+	function get_latest_post(edate='', return_map='', feed_id, seltype){					
+				
+
+		$.each(seltypes, function( index, value ) {
+			
+			if( $('.'+value+'_list').hasClass('block') ) {
+				seltype = value;
+				return;
+        	}
+		});
+
+		keyword = (seltype == 'plant') ? 'PRO/PL' : '';		
+		diesesIds = (seltype == 'topical') ? '41,282,285,156' :'';		
+			$.ajax({
+			url  : "/wp-admin/admin-ajax.php",
+			type : 'post',
+			dataType: 'json',
+			data : {
+				action 		:   'get_latest_posts',
+				edate 		: 	edate,
+				return_map 	: 	return_map,
+				feed_id 	: 	feed_id,
+				seltype 	: 	seltype,
+				keyword		: 	keyword,
+				diesesIds	:   diesesIds
+			},
+			success : function( response ) {
+				if( response ){		
+
+					$('.lds-ring').hide();
+					$('.'+seltype+'_list').html(response.listview);																				
+					//if( seltype == 'latest' ){
+						$.ajax({
+							url  : "/wp-admin/admin-ajax.php",
+							type : 'post',
+							dataType: 'json',
+							data : {
+								action 		:   'get_latest_post_data',
+								alertId		: response['first_alert'],
+								
+							},
+							success: function(response2){
+								
+									if(response2){
+										$('.lds-dual-ring').hide();
+										$('.latest-post-content').removeClass('hide');
+										$('.latest-post-content').html(response2.post);										
+										setTimeout(function(){ show_content() }, 500);										
+										
+									}															
+								
+							},
+							
+						});
+
+					//}
+					
+					if(return_map){						
+						serve_marker(response);
+					}
+				}
+				
+			}
+		});
+			
+	}
+
+	$("#tabs li").click(function() {
+		// tabs down states			
+				
+		$('#tabs li').removeClass('down');		 
+        $(this).addClass('down');
+        var selid = this.id;
+        selid = selid.split("_");
+		var seltype = selid[0];	
+		
+		if( seltype == 'latest' ){
+			postHeading = 'Latest Posts on ProMED-mail';
+		} else if( seltype == 'plant' ){
+			postHeading = 'Latest Posts about Plant Diseases';
+		} else if( seltype == 'topical' ){
+			postHeading = 'Latest Posts by Topic';
+		} else {
+			postHeading = 'Errata';
+		}
+		$('.widget-title').text(postHeading);
+
+        $.each(seltypes, function( index, value ) {
+            if(value == seltype) {
+								
+				$('.'+value+'_list').removeClass('hide')
+				$('.'+value+'_list').addClass('block');            	
+				
+            } else {
+				$('.'+value+'_list').removeClass('block')
+				$('.'+value+'_list').addClass('hide');
+            }
+		});
+		
+		
+		if( $('.'+seltype+'_list').children().length == 0 ) {
+						
+			get_latest_post('', '', feedLists[seltype], seltype);
+			
+		}
+						 
+    });
+	
+	$(document).on('click','.prev_or_next', function(){
+		$('.latest-post-content').addClass('hide');		
+        var id 			= this.id;
+		var feedanddate = id.split("_");
+		$('.lds-dual-ring').show();		
+		get_latest_post(feedanddate[1], 1, feedanddate[0], seltype);
+    }); 
+</script>
