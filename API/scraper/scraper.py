@@ -36,8 +36,7 @@ headers = {
 if __name__ == "__main__":
     response = requests.post(url, data, headers=headers)
     responseJson = response.json()
-    f = open("scraper_output.txt", "w")
-    f.write(str(response))
+    f = open("scraper_output.json", "w")
     f.write("\n")
-    f.write(json.dumps(responseJson))
+    f.write(json.dumps(responseJson, sort_keys=False, indent=4))
     f.close()
