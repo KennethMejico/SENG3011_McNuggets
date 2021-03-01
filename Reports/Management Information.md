@@ -42,4 +42,4 @@ For our own convenience, we have created team meeting logs that can be found [he
 #### Project Planning:
 In order to stay organised, we have created a gantt chart that roughly outlines important deadlines and our time management plan for each deliverable:
 
-![SENG3011 Gantt Chart](https://user-images.githubusercontent.com/53299898/109439778-d9e68600-7a83-11eb-8573-a7231b577120.png)
+![SENG3011 Gantt Chart (1)](https://user-images.githubusercontent.com/53299898/109443085-c7714a00-7a8d-11eb-8ce7-05bab485e1a7.png)
