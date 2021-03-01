@@ -29,6 +29,7 @@ Work arrangements for deliverable 1 were also organised.
 Main tools that we use for communication and contact are:
 * Messenger Group Chat
 * Microsoft Teams
+
 Other software tools that we use or may use for project management:
 * Google Suite
   * Google Docs
