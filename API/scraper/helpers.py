@@ -9,15 +9,16 @@ def findID(string):
 def findName(string):
     return re.search('<a.*> (.+?)</a>', string).group(1)
 
-def printInfo(key, date, sid, name):
-    print(f"{key}: {date} : {sid} : {name}")
+def printInfo(key, date, aid, name):
+    print(f"Location Key: {key}.    Article Date: {date}.\
+        Article ID: {aid}.    Article Name: {name}.")
 
 def processData(jsonResponse):
     contents = jsonResponse['contents']
     for key in contents:
         for item in contents[key]:
             date  = findDate(item)
-            sid   = findID(item)
+            aid   = findID(item)
             name  = findName(item)
-            printInfo(key, date, sid, name)
+            printInfo(key, date, aid, name)
     pass
