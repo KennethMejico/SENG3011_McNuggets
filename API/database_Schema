@@ -1,0 +1,15 @@
+
+create table [IF NOT EXISTS] markerLocations (
+   markerID integer NOT NULL CHECK (markerID > 0) PRIMARY KEY,
+   latitude numeric(10, 6) NOT NULL,
+   longitude numeric(10, 6) NOT NULL,
+   country VARCHAR(60) NOT NULL
+);
+
+create table [if not exists] articles (
+    articleID INTEGER NOT NULL CHECK (articleID > 0) PRIMARY KEY,
+    pub_Date DATE,
+    articleName VARCHAR(100),
+    markerID integer CHECK (markerID > 0),
+    FOREIGN KEY (markerID) REFERENCES markerLocations(markerID)
+);
