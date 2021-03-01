@@ -1,10 +1,10 @@
-# Design Details
+# Design Details 🍦
 ## Table of Contents
 * [Deliverable 1](#deliverable1)
   1. [API Module Development](#apidev)
   2. [Module Interactions](#modint)
   3. [Development Stack](#devstack)
-## Deliverable 1 <a name="deliverable1"></a>
+## Deliverable 1 🥓 <a name="deliverable1"></a>
 ### API Module Development <a name="apidev"></a>
 Question: *Describe how you intend to develop the API module and provide the ability to run it in Web service mode*
 
