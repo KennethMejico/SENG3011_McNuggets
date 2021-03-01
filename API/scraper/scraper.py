@@ -1,5 +1,6 @@
 import requests
 import json
+import helpers
 
 edate 			= ''
 return_map 		= ''
@@ -33,10 +34,15 @@ headers = {
     'alertId': response['first_alert'],
 } """
 
+
 if __name__ == "__main__":
     response = requests.post(url, data, headers=headers)
-    responseJson = response.json()
-    f = open("scraper_output.json", "w")
+    jsonResponse = response.json()
+    print("Processing Data Now")
+    helpers.processData(jsonResponse)
+    print("Data Proccessed")
+    
+    """ f = open("scraper_output.json", "w")
     f.write("\n")
-    f.write(json.dumps(responseJson, sort_keys=False, indent=4))
-    f.close()
+    f.write(json.dumps(jsonResponse, sort_keys=False, indent=4))
+    f.close() """
