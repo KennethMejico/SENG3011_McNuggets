@@ -34,7 +34,7 @@ Other software tools that we use or may use for project management:
 * Google Suite
   * Google Docs
 * GitHub
-* Swagger/Stoplight
+* Stoplight
 * Virtual Environments
 
 #### Meeting Logs:
