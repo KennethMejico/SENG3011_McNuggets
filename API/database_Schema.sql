@@ -17,5 +17,6 @@ CREATE TABLE [IF NOT EXISTS] articles (
     pub_Date DATE,
     articleName VARCHAR(100),
     markerID INTEGER CHECK (markerID > 0),
+    textFile TEXT,
     FOREIGN KEY (markerID) REFERENCES markerLocations(markerID)
 );
