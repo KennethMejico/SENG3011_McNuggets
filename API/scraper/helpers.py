@@ -21,7 +21,8 @@ def findName(string):
 def printInfo(key, date, aid, name):
     """
     Prints data for the given information in the following format:
-        Location Key: {key}.    Article Date: {date}.    Article ID: {aid}.    Article Name: {name}.
+    >>> Location Key: {key}.    Article Date: {date}.
+    >>> Article ID: {aid}.    Article Name: {name}.
     """
     print(f"Location Key: {key}.    Article Date: {date}.\
         Article ID: {aid}.    Article Name: {name}.")

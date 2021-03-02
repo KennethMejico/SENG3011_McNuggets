@@ -1,3 +1,8 @@
+/*  CONSTANTS   */
+
+-- DECLARE textFileStoragePath CONSTANT CHAR() DEFAULT "~/textFiles";
+
+/*  CREATING TABLES */
 
 CREATE TABLE [IF NOT EXISTS] markerLocations (
    markerID INTEGER NOT NULL CHECK (markerID > 0) PRIMARY KEY,
