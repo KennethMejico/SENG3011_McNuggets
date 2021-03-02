@@ -1,6 +1,6 @@
 /*  CONSTANTS   */
 
--- DECLARE textFileStoragePath CONSTANT CHAR() DEFAULT "~/textFiles";
+DECLARE textFileStoragePath CONSTANT VARCHAR DEFAULT "~/textFiles";
 
 /*  CREATING TABLES */
 
