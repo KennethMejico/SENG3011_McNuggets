@@ -14,3 +14,9 @@
 * API format
 * Alternative communicative options
 * OS clarification
+
+## Meeting 3 (Tuesday, 2nd of Mar, 14:15 - 14:50)
+* Stoplight Vs Swagger Comparison - Stoplight preference due to collaboration restrictions on Swagger
+* Web service hosting: AWS (Lambda, EC2)
+* DB Vs Fetch on Demand - DB much more efficient
+* Deliverable 2 will be released within 3 days
