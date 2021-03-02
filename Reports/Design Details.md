@@ -16,7 +16,8 @@ The first step is to make a detailed list of endpoints, describing exactly what 
 5. Fill out the documentation on Stoplight in a way that’s useable by others
 
 Once our documentation is sorted out, we can begin actually creating these endpoints. At first, we will only return dummy data or perform superficial operations, but once every endpoint exists, we can go into making each one fully functional. After the design phase it will become apparent that some endpoints should be made before others, either because they are more useful or they are base we can work off of for harder endpoints. The endpoints can be split up between group members, and each one can work on a set of related endpoints. The first few can also be done as a group, so we can establish a style and consistency in our code.
-Stoplight lets us run the API in web service mode.
+
+Stoplight lets us run a mock server that will provide example responses to api calls. When we create our API we’ll also need to run it on a live server to allow other teams to access it. Our team will make use of Amazon Web Services for easy and convenient hosting of our API, in particular using AWS Lambda. This service lets us host an API cheaply, only charging us for calls made to it, and is designed for small APIs like ours.
 
 ### Module Interactions <a name="modint"></a>
 Question: *Discuss your current thinking about how parameters can be passed to your module and how results are collected. Show an example of a possible interaction. (e.g.- sample HTTP calls with URL and parameters)*
