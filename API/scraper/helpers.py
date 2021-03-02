@@ -6,6 +6,11 @@ These are all just for the format from promedmail.org. There is no certainty it 
 
 import re
 
+""" data2 = {
+    'action' : 'get_latest_post_data',
+    'alertId': response['first_alert'],
+} """
+
 def findDate(string):
     """Finds the date of an article for the string format returned by promedmail.org"""
     return re.search('^.+(?= <a h)|$', string).group()
