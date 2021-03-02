@@ -11,6 +11,6 @@ CREATE TABLE [IF NOT EXISTS] articles (
     articleID INTEGER NOT NULL CHECK (articleID > 0) PRIMARY KEY,
     pub_Date DATE,
     articleName VARCHAR(100),
-    markerID integer CHECK (markerID > 0),
+    markerID INTEGER CHECK (markerID > 0),
     FOREIGN KEY (markerID) REFERENCES markerLocations(markerID)
 );
