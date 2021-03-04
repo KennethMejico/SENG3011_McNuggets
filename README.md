@@ -30,9 +30,9 @@ Our main software tools currently in use to assist project management are:
 * Messenger Group Chat
 * Microsoft Teams
 * Github
-* Swagger.io / Stoplight
+* Stoplight
 * Virtual Environments
 * Google Docs
 * Selenium / Requests
 
-More information can be found in our [Management Information Report](https://github.com/KennethMejico/SENG3011_McNuggets/blob/main/Reports/Management%20Information.md)
+More information can be found in our [Management Information Report](https://github.com/KennethMejico/SENG3011_McNuggets/blob/main/Reports/Management%20Information.md).
