@@ -15,8 +15,9 @@ The first step is to make a detailed list of endpoints, describing exactly what 
 4. Make example data to show how it can be used and what type of information will be passed back
 5. Fill out the documentation on Stoplight in a way that’s useable by others
 
-Once our documentation is sorted out, we can begin actually creating these endpoints. At first, we will only return dummy data or perform superficial operations, but once every endpoint exists, we can go into making each one fully functional. After the design phase it will become apparent that some endpoints should be made before others, either because they are more useful or they are base we can work off of for harder endpoints. The endpoints can be split up between group members, and each one can work on a set of related endpoints. The first few can also be done as a group, so we can establish a style and consistency in our code.
-Stoplight lets us run the API in web service mode.
+Once our documentation is sorted out, we can begin actually creating these endpoints. At first, we will only return dummy data or perform superficial operations, but once every endpoint exists, we can go into making each one fully functional. After the design phase it will become apparent that some endpoints should be made before others, either because they are more useful or they are a base we can work off of for harder endpoints. The endpoints can be split up between group members, and each one can work on a set of related endpoints. The first few can also be done as a group, so we can establish a style and consistency in our code.
+
+Stoplight lets us run a mock server that will provide example responses to api calls. When we create our API we’ll also need to run it on a live server to allow other teams to access it. Our team will make use of Amazon Web Services for easy and convenient hosting of our API, in particular using AWS Lambda. This service lets us host an API cheaply, only charging us for calls made to it, and is designed for small APIs like ours.
 
 ### Module Interactions <a name="modint"></a>
 Question: *Discuss your current thinking about how parameters can be passed to your module and how results are collected. Show an example of a possible interaction. (e.g.- sample HTTP calls with URL and parameters)*
@@ -124,18 +125,18 @@ Pros and Cons of Languages for APIs:
 | C/C++ | <ul><li>High performance and efficient</li><li>Statically typed so errors can be detected during runtime</li></ul> | <ul><li>Need to manually manage memory</li><li>Commonly used to be platform specific</li><li>Can be more complex and therefore harder to use</li></ul> |
 | SQL | <ul><li>Fast data lookup once it is stored</li></ul> | <ul><li>Backend database</li><li>Not for frontend use</li><li>Not used to crawl internet directly</li></ul> |
 
-After evaluating the possible languages we could use for developing our API and Web App, we decided to use Python as it was the language that everyone in the team was relatively familiar with and thus would allow all team members to contribute in the development of the program. Furthermore with how Python filing works it is very easy to import packages, allowing us to easily work on separate functions without reliance on others work.
+After evaluating the possible languages we could use for developing our API and Web App, we decided to use Python as it was the language that everyone in the team was relatively familiar with, and thus would allow all team members to contribute in the development of the program. Furthermore, with how Python filing works, it is very easy to import packages, allowing us to easily work on separate functions without reliance on others work.
 
-Additionally, Python’s ease of use arising from its simple syntax and dynamic typing make it easier to maintain and collaborate on between five team members who have not worked together on a project of this scale before. With python being interpreted rather than compiled, it is slower compared to languages such as C, C# or Java, however, due to the relatively small scale of this project, we believe the difference in performance would not be significant enough to outweigh the benefits python brings. 
+Additionally, Python’s ease of use arising from its simple syntax and dynamic typing makes it easier to maintain and collaborate on, especially between five team members who have not worked together on a project of this scale before. With Python being interpreted rather than compiled, it is slower compared to languages such as C, C# or Java, however, due to the relatively small scale of this project, we believe the difference in performance would not be significant enough to outweigh the benefits Python brings. 
 Additionally, python also has a large community of users as well as extensive libraries which will speed up the development process. 
 Some of the libraries we will be using in this project include:
-* json : a library for reading and production of JSON data. This is a common format for API input and output meaning it will be an essential library during our development.
-* flask : one of two major options for server development in python. Due to this server only being a backend server, flask will be a simple option and preferable to django.
-* pytest : one of the best options for unit testing in python.
-* psycopg2 : if we use an SQL database, this will be how we connect to it and run associated code on it.
-* datetime : for dates and/or times.
-* requests : for making requests to websites and/or pages and/or other api’s
-* selenium : for requesting HTML from dynamic websites
+* **json**: a library for reading and producing JSON data. This is a common format for API input and output, meaning it will be an essential library during our development.
+* **flask**: one of two major options for server development in Python. Due to this server only being a backend server, Flask will be a simple option and preferable to Django.
+* **pytest**: one of the best options for unit testing in Python.
+* **psycopg2**: if we use an SQL database, this will be how we connect to it and run associated code on it.
+* **datetime**: for dates and/or times.
+* **requests**: for making requests to websites and/or pages and/or other API’s.
+* **selenium**: for requesting HTML from dynamic websites.
 
 #### Operating System
 | Operating System | Pros | Cons |
@@ -144,9 +145,9 @@ Some of the libraries we will be using in this project include:
 | OS-X Server | <ul><li>Benefits for apple users</li><li>Access to some apple specific programs</li></ul> | <ul><li>Can’t host any .NET or ASP programs</li><li>On top of the cost of the macintosh OS, you then have to purchase the server program from the app store</li><li>Mostly used for small scale business organization</li></ul> |
 | Windows Server | <ul><li>Proprietary and constantly getting security updates</li><li>Applications written in Windows-only languages like .NET or ASP must be run from a Windows server</li><li>Good all rounder</li></ul> | <ul><li>All rounder, but sometimes can’t do the same specifics that can be done on a linux host</li><li>Much harder to work with for the inexperienced</li><li>Proprietary, so costs money to set up and use, alongside the extra costs of server</li></ul> |
 
-We have decided that we will be using Linux for our hosting system. Alongside being an industry standard, it is free and can be run in a VM or as a machine itself. Furthermore, with all of us having access to the CSE computers via VNC or via downloaded image, we can be certain that we all have the same local setup and ensure there won’t be any compatibility issues.
+We have decided that we will be using Linux for our hosting system. Alongside being an industry standard, it is free and can be run in a VM or as a machine itself. Furthermore, with all of us having access to the CSE computers via VNC or UNSW computer labs, we can be certain that we all have the same local setup and ensure there won’t be any compatibility issues.
 
-Furthermore we are using a virtual env so that we are all working in the same area. To use this, first a person must install venv. Follow the instructions below:
+Furthermore, we are using a virtual env so that we are all working in the same area. To use this, a person must first install venv. Follow the instructions below:
 * python3 -m pip install --upgrade pip
 * python3 -m pip install virtualenv
 * Whilst in the API folder, run this command: 
