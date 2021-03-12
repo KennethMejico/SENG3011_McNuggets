@@ -41,3 +41,14 @@ def processData(jsonResponse):
             aid   = findID(item)
             name  = findName(item)
             printInfo(key, date, aid, name)
+
+def processDataToDb(jsonResponse):
+    """Processes data for the JSON response given by promedmail.org to db"""
+    results = []
+    contents = jsonResponse['contents']
+    for key in contents:
+        for item in contents[key]:
+            date  = findDate(item)
+            aid   = findID(item)
+            name  = findName(item)
+            printInfo(key, date, aid, name)
