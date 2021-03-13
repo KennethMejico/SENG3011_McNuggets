@@ -3,10 +3,10 @@ A web scraper to crawl and scrape all the articles on promedmail.org.
 Can then dump all the articles and information into a PostgreSQL database
 """
 
-# IMPORTS
-# External Imports
-import requests
 import re
+from datetime import date as Date
+import time as Time
+import requests
 
 
 class Scraper:
@@ -28,17 +28,6 @@ class Scraper:
     # REQUEST URL
     url = "https://promedmail.org/wp-admin/admin-ajax.php"
 
-    # DATA REQUEST
-    data = {
-        'action' 	:   'get_latest_posts',
-        'edate' 	: 	edate,
-        'return_map': 	return_map,
-        'feed_id' 	: 	feed_id,
-        'seltype' 	: 	seltype,
-        'keyword'	: 	keyword,
-        'diesesIds'	:   diesesIds
-    }
-
     """ data2 = {
         'action' : 'get_latest_post_data',
         'alertId': response['first_alert'],
@@ -48,9 +37,6 @@ class Scraper:
     headers = {
         'user-agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36'
     }
-
-    #json response for processing
-    jsonResponse = ""
 
     def __init__ (self):
         pass
@@ -78,26 +64,48 @@ class Scraper:
 
     def processData(self, response):
         """Processes data for the JSON response given by promedmail.org"""
-        contents = jsonResponse['contents']
+        contents = response['contents']
+        lastDate = Date.today()
         for key in contents:
             for item in contents[key]:
-                date  = findDate(item)
-                aid   = findID(item)
-                name  = findName(item)
-                printInfo(key, date, aid, name)
+                date  = self.findDate(item)
+                aid   = self.findID(item)
+                name  = self.findName(item)
+                self.printInfo(key, date, aid, name)
+                tempDate = Date.fromtimestamp(Time.strptime(date, "%d %b %Y"))
+                if tempDate < lastDate:
+                    lastDate = tempDate
+        return lastDate
+                
 
-    def fetch(self):
-        response = requests.post(self.url, self.data, headers=self.headers)
-        self.jsonResponse = response.json()
+    def fetch(self, edate):
+        """ Makes a data request to a the promedmail database, for a specific page given by feed_id """
+        # DATA REQUEST
+        data = {
+            'action' 	:   'get_latest_posts',
+            'edate' 	: 	edate,
+            'return_map': 	self.return_map,
+            'feed_id' 	: 	self.feed_id,
+            'seltype' 	: 	self.seltype,
+            'keyword'	: 	self.keyword,
+            'diesesIds'	:   self.diesesIds
+        }
+        response = requests.post(self.url, data, headers=self.headers)
+        return response.json()
     
-    def process(self):
-        print("Processing Data Now")
-        self.processData(self.jsonResponse)
-        print("Data Proccessed")
-    
+
     def run(self):
-        self.fetch()
-        self.process()
+        edate = ''
+        jsonResponse = self.fetch(edate)
+        while (jsonResponse['contents'].keys()):
+            rdate = self.processData(jsonResponse)
+            if rdate == Date.today():
+                break
+            edate = rdate.year + '-' + rdate.month + '-' + rdate.day
+            jsonResponse = self.fetch(edate)
+
+    def testing(self):
+        print(self.fetch(1))
         
 
 
