@@ -1,6 +1,8 @@
 import flask
 from flask import request, jsonify
 import mysql.connector
+import simplejson as json
+from datetime import datetime
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
@@ -36,16 +38,32 @@ def filter_search():
     if location:
         query += ' location=? AND'
         to_filter.append(location)
-    if not (start_date or end_date or key_terms or location):
+    if not (start_date or end_date or location):
         return page_not_found(404)
 
     mydb = mysql.connector.connect(
-        host="",
-        user="",
-        password=""
+        host="localhost",
+        user="root",
+        password="newrootpassword",
+        auth_plugin='mysql_native_password',
+        database="promedmail"
     )
 
-    results = ""
+    start = datetime.strptime(start_date, '%Y-%m-%dT%H:%M:%S')
+    end = datetime.strptime(end_date, '%Y-%m-%dT%H:%M:%S')
+    mycursor = mydb.cursor()
+    sql = "select * from articles where pubDate >= %s and pubDate <= %s;"
+    sql2 = "select * from locations;"
+    data = (start, end)
+    mycursor.execute(sql, data)
+    record = mycursor.fetchall()
+
+
+    # Connect to DB
+    # Query Articles DB for publication date
+    # If articles reports do not include key_terms or location, remove from dict
+
+    results = record
     return jsonify(results)
 
 app.run()
