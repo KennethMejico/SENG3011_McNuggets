@@ -5,6 +5,7 @@ info:
   contact:
     name: Kenneth Mejico
     email: sengmcnuggets@outlook.com
+  description: SENG3011 McNuggets API - ProMedMail.org
 servers:
   - url: 'http://localhost:5000'
 paths:
@@ -49,7 +50,9 @@ paths:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
       operationId: get-home
       description: Landing page for SENG3011 McNuggets API
     parameters: []
