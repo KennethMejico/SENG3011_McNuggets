@@ -7,7 +7,7 @@ import re
 from datetime import date as Date
 import time as Time
 import requests
-import bs4
+from bs4 import BeautifulSoup as BS
 
 import scraper.db_controller as db_controller
 
