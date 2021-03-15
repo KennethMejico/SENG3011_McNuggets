@@ -19,7 +19,6 @@ Preferences for roles were resolved, with everyone being assigned a particular t
 | Kenneth Mejico     | Documentation, Submissions |
 | Liam Staples       | Linking, Testing, Cleanup  |
 | Luke Junsuo Chen   | API Development            |
-| Vicknesh Ravikumar | API Development            |
 
 Work arrangements for deliverable 1 were also organised.
 ### Work Arrangements: <a name="warrangements"></a>
@@ -29,7 +28,6 @@ Work arrangements for deliverable 1 were also organised.
 | Kenneth Mejico     | Team Management                       |
 | Liam Staples       | API Development (Design Details Q1)   |
 | Luke Junsuo Chen   | Development Stack (Design Details Q3) |
-| Vicknesh Ravikumar | API Interactions (Design Details Q2)  |
 
 ### Team Coordination: <a name="teamcoord"></a>
 Main tools that we use for communication and contact are:
