@@ -1,8 +1,10 @@
 
+/* SQL INSERT FORMAT */
 /* Locations (LocationID,Latitude,Longitude,LocationName )*/
 /* Articles (ArticleID, PubDate , ArticleName , LocationID , MainText , LinkToArticle )*/
 /* Reports ( ReportID (SERIAL), ArticleID, LocationID, Disease, Syndrome, EventDate)  ;*/
 
+/**; DUMMY DATA 1 ;**/
 INSERT INTO LOCATIONS (106, 39.966930, -97.556099, "United States");
 
 INSERT INTO Articles (7774890, 13 Sep 2020,  'West Nile virus (14): Americas, USA (MA)', 106, 
@@ -53,6 +55,9 @@ West Nile virus (12): Americas, USA (CA,FL) horse 20200829.7727646
 West Nile virus (03): Americas (USA) 20200707.7546849
 West Nile virus: Americas (USA) mosquitoes 20200317.7103719
 .................................................sb/jh/ty/msp/jh", https://promedmail.org/promed-post/?id=7774890 );
+
+
+/**; DUMMY DATA 2 ;**/
 
 INSERT INTO Reports (7774890, 106, 'WEST NILE VIRUS', 'a fever, experience headaches, body aches, vomiting, diarrhea, a rash, other side effects', NULL);
 
