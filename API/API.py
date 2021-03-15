@@ -26,9 +26,16 @@ def convert(lst):
     article_dict = {'url':lst[0], 'date_of_publication':lst[1], 'headline':lst[2], 'main_text':lst[3], 'reports': reports_list}
     return article_dict
 
+def noneOrEmpty(str):
+    return (str is None) or (not str)
+
 @app.errorhandler(404)
 def page_not_found(e):
     return "<h1>404</h1><p>The resource could not be found.</p>", 404
+
+@app.errorhandler(400)
+def dates_not_given(e):
+    return "<h1>400</h1><p>Please input a start and end date.</p>", 400
 
 @app.route('/', methods=['GET'])
 def home():
@@ -43,8 +50,8 @@ def filter_search():
     key_terms = query_parameters.get('key_terms')
     location = query_parameters.get('location')
 
-    if not (start_date or end_date):
-        return page_not_found(404)
+    if noneOrEmpty(start_date) or noneOrEmpty(end_date):
+        return dates_not_given(400)
 
     # Connect to MySQL Database
     mydb = mysql.connector.connect(
@@ -54,10 +61,6 @@ def filter_search():
         auth_plugin='mysql_native_password',
         database="promedmail"
     )
-
-    # Convert start_date and end_date to datetime
-    start = datetime.strptime(start_date, '%Y-%m-%dT%H:%M:%S')
-    end = datetime.strptime(end_date, '%Y-%m-%dT%H:%M:%S')
 
     # Execute query to gather articles which satisfy data constraint
     mycursor = mydb.cursor()
@@ -75,41 +78,29 @@ def filter_search():
             r.syndrome
         from
             articles a
-        left join
+        join
             reports r on r.articleID = a.articleID
-        left join
+        join
             locations l on r.locationID = l.locationID
+        where a.pubDate >= %s and a.pubDate <= %s
     """
     
     # Convert start and date time to datetime datatype
     start = datetime.strptime(start_date, '%Y-%m-%dT%H:%M:%S')
     end = datetime.strptime(end_date, '%Y-%m-%dT%H:%M:%S')
 
-    # Case 1: Only period of interest input
-    if (start_date and end_date and not key_terms and not location):
-        sql = sql + "where pubDate >= %s and pubDate <= %s;"
-        data = (start, end)
-        result = retrieve_data(mycursor, sql, data)
-    # Case 2: Only key terms --
-    # Case 3: Only locations --
-    # Case 4: Period of interest and locations
-    elif (start_date and end_date and not key_terms and location):
-        sql1 = sql + "where pubDate >= %s and pubDate <= %s and locationName = %s"
-        data = (start, end, location)
-        result = retrieve_data(mycursor, sql1, data)
-    # Case 5: Period of interest and key_terms
-    elif (start_date and end_date and key_terms and not location):
-        sql1 = sql + "where pubDate >= %s and pubDate <= %s and (disease LIKE %s or syndrome LIKE %s)"
-        key_terms = "%" + key_terms + "%"
-        data = (start, end, key_terms, key_terms)
-        result = retrieve_data(mycursor, sql1, data)
-    # Case 6: Key terms and locations --
-    # Case 7: All Three
-    elif (start_date and end_date and key_terms and location):
-        sql1 = sql + "where pubDate >= %s and pubDate <= %s and locationName = %s and (disease LIKE %s or syndrome LIKE %s)"
-        key_terms = "%" + key_terms + "%"
-        data = (start, end, location, key_terms, key_terms)
-        result = retrieve_data(mycursor, sql1, data)
+    data = (start, end)
+
+    if not noneOrEmpty(location):
+        sql = sql + " and l.locationName = %s"
+        data = data + (location)
+
+    if not noneOrEmpty(key_terms):
+        sql = sql + " and (r.disease LIKE %s or r.syndrome LIKE %s)"
+        formatted_key_terms = "%" + key_terms + "%"
+        data = data + (formatted_key_terms, formatted_key_terms)
+    
+    result = retrieve_data(mycursor, sql, data)
 
     # Return list of articles
     return jsonify(result)
