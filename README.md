@@ -16,7 +16,6 @@ Ever since COVID-19's breakout, more awareness and emphasis has been placed on t
 | Kenneth Mejico     | z5257133 |
 | Liam Staples       | z5254570 |
 | Luke Junsuo Chen   | z5264602 |
-| Vicknesh Ravikumar | z5255879 |
 
 ## Deliverable 1 🍟 <a name="deliverable1"></a>
 ### Design Details <a name="designdetails"></a>
