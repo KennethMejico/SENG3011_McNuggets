@@ -1,6 +1,5 @@
 # import psycopg2
 import mysql.connector # pip3 install mysql-connector-python
-import helpers
 
 # change this to your own config for now until we set up on AWS
 db = mysql.connector.connect(
@@ -11,21 +10,27 @@ db = mysql.connector.connect(
 )
 cursor = db.cursor()
 
-def writeToDB():
-    pass
+def writeToDB(jsonResponse):
+    insertLocations(jsonResponse)
 
-def insertLocations(locationId):
-    query = "INSERT INTO Locations (LocationID, Latitude, Longitude, LocationName) VALUES (%d, %f, %f, %s)"
+def insertLocations(jsonResponse):
+    """Writes location data from the JSON response to db"""
+    results = []
+    locations = jsonResponse['markers']
+    for key in locations:
+        location = locations[key]
+        name = location[1]
+        latitude = location[2]
+        longitude = location[3]
+        results.append((
+            key,
+            latitude,
+            longitude,
+            name
+        ))
 
-    # method 1 - inserting everything at once, will be faster than hitting the db for every row of data we need to insert
-    locationData = [
-        (locationId, latitude, longitude, locationName),
-    ] # example - need to get list from somewhere
-    cursor.executemany(query, values)
-
-    # method 2 inserting one row at a time
-    data = (locationId, latitude, longitude, locationName)
-    cursor.execute(query, data)
-
+    query = "INSERT IGNORE INTO Locations (LocationID, Latitude, Longitude, LocationName) VALUES (%s, %s, %s, %s)"
+    cursor.executemany(query, results)
     db.commit()
     print(cursor.rowcount, "was inserted")
+    
