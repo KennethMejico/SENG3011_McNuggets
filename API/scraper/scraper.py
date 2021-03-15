@@ -5,11 +5,11 @@ Can then dump all the articles and information into a PostgreSQL database
 
 import re
 from datetime import date as Date
-import time as Time
+import time
 import requests
-from bs4 import BeautifulSoup as BS
+from bs4 import BeautifulSoup
 
-import scraper.db_controller as db_controller
+#import db_controller as db_controller
 
 class Scraper:
     """
@@ -64,27 +64,35 @@ class Scraper:
         print(f"Location Key: {key}.    Article Date: {date}.\
             Article ID: {aid}.    Article Name: {name}.")
 
+    def generateReports(self, articleDate, articleID, articleMarkerID, articleName, articleText):
+        pass
+
     def processData(self, response):
         """Processes data for the JSON response given by promedmail.org"""
         contents = response['contents']
         lastDate = Date.today()
         for key in contents:
+            markerID = key
+            # db_controller.addMarker(markerID, response['markers'][markerID])  # TODO write to DB
             for item in contents[key]:
-                markerID = key
                 date  = self.findDate(item)
                 aid   = self.findID(item)
                 name  = self.findName(item)
-                self.printInfo(markerID, date, aid, name)
-                tempDate = Date.fromtimestamp(Time.strptime(date, "%d %b %Y"))
+                # self.printInfo(markerID, date, aid, name)                     # FOR DEBUGGING. REMOVE IN PRODUCTION # TODO
+                tempDate = Date.fromtimestamp(time.mktime(time.strptime(date, "%d %b %Y")))
                 if tempDate < lastDate:
                     lastDate = tempDate
                 dataReq = {
                     'action' : 'get_latest_post_data',
                     'alertId': aid,
                 }
-                textResponse = requests.post(self.url, dataReq, headers=self.headers)
-                text = ""
-                db_controller.writeToDB(markerID, date, aid, name, text)
+                soup = BeautifulSoup(requests.post(self.url, dataReq, headers=self.headers).json()['post'], "html5lib")
+                text = soup.find('div', attrs={'class':'text1'}).get_text(separator=" ")
+                # print(text + "\n\n\n\n")                                      # FOR DEBUGGING. REMOVE IN PRODUCTION # TODO
+                
+                # db_controller.writeToDB(markerID, date, aid, name, text)      # TODO write to DB
+
+                self.generateReports(date, aid, markerID, name, text)
         return lastDate
                 
 
@@ -114,8 +122,15 @@ class Scraper:
             edate = rdate.year + '-' + rdate.month + '-' + rdate.day
             jsonResponse = self.fetch(edate)
 
-    def testing(self):
-        print(self.fetch(1))
+    def getLatest(self):
+        jsonresponse = self.fetch('')
+        dataReq = {
+                    'action' : 'get_latest_post_data',
+                    'alertId': jsonresponse['first_alert'],
+                }
+        soup = BeautifulSoup(requests.post(self.url, dataReq, headers=self.headers).json()['post'], "html5lib")
+        print(soup.find('div', attrs={'class':'text1'}).get_text(separator=" "))
+        
         
 
 
