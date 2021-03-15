@@ -8,6 +8,7 @@ Can then dump all the articles and information into a PostgreSQL database
 import requests
 
 import helpers 
+import db_controller
 
 
 class Scraper:
@@ -57,7 +58,8 @@ class Scraper:
     
     def process(self):
         print("Processing Data Now")
-        helpers.processData(self.jsonResponse)
+        # helpers.processData(self.jsonResponse)
+        db_controller.writeToDB(self.jsonResponse)
         print("Data Proccessed")
     
     def run(self):

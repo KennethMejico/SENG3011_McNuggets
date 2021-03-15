@@ -6,6 +6,7 @@ These are all just for the format from promedmail.org. There is no certainty it 
 
 import re
 
+
 """ data2 = {
     'action' : 'get_latest_post_data',
     'alertId': response['first_alert'],
@@ -34,17 +35,6 @@ def printInfo(key, date, aid, name):
 
 def processData(jsonResponse):
     """Processes data for the JSON response given by promedmail.org"""
-    contents = jsonResponse['contents']
-    for key in contents:
-        for item in contents[key]:
-            date  = findDate(item)
-            aid   = findID(item)
-            name  = findName(item)
-            printInfo(key, date, aid, name)
-
-def processDataToDb(jsonResponse):
-    """Processes data for the JSON response given by promedmail.org to db"""
-    results = []
     contents = jsonResponse['contents']
     for key in contents:
         for item in contents[key]:
