@@ -8,6 +8,7 @@ from datetime import date as Date
 import time as Time
 import requests
 
+import scraper.db_controller
 
 class Scraper:
     """
@@ -75,6 +76,7 @@ class Scraper:
                 tempDate = Date.fromtimestamp(Time.strptime(date, "%d %b %Y"))
                 if tempDate < lastDate:
                     lastDate = tempDate
+                
         return lastDate
                 
 
