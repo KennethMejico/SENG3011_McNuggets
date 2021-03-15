@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS Reports (
     ArticleID INTEGER NOT Null,                                         /*  */
     LocationID INTEGER NOT NULL,                                                 /* IF NULL get location from article location*/
     Disease varchar(100) NOT NULL,                                      /*  */
-    Syndrome varchar(100) NOT NULL,                                     /*  */
+    Syndrome TEXT,					                                    /*  */
     EventDate DATE,                                                     /* IF NULL get date from article */
     FOREIGN KEY (ArticleID) REFERENCES Articles(ArticleID), 
     FOREIGN KEY (LocationID) REFERENCES Locations(LocationID)
