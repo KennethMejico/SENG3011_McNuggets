@@ -7,8 +7,9 @@ import re
 from datetime import date as Date
 import time as Time
 import requests
+import bs4
 
-import scraper.db_controller
+import scraper.db_controller as db_controller
 
 class Scraper:
     """
@@ -69,14 +70,21 @@ class Scraper:
         lastDate = Date.today()
         for key in contents:
             for item in contents[key]:
+                markerID = key
                 date  = self.findDate(item)
                 aid   = self.findID(item)
                 name  = self.findName(item)
-                self.printInfo(key, date, aid, name)
+                self.printInfo(markerID, date, aid, name)
                 tempDate = Date.fromtimestamp(Time.strptime(date, "%d %b %Y"))
                 if tempDate < lastDate:
                     lastDate = tempDate
-                
+                dataReq = {
+                    'action' : 'get_latest_post_data',
+                    'alertId': aid,
+                }
+                textResponse = requests.post(self.url, dataReq, headers=self.headers)
+                text = ""
+                db_controller.writeToDB(markerID, date, aid, name, text)
         return lastDate
                 
 
