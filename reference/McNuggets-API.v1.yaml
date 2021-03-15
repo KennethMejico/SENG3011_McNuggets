@@ -1,0 +1,99 @@
+openapi: 3.0.0
+info:
+  title: McNuggets API
+  version: '1.0'
+  contact:
+    name: Kenneth Mejico
+    email: sengmcnuggets@outlook.com
+servers:
+  - url: 'http://localhost:5000'
+paths:
+  /search:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      operationId: get-search
+      description: |-
+        Users may input four parameters:
+        1. start_date
+        2. end_date
+        3. key_terms
+        4. location
+        The API will return a list of articles in JSON format filtered by the parameters.
+        Both dates (1. and 2.) have to respect the following format: “yyyy-MM-ddTHH:mm:ss”
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: start_date
+          description: Start date for period of interest
+        - schema:
+            type: string
+          in: query
+          name: end_date
+          description: End date for period of interest
+        - schema:
+            type: string
+          in: query
+          name: key_terms
+          description: Search for key terms in disease reports
+        - schema:
+            type: string
+          in: query
+          name: location
+          description: Search for location of disease
+      responses:
+        '200':
+          description: OK
+  /:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-home
+      description: Landing page for SENG3011 McNuggets API
+    parameters: []
+components:
+  schemas:
+    User:
+      title: User
+      type: object
+      description: ''
+      x-examples:
+        Alice Smith:
+          id: 142
+          firstName: Alice
+          lastName: Smith
+          email: alice.smith@gmail.com
+          dateOfBirth: '1997-10-31'
+          emailVerified: true
+          signUpDate: '2019-08-24'
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the given user.
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+          format: email
+        dateOfBirth:
+          type: string
+          format: date
+          example: '1997-10-31'
+        emailVerified:
+          type: boolean
+          description: Set to true if the user's email has been verified.
+        createDate:
+          type: string
+          format: date
+          description: The date that the user was created.
+      required:
+        - id
+        - firstName
+        - lastName
+        - email
+        - emailVerified
+  securitySchemes: {}
