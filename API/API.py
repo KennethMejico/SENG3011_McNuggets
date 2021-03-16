@@ -4,7 +4,7 @@ import mysql.connector
 import simplejson as json
 from datetime import datetime
 
-app = flask.Flask(__name__)
+application = app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 app.config['JSON_SORT_KEYS'] = False
 
