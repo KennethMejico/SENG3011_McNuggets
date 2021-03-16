@@ -1,11 +1,11 @@
-
 /* SQL INSERT FORMAT */
 /* Locations (LocationID,Latitude,Longitude,LocationName )*/
 /* Articles (ArticleID, PubDate , ArticleName , LocationID , MainText , LinkToArticle )*/
 /* Reports ( ReportID (SERIAL), ArticleID, LocationID, Disease, Syndrome, EventDate)  ;*/
 
+
 /**; DUMMY DATA 1 ;**/
-INSERT INTO LOCATIONS (106, 39.966930, -97.556099, "United States");
+INSERT INTO LOCATIONS (106, 39.966930, -97.556099, 'United States');
 
 INSERT INTO Articles (7774890, 13 Sep 2020,  'West Nile virus (14): Americas, USA (MA)', 106, 
 "WEST NILE VIRUS (14): AMERICAS, USA (MASSACHUSETTS )
@@ -58,10 +58,9 @@ West Nile virus: Americas (USA) mosquitoes 20200317.7103719
 
 
 /**; DUMMY DATA 2 ;**/
-
 INSERT INTO Reports (7774890, 106, 'WEST NILE VIRUS', 'a fever, experience headaches, body aches, vomiting, diarrhea, a rash, other side effects', NULL);
 
-INSERT INTO Locations (2975, -27.000000, -50.000000, "Santa Catarina, Brazil");
+INSERT INTO Locations (2975, -27.000000, -50.000000, 'Santa Catarina, Brazil');
 
 INSERT INTO Articles (8235917, 09 Mar 2021, 'Yellow fever - Americas (04): Brazil (SC) monkey, susp', 2975, 
 "YELLOW FEVER - AMERICAS (04): BRAZIL (SANTA CATARINA) MONKEY, SUSPECTED
