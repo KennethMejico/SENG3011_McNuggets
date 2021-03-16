@@ -8,6 +8,17 @@ application = app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 app.config['JSON_SORT_KEYS'] = False
 
+# Returns pointer to db connector
+def connect_to_db():
+    mydb = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password="newrootpassword",
+        auth_plugin='mysql_native_password',
+        database="promedmail"
+    )
+    return mydb
+
 # Retrieves data from MySQL server and returns a list of articles
 def retrieve_data(mycursor, sql, data):
     mycursor.execute(sql, data)
@@ -39,7 +50,37 @@ def dates_not_given(e):
 
 @app.route('/', methods=['GET'])
 def home():
-    return "<h1>SENG3011 McNuggets API</h1><p>API for ProMedMail.org</p>"
+    return """<!DOCTYPE html>
+<html>
+<title>McNuggets API</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<style>
+body,h1 {font-family: "Raleway", sans-serif}
+body, html {height: 100%}
+.bgimg {
+  min-height: 100%;
+  background-position: center;
+  background-size: cover;
+}
+</style>
+<body>
+
+<div class="bgimg w3-display-container w3-animate-opacity w3-text-black">
+  <div class="w3-display-topleft w3-padding-large w3-xlarge">
+    SENG3011
+  </div>
+  <div class="w3-display-middle">
+    <h1 class="w3-jumbo w3-animate-top">McNuggets API</h1>
+    <hr class="w3-border-grey" style="margin:auto;width:40%">
+    <p class="w3-large w3-center">Extraction from ProMedMail.org</p>
+  </div>
+</div>
+
+</body>
+</html>"""
 
 @app.route('/search', methods=['GET'])
 def filter_search():
@@ -53,14 +94,7 @@ def filter_search():
     if noneOrEmpty(start_date) or noneOrEmpty(end_date):
         return dates_not_given(400)
 
-    # Connect to MySQL Database
-    mydb = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="newrootpassword",
-        auth_plugin='mysql_native_password',
-        database="promedmail"
-    )
+    mydb = connect_to_db()
 
     # Execute query to gather articles which satisfy data constraint
     mycursor = mydb.cursor()
@@ -78,9 +112,9 @@ def filter_search():
             r.syndrome
         from
             articles a
-        join
+        left join
             reports r on r.articleID = a.articleID
-        join
+        left join
             locations l on r.locationID = l.locationID
         where a.pubDate >= %s and a.pubDate <= %s
     """
@@ -93,21 +127,54 @@ def filter_search():
 
     if not noneOrEmpty(location):
         sql = sql + " and l.locationName = %s"
-        data = data + (location)
+        data = data + (location,)
 
     if not noneOrEmpty(key_terms):
         sql = sql + " and (r.disease LIKE %s or r.syndrome LIKE %s)"
         formatted_key_terms = "%" + key_terms + "%"
-        data = data + (formatted_key_terms, formatted_key_terms)
+        data = data + (formatted_key_terms, formatted_key_terms,)
     
     result = retrieve_data(mycursor, sql, data)
 
     # Return list of articles
     return jsonify(result)
 
-# Possible Endpoints
-# @app.route('/count', methods=['GET'])
-# @app.route('/getDatabase', methods=['GET'])
+@app.route('/getDatabase', methods=['GET'])
+def get_all_reports():
+    mydb = connect_to_db()
+
+    # Execute query to gather articles which satisfy data constraint
+    mycursor = mydb.cursor()
+    sql = """
+        select
+            a.linkToArticle,
+            a.pubDate,
+            a.articleName,
+            a.mainText,
+            r.eventDate,
+            l.locationName,
+            r.disease,
+            r.syndrome
+        from
+            articles a
+        left join
+            reports r on r.articleID = a.articleID
+        left join
+            locations l on r.locationID = l.locationID
+    """
+    mycursor.execute(sql)
+    results = mycursor.fetchall()
+    article_list = []
+    for article in results:
+        article_list.append(convert(article))
+    result = article_list
+
+    # Return list of articles
+    return jsonify(result)
+
+#@app.route('/count', methods=['GET'])
+
+# Possible Endpoints\
 # @app.route('/images', methods=['GET'])
 # @app.route('/list/diseases', methods=['GET'])
 # @app.route('/list/syndromes', methods=['GET'])
