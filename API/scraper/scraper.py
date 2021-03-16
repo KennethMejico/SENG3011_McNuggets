@@ -97,7 +97,7 @@ class Scraper:
                 
 
     def fetch(self, edate):
-        """ Makes a data request to a the promedmail database, for a specific page given by feed_id """
+        """ Makes a data request to a the promedmail database, for a specific date given by edate """
         # DATA REQUEST
         data = {
             'action' 	:   'get_latest_posts',
@@ -130,7 +130,35 @@ class Scraper:
                 }
         soup = BeautifulSoup(requests.post(self.url, dataReq, headers=self.headers).json()['post'], "html5lib")
         print(soup.find('div', attrs={'class':'text1'}).get_text(separator=" "))
-        
+
+    def fetchFeedID(self, feed_id):
+        data = {
+            'action' 	:   'get_latest_posts',
+            'edate' 	: 	'',
+            'return_map': 	self.return_map,
+            'feed_id' 	: 	feed_id,
+            'seltype' 	: 	self.seltype,
+            'keyword'	: 	self.keyword,
+            'diesesIds'	:   self.diesesIds
+        }
+        response = requests.post(self.url, data, headers=self.headers)
+        return response.json()
+    
+    def fetchOneEachFeed(self):
+        for i in range(255, 1024, 1):
+            print("FEED " + str(i))
+            response = self.fetchFeedID(i)
+            dataReq = {
+                    'action' : 'get_latest_post_data',
+                    'alertId': response['first_alert'],
+                }
+            try :
+                soup = BeautifulSoup(requests.post(self.url, dataReq, headers=self.headers).json()['post'], "html5lib")
+                print(soup.get_text(separator=" "))
+            except:
+                print("Error")
+            finally:
+                print("\n\n\n\n\n\n\n")
         
 
 
@@ -138,4 +166,4 @@ class Scraper:
 #TESTING
 if __name__ == "__main__":
     scraper = Scraper()
-    scraper.run()
+    scraper.fetchOneEachFeed()
