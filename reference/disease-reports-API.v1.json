@@ -228,7 +228,7 @@
               "example": "2021-12-31T23:59:59"
             },
             "in": "query",
-            "name": "from_date",
+            "name": "start_date",
             "description": "The earliest publication date that will be returned, in the format \"yyyy-MM-ddTHH:mm:ss\"",
             "required": true
           },
@@ -239,7 +239,7 @@
               "example": "2021-12-31T23:59:59"
             },
             "in": "query",
-            "name": "to_date",
+            "name": "end_date",
             "description": "The latest publication date that will be returned, in the format \"yyyy-MM-ddTHH:mm:ss\"",
             "required": true
           },
@@ -470,15 +470,6 @@
         "operationId": "get-images",
         "description": "Searches for images associated with the keywords inputted"
       }
-    },
-    "/testFunction": {
-      "get": {
-        "summary": "Your GET endpoint",
-        "tags": [],
-        "responses": {},
-        "operationId": "get-helloworld"
-      },
-      "parameters": []
     }
   },
   "components": {
