@@ -1,0 +1,118 @@
+Location Key: 8854.    Article Date: 28 Feb 2021.    Article ID: 8219231.    Article Name: Ebola update (20): USA, Guinea, Sub-Saharan Africa.
+Location Key: 8854.    Article Date: 28 Feb 2021.    Article ID: 8218147.    Article Name: COVID-19 update (82): mapping escape mutants, variants, vaccines, WHO, global.
+Location Key: 8854.    Article Date: 27 Feb 2021.    Article ID: 8216798.    Article Name: COVID-19 update (81): transmission, reinfection, vaccine and case severity, WHO.
+Location Key: 8854.    Article Date: 23 Feb 2021.    Article ID: 8206906.    Article Name: Gulf war syndrome: depleted uranium NOT.
+Location Key: 8854.    Article Date: 22 Feb 2021.    Article ID: 8205197.    Article Name: Poliomyelitis update (02): global, WPV1, cDPV.
+Location Key: 8854.    Article Date: 21 Feb 2021.    Article ID: 8204585.    Article Name: COVID-19 update (74): vaccines, variants, genomic surveillance, WHO, global.
+Location Key: 8854.    Article Date: 18 Feb 2021.    Article ID: 8200008.    Article Name: COVID-19 update (71): world, animal, mink, WHO/FAO/OIE risk assessment.
+Location Key: 8854.    Article Date: 18 Feb 2021.    Article ID: 8198620.    Article Name: COVID-19 update (70): gangrene, challenge trials, immunity, cancer, WHO, global.
+Location Key: 8854.    Article Date: 16 Feb 2021.    Article ID: 8195382.    Article Name: COVID-19 update (68): animal-human interface, OIE, mink.
+Location Key: 8854.    Article Date: 14 Feb 2021.    Article ID: 8190239.    Article Name: COVID-19 update (64): vaccine, reinfect. France, plasma, viral load, WHO, global.
+Location Key: 8854.    Article Date: 13 Feb 2021.    Article ID: 8189122.    Article Name: COVID-19 update (63): children, China, nebulizer-associated spread, WHO, global.
+Location Key: 8854.    Article Date: 12 Feb 2021.    Article ID: 8187538.    Article Name: COVID-19 update (61): meat facility, S Korea, T lymphocytes, S Asia, WHO, global.
+Location Key: 8854.    Article Date: 11 Feb 2021.    Article ID: 8184805.    Article Name: COVID-19 update (59): dementia risk, UK REACT, mutation, mAb therapy, WHO, global.
+Location Key: 8854.    Article Date: 10 Feb 2021.    Article ID: 8182520.    Article Name: New in IJID (02): February 2021.
+Location Key: 8854.    Article Date: 07 Feb 2021.    Article ID: 8172609.    Article Name: COVID-19 update (52): immunity, recomb, passport, reinfect, WHO.
+Location Key: 8854.    Article Date: 06 Feb 2021.    Article ID: 8170027.    Article Name: COVID-19 update (51): variant mortality, frailty, USA variants, WHO.
+Location Key: 8854.    Article Date: 04 Feb 2021.    Article ID: 8164453.    Article Name: COVID-19 update (48): Olympics, ICU mortality, seasonality, WHO.
+Location Key: 8854.    Article Date: 31 Jan 2021.    Article ID: 8152278.    Article Name: COVID-19 update (42): vaccine, EU, Iran, US navy ship, long haulers, WHO, global.
+Location Key: 8854.    Article Date: 31 Jan 2021.    Article ID: 8151988.    Article Name: Ebola update (04): long term sequelae, antibody resurgence.
+Location Key: 8854.    Article Date: 30 Jan 2021.    Article ID: 8149707.    Article Name: COVID-19 update (40): vaccines, Thailand, Viet Nam, WHO, global.
+Location Key: 8854.    Article Date: 29 Jan 2021.    Article ID: 8147377.    Article Name: Sea star wasting syndrome - North America: oxygen depletion.
+Location Key: 8854.    Article Date: 28 Jan 2021.    Article ID: 8145437.    Article Name: Announcements: Opt-in coming soon for ProMED.
+Location Key: 8854.    Article Date: 24 Jan 2021.    Article ID: 8131487.    Article Name: COVID-19 update (31): foodborne transmission, variants, WHO, global.
+Location Key: 8854.    Article Date: 23 Jan 2021.    Article ID: 8129255.    Article Name: COVID-19 update (30): vaccination impact, immune escape, variant, WHO, global.
+Location Key: 8854.    Article Date: 22 Jan 2021.    Article ID: 8126905.    Article Name: COVID-19 update (29): animal, peridomestic wildlife, experimental infection.
+Location Key: 8854.    Article Date: 18 Jan 2021.    Article ID: 8114712.    Article Name: Ebola update (03): Ebanga monoclonal antibody.
+Location Key: 8854.    Article Date: 17 Jan 2021.    Article ID: 8111215.    Article Name: COVID-19 update (21): health systems, vaccines, variants, skin, WHO, global.
+Location Key: 8854.    Article Date: 16 Jan 2021.    Article ID: 8108967.    Article Name: COVID-19 update (20): animal, deer, experimental infection.
+Location Key: 8854.    Article Date: 16 Jan 2021.    Article ID: 8108325.    Article Name: COVID-19 update (19): variant, Americas PAHO, vaccine, WHO, global.
+Location Key: 8854.    Article Date: 13 Jan 2021.    Article ID: 8099749.    Article Name: Ebola update (01): vaccine stockpile.
+Location Key: 8854.    Article Date: 10 Jan 2021.    Article ID: 8076786.    Article Name: Influenza (02): WHO global update, antiviral.
+Location Key: 8854.    Article Date: 09 Jan 2021.    Article ID: 8086465.    Article Name: COVID-19 update (10): IgA, IL-6 receptor agonists, China, WHO, global.
+Location Key: 8854.    Article Date: 08 Jan 2021.    Article ID: 8083368.    Article Name: COVID-19 update (09): immunity, convalescent plasma, asympt transm, WHO, global.
+Location Key: 8854.    Article Date: 03 Jan 2021.    Article ID: 8067340.    Article Name: COVID-19 update (03): UK hospital preparedness, vaccination, travel, WHO.
+Location Key: 8854.    Article Date: 02 Jan 2021.    Article ID: 8064627.    Article Name: COVID-19 update (02): variants, vaccine, WHO.
+Location Key: 8854.    Article Date: 01 Jan 2021.    Article ID: 8062938.    Article Name: COVID-19 update (01): variants, vaccine, Thailand, global, WHO.
+Location Key: 8854.    Article Date: 27 Dec 2020.    Article ID: 8049469.    Article Name: COVID-19 update (558): variants, Africa, Europe, Hong Kong, trials, WHO, global.
+Location Key: 8854.    Article Date: 26 Dec 2020.    Article ID: 8047282.    Article Name: COVID-19 update (556): Egypt, UAE, Thailand, diabetes, mutations, WHO, global.
+Location Key: 8854.    Article Date: 23 Dec 2020.    Article ID: 8041877.    Article Name: COVID-19 update (551): animal, pig, research, experimental infection.
+Location Key: 8854.    Article Date: 19 Dec 2020.    Article ID: 8030355.    Article Name: COVID-19 update (544): mAb cocktail, mortality, Thailand, WHO, global.
+Location Key: 8854.    Article Date: 17 Dec 2020.    Article ID: 8025562.    Article Name: COVID-19 update (541): COVI-VAC, prevalence, fungal infections, WHO, global.
+Location Key: 8854.    Article Date: 13 Dec 2020.    Article ID: 8014830.    Article Name: COVID-19 update (534): tests, data, therapy, vaccines, WHO, global.
+Location Key: 8854.    Article Date: 12 Dec 2020.    Article ID: 8013854.    Article Name: Poliomyelitis update (19): comment.
+Location Key: 8854.    Article Date: 12 Dec 2020.    Article ID: 8012530.    Article Name: COVID-19 update (533): Italy 2019, USA reinfection, USA vaccine, WHO, global.
+Location Key: 8854.    Article Date: 10 Dec 2020.    Article ID: 8008259.    Article Name: COVID-19 update (529): indoor transmission risk, vaccines, surveillance, WHO, global.
+Location Key: 8854.    Article Date: 06 Dec 2020.    Article ID: 7996993.    Article Name: COVID-19 update (522): viral persistence, assays, markers, WHO, global.
+Location Key: 8854.    Article Date: 05 Dec 2020.    Article ID: 7994443.    Article Name: COVID-19 update (521): CDC guidelines, Europe 2nd wave, WHO, global.
+Location Key: 8854.    Article Date: 04 Dec 2020.    Article ID: 7991767.    Article Name: COVID-19 update (518): virus origin, placebo trials, vaccine, WHO, global.
+Location Key: 8854.    Article Date: 03 Dec 2020.    Article ID: 7989980.    Article Name: COVID-19 update (517): medicines, vaccines, FDA, WHO, global.
+Location Key: 8854.    Article Date: 30 Nov 2020.    Article ID: 7980929.    Article Name: COVID-19 update (513): neonatal serology, isolation, WHO, global.
+Location Key: 8854.    Article Date: 29 Nov 2020.    Article ID: 7979451.    Article Name: COVID-19 update (512): origins, testing regimens, WHO, global.
+Location Key: 8854.    Article Date: 28 Nov 2020.    Article ID: 7977421.    Article Name: COVID-19 update (511): vaccine efficacy, China contaminated food, WHO, global.
+Location Key: 8854.    Article Date: 26 Nov 2020.    Article ID: 7972745.    Article Name: Measles update (27): global surge.
+Location Key: 8854.    Article Date: 24 Nov 2020.    Article ID: 7967377.    Article Name: COVID-19 update (504): vaccine efficacy, Africa, WHO, global.
+Location Key: 8854.    Article Date: 22 Nov 2020.    Article ID: 7962919.    Article Name: COVID-19 update (500): frequent rapid tests, vaccine, WHO, global.
+Location Key: 8854.    Article Date: 21 Nov 2020.    Article ID: 7960723.    Article Name: COVID-19 update (499): obesity, remdesivir, Eastern Mediterranean, WHO, global.
+Location Key: 8854.    Article Date: 20 Nov 2020.    Article ID: 7958200.    Article Name: COVID-19 update (497): baricitinib, viral load dynamics, Samoa, WHO, global.
+Location Key: 8854.    Article Date: 19 Nov 2020.    Article ID: 7956001.    Article Name: COVID-19 update (496): NPI, vaccine, antigen test, WHO, global.
+Location Key: 8854.    Article Date: 19 Nov 2020.    Article ID: 7954363.    Article Name: COVID-19 update (495): animal, cat, transmission model.
+Location Key: 8854.    Article Date: 18 Nov 2020.    Article ID: 7951890.    Article Name: COVID-19 update (494): forged results, eradication, immunity, WHO, global.
+Location Key: 8854.    Article Date: 17 Nov 2020.    Article ID: 7950604.    Article Name: New in IJID (11): November 2020.
+Location Key: 8854.    Article Date: 17 Nov 2020.    Article ID: 7948812.    Article Name: COVID-19 update (493): vaccine efficacy, CoV-OC43, WHO, global.
+Location Key: 8854.    Article Date: 15 Nov 2020.    Article ID: 7945357.    Article Name: Dengue/DHF update (12): Americas.
+Location Key: 8854.    Article Date: 15 Nov 2020.    Article ID: 7944801.    Article Name: COVID-19 update (491): super spread, immunization, mutations, WHO, global.
+Location Key: 8854.    Article Date: 14 Nov 2020.    Article ID: 7942790.    Article Name: COVID-19 update (489): convalescent plasma, South Asia, WHO, global.
+Location Key: 8854.    Article Date: 13 Nov 2020.    Article ID: 7941152.    Article Name: Staph. epidermidis: MDR clones, global spread, alert.
+Location Key: 8854.    Article Date: 13 Nov 2020.    Article ID: 7940073.    Article Name: COVID-19 update (488): mobility models, crossover immunity, WHO, global.
+Location Key: 8854.    Article Date: 10 Nov 2020.    Article ID: 7930703.    Article Name: COVID-19 update (483): vaccine efficacy, Americas region, WHO, global.
+Location Key: 8854.    Article Date: 08 Nov 2020.    Article ID: 7926649.    Article Name: COVID-19 update (479): farmed animals, guidance, OIE .
+Location Key: 8854.    Article Date: 08 Nov 2020.    Article ID: 7925666.    Article Name: COVID-19 update (478): genome, mink, mortality rates, FDA, WHO, global.
+Location Key: 8854.    Article Date: 07 Nov 2020.    Article ID: 7923556.    Article Name: COVID-19 update (476): chronic viral shedding, NPIs impact, WHO, global.
+Location Key: 8854.    Article Date: 06 Nov 2020.    Article ID: 7920708.    Article Name: COVID-19 update (474): remdesivir, vaccine induced herd immunity, WHO, global.
+Location Key: 8854.    Article Date: 05 Nov 2020.    Article ID: 7918610.    Article Name: COVID-19 update (472): schools, immunity, mutations, WHO, global.
+Location Key: 8854.    Article Date: 04 Nov 2020.    Article ID: 7915703.    Article Name: COVID-19 update (470): USA contact tracing, sewage, WHO, global.
+Location Key: 8854.    Article Date: 01 Nov 2020.    Article ID: 7907142.    Article Name: COVID-19 update (465): age, South Asia, antibody trial, WHO, global.
+Location Key: 8854.    Article Date: 31 Oct 2020.    Article ID: 7904955.    Article Name: Gonococcal disease: rapid point-of-care testing, targeted therapy.
+Location Key: 8854.    Article Date: 31 Oct 2020.    Article ID: 7905120.    Article Name: COVID-19 update (462): OP monoclonal antibody, Brazil, age-group NPI, WHO, global.
+Location Key: 8854.    Article Date: 29 Oct 2020.    Article ID: 7900761.    Article Name: COVID-19 update (459): aerosol transmission, lockdowns, masking, WHO, global.
+Location Key: 8854.    Article Date: 25 Oct 2020.    Article ID: 7889160.    Article Name: COVID-19 update (454): vaccine trials, immunity, reinfections, WHO, global.
+Location Key: 8854.    Article Date: 24 Oct 2020.    Article ID: 7886686.    Article Name: COVID-19 update (453): rapid breath test, excess mortality, masks, WHO, global.
+Location Key: 8854.    Article Date: 23 Oct 2020.    Article ID: 7884336.    Article Name: New in IJID (10): October 2020.
+Location Key: 8854.    Article Date: 23 Oct 2020.    Article ID: 7884098.    Article Name: COVID-19 update (451): vaccine efficacy, winter, close contact, WHO, global.
+Location Key: 8854.    Article Date: 22 Oct 2020.    Article ID: 7883213.    Article Name: COVID-19 update (450): animal, cattle, research, experimental infection.
+Location Key: 8854.    Article Date: 18 Oct 2020.    Article ID: 7860441.    Article Name: Influenza (09): WHO global update.
+Location Key: 8854.    Article Date: 18 Oct 2020.    Article ID: 7870550.    Article Name: COVID-19 update (443): cytokine storm, mortality comparison, WHO, global.
+Location Key: 8854.    Article Date: 17 Oct 2020.    Article ID: 7868576.    Article Name: COVID-19 update (442): immunity duration, Switzerland yodeling, WHO, global.
+Location Key: 8854.    Article Date: 15 Oct 2020.    Article ID: 7863738.    Article Name: COVID-19 update (440): children, RNA vaccines, WHO, global.
+Location Key: 8854.    Article Date: 11 Oct 2020.    Article ID: 7852648.    Article Name: COVID-19 update (434): COVAX, viral Load, WHO, global.
+Location Key: 8854.    Article Date: 10 Oct 2020.    Article ID: 7850554.    Article Name: COVID-19 update (432): transmission and age, South Asia, WHO, global.
+Location Key: 8854.    Article Date: 04 Oct 2020.    Article ID: 7835129.    Article Name: COVID-19 update (424): air travel, India, CSF leakage, WHO, global.
+Location Key: 8854.    Article Date: 03 Oct 2020.    Article ID: 7832664.    Article Name: COVID-19 update (423): Parkinson's disease, MIS-A, WHO, global.
+Location Key: 8854.    Article Date: 30 Sep 2020.    Article ID: 7823938.    Article Name: Announcement (04): ProMED anniversary award 2020.
+Location Key: 8854.    Article Date: 29 Sep 2020.    Article ID: 7821062.    Article Name: COVID-19 update (419): intranasal treatment, USA hospital outbreak, WHO, global.
+Location Key: 8854.    Article Date: 27 Sep 2020.    Article ID: 7816222.    Article Name: COVID-19 update (416): gastrointestinal complications, antibodies, WHO, global.
+Location Key: 8854.    Article Date: 26 Sep 2020.    Article ID: 7814181.    Article Name: COVID-19 update (415): vertical transmission, Fido, WHO, global.
+Location Key: 8854.    Article Date: 22 Sep 2020.    Article ID: 7801717.    Article Name: COVID-19 update (410): ACE inhibitors and ARBs, WHO COVAX plan, WHO, global.
+Location Key: 8854.    Article Date: 20 Sep 2020.    Article ID: 7797002.    Article Name: COVID-19 update (408): children, Al Jazeera, WHO, global.
+Location Key: 8854.    Article Date: 19 Sep 2020.    Article ID: 7795084.    Article Name: COVID-19 update (407): in-flight transmission, wildlife research, WHO, global.
+Location Key: 8854.    Article Date: 17 Sep 2020.    Article ID: 7789628.    Article Name: COVID-19 update (404): US FDA, genome analysis, WHO, global.
+Location Key: 8854.    Article Date: 16 Sep 2020.    Article ID: 7783581.    Article Name: COVID-19 update (403): vaccine trial, transmission data needs, WHO, global.
+Location Key: 8854.    Article Date: 13 Sep 2020.    Article ID: 7773769.    Article Name: COVID-19 update (399): nasal vaccine, Al Jazeera, WHO, global.
+Location Key: 8854.    Article Date: 12 Sep 2020.    Article ID: 7771047.    Article Name: COVID-19 update (398): community transm exposures, HCW serology, WHO, global.
+Location Key: 8854.    Article Date: 07 Sep 2020.    Article ID: 7755219.    Article Name: Tick behavior: pathogen influence.
+Location Key: 8854.    Article Date: 06 Sep 2020.    Article ID: 7751802.    Article Name: COVID-19 update (391): vaccine trials, cytokines, WHO, global.
+Location Key: 8854.    Article Date: 05 Sep 2020.    Article ID: 7748995.    Article Name: COVID-19 update (390): Russia vaccine trial, vaping risk factor, WHO, global.
+Location Key: 8854.    Article Date: 03 Sep 2020.    Article ID: 7743273.    Article Name: COVID-19 update (388): corticosteroids, serosurvey, selected countries, WHO, global.
+Location Key: 8854.    Article Date: 01 Sep 2020.    Article ID: 7737065.    Article Name: Dengue/DHF update (10): Americas  .
+Location Key: 8854.    Article Date: 01 Sep 2020.    Article ID: 7735967.    Article Name: COVID-19 update (385): guidelines for working with wildlife.
+Location Key: 98.    Article Date: 28 Feb 2021.    Article ID: 8217634.    Article Name: Avian influenza, human (03): Russia, H5N8, update.
+Location Key: 98.    Article Date: 21 Feb 2021.    Article ID: 8204014.    Article Name: Avian influenza, human (02): Russia, H5N8, 1st case.
+Location Key: 98.    Article Date: 03 Feb 2021.    Article ID: 8160588.    Article Name: COVID-19 update (46): vaccine, mAb, diabetes, age, WHO.
+Location Key: 98.    Article Date: 27 Jan 2021.    Article ID: 8142528.    Article Name: Fig mosaic virus - Russia: 1st rep (Crimea).
+Location Key: 98.    Article Date: 26 Nov 2020.    Article ID: 7973920.    Article Name: Canine distemper, wildlife - Russia: (Far East) tiger, conservation concern, vacc.
+Location Key: 98.    Article Date: 09 Nov 2020.    Article ID: 7930136.    Article Name: Pepino mosaic virus, tomato - Russia ex Armenia, Belarus: intercepts.
+Location Key: 98.    Article Date: 11 Oct 2020.    Article ID: 7853921.    Article Name: Toxic algae - Russia: susp., RFI.
+Location Key: 98.    Article Date: 06 Oct 2020.    Article ID: 7838872.    Article Name: Avian influenza (64): Russia, H5N8, Kazakhstan, H5, poultry, spread, OIE.
+Location Key: 98.    Article Date: 12 Sep 2020.    Article ID: 7770827.    Article Name: Nerve agent poisoning - Russia (02): Novichok.
+Location Key: 98.    Article Date: 09 Sep 2020.    Article ID: 7763574.    Article Name: Phytoplasmas, grapevine & pome fruit - Russia: surveys.
