@@ -79,38 +79,38 @@ CREATE TABLE IF NOT EXISTS metaData (
 );
 
 
-/* UPDATE FUNCTIONS */
+-- /* UPDATE FUNCTIONS */
 
-/*
+-- /*
 
-CREATE FUNCTION check_reports_insert() 
-	RETURNS TRIGGER 
-	LANGUAGE PLPGSQL
-	AS $$
-	BEGIN
-		NEW.LOCATIONID =  COALESCE ( ( OLD.LOCATIONID ), ( SELECT  LOCATIONID  from  articles  where  articles.articleID == old.articleID ) );
-		NEW.EVENTDATE  =  COALESCE ( ( OLD.EVENTDATE  ), ( SELECT  PUBDATE     from  articles  where  articles.articleID == old.articleID ) );
-		RETURN NEW;
-	END;
-	$$
+-- CREATE FUNCTION check_reports_insert() 
+-- 	RETURNS TRIGGER 
+-- 	LANGUAGE PLPGSQL
+-- 	AS $$
+-- 	BEGIN
+-- 		NEW.LOCATIONID =  COALESCE ( ( OLD.LOCATIONID ), ( SELECT  LOCATIONID  from  articles  where  articles.articleID == old.articleID ) );
+-- 		NEW.EVENTDATE  =  COALESCE ( ( OLD.EVENTDATE  ), ( SELECT  PUBDATE     from  articles  where  articles.articleID == old.articleID ) );
+-- 		RETURN NEW;
+-- 	END;
+-- 	$$
 
-CREATE TRIGGER IF NOT EXISTS reports_Insert
-	BEFORE INSERT ON "REPORTS"
-	FOR EACH ROW WHEN reports.locationID IS NULL OR reports.eventDate IS NULL
-	EXECUTE PROCEDURE check_reports_insert();
+-- CREATE TRIGGER IF NOT EXISTS reports_Insert
+-- 	BEFORE INSERT ON "REPORTS"
+-- 	FOR EACH ROW WHEN reports.locationID IS NULL OR reports.eventDate IS NULL
+-- 	EXECUTE PROCEDURE check_reports_insert();
 
-*/
+-- */
 
-/* 
-CREATE FUNCTION update_metaData()
-	RETURNS TRIGGER
-	LANGUAGE PLPGSQL
-	AS $$
-	BEGIN
-		UPDATE metaData SET
-		lastUpdated = ( SELECT NOW() ),
-		lastUserToUpdate = ( SELECT CURRENT_USER );
-	END;
-	$$ 
-*/
+-- /* 
+-- CREATE FUNCTION update_metaData()
+-- 	RETURNS TRIGGER
+-- 	LANGUAGE PLPGSQL
+-- 	AS $$
+-- 	BEGIN
+-- 		UPDATE metaData SET
+-- 		lastUpdated = ( SELECT NOW() ),
+-- 		lastUserToUpdate = ( SELECT CURRENT_USER );
+-- 	END;
+-- 	$$ 
+-- */
 	

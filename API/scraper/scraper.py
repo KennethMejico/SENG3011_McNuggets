@@ -8,7 +8,7 @@ Can then dump all the articles and information into a PostgreSQL database
 import requests
 
 import helpers 
-import db_controller
+from API import db_controller
 
 
 class Scraper:
