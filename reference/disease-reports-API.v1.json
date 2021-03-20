@@ -6,11 +6,11 @@
   },
   "servers": [
     {
-      "url": "http://localhost:3000"
+      "url": "https://yezisizxhb.execute-api.ap-southeast-2.amazonaws.com/default/"
     }
   ],
   "paths": {
-    "/search": {
+    "example-search": {
       "get": {
         "summary": "Search for disease reports",
         "tags": [],
@@ -45,7 +45,8 @@
             },
             "in": "query",
             "name": "key_terms",
-            "description": "The key words to search for in articles."
+            "description": "The key words to search for in articles.",
+            "required": true
           },
           {
             "schema": {
@@ -142,8 +143,7 @@
                     "url",
                     "date_of_publication",
                     "headline",
-                    "main_text",
-                    "reports"
+                    "main_text"
                   ]
                 },
                 "examples": {
@@ -189,8 +189,10 @@
               }
             }
           }
-        }
-      }
+        },
+        "description": " Users may input four parameters:\n        1. start_date\n        2. end_date\n        3. key_terms\n        4. location\n        The API will return a list of articles in JSON format filtered by the parameters.\n        Both dates (1. and 2.) have to respect the following format: “yyyy-MM-ddTHH:mm:ss”"
+      },
+      "parameters": []
     },
     "/count": {
       "get": {
@@ -212,7 +214,7 @@
               "type": "string"
             },
             "in": "query",
-            "name": "from_date",
+            "name": "start_date",
             "required": true
           },
           {
@@ -220,7 +222,7 @@
               "type": "string"
             },
             "in": "query",
-            "name": "to_date",
+            "name": "end_date",
             "required": true
           }
         ]
@@ -266,58 +268,85 @@
   },
   "components": {
     "schemas": {
-      "User": {
-        "title": "User",
+      "article": {
+        "title": "article",
         "type": "object",
-        "description": "",
-        "x-examples": {
-          "Alice Smith": {
-            "id": 142,
-            "firstName": "Alice",
-            "lastName": "Smith",
-            "email": "alice.smith@gmail.com",
-            "dateOfBirth": "1997-10-31",
-            "emailVerified": true,
-            "signUpDate": "2019-08-24"
-          }
-        },
         "properties": {
-          "id": {
-            "type": "integer",
-            "description": "Unique identifier for the given user."
-          },
-          "firstName": {
+          "url": {
             "type": "string"
           },
-          "lastName": {
+          "date_of_publication": {
             "type": "string"
           },
-          "email": {
-            "type": "string",
-            "format": "email"
+          "headline": {
+            "type": "string"
           },
-          "dateOfBirth": {
-            "type": "string",
-            "format": "date",
-            "example": "1997-10-31"
+          "main_text": {
+            "type": "string"
           },
-          "emailVerified": {
-            "type": "boolean",
-            "description": "Set to true if the user's email has been verified."
-          },
-          "createDate": {
-            "type": "string",
-            "format": "date",
-            "description": "The date that the user was created."
+          "reports": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "diseases": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "syndromes": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "event_date": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "locations": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
           }
-        },
-        "required": [
-          "id",
-          "firstName",
-          "lastName",
-          "email",
-          "emailVerified"
-        ]
+        }
+      },
+      "report": {
+        "title": "report",
+        "type": "object",
+        "properties": {
+          "diseases": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "syndromes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "event_dates": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "locations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
       }
     }
   }
