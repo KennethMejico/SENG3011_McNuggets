@@ -3,39 +3,12 @@ from flask import request, jsonify
 import mysql.connector
 import simplejson as json
 from datetime import datetime
+import db_controller
 
 application = app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 app.config['JSON_SORT_KEYS'] = False
 
-# Returns pointer to db connector
-def connect_to_db():
-    mydb = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="newrootpassword",
-        auth_plugin='mysql_native_password',
-        database="promedmail"
-    )
-    return mydb
-
-# Retrieves data from MySQL server and returns a list of articles
-def retrieve_data(mycursor, sql, data):
-    mycursor.execute(sql, data)
-    results = mycursor.fetchall()
-    article_list = []
-    for article in results:
-        article_list.append(convert(article))
-    return article_list
-
-# Converts SQL data to python dict/list form
-def convert(lst):
-    reports_list = []
-    # This needs to be updated in future when multiple reports are assigned to a single article
-    report_dict = {'event_date':lst[4], 'locations':lst[5], 'diseases': lst[6], 'syndromes': lst[7]}
-    reports_list.append(report_dict)
-    article_dict = {'url':lst[0], 'date_of_publication':lst[1], 'headline':lst[2], 'main_text':lst[3], 'reports': reports_list}
-    return article_dict
 
 def noneOrEmpty(str):
     return (str is None) or (not str)
@@ -93,82 +66,85 @@ def filter_search():
 
     if noneOrEmpty(start_date) or noneOrEmpty(end_date):
         return dates_not_given(400)
-
-    mydb = connect_to_db()
-
-    # Execute query to gather articles which satisfy data constraint
-    mycursor = mydb.cursor()
-
-    # Base SQL Query
-    sql = """
-        select
-            a.linkToArticle,
-            a.pubDate,
-            a.articleName,
-            a.mainText,
-            r.eventDate,
-            l.locationName,
-            r.disease,
-            r.syndrome
-        from
-            articles a
-        left join
-            reports r on r.articleID = a.articleID
-        left join
-            locations l on r.locationID = l.locationID
-        where a.pubDate >= %s and a.pubDate <= %s
-    """
     
-    # Convert start and date time to datetime datatype
-    start = datetime.strptime(start_date, '%Y-%m-%dT%H:%M:%S')
-    end = datetime.strptime(end_date, '%Y-%m-%dT%H:%M:%S')
-
-    data = (start, end)
-
-    if not noneOrEmpty(location):
-        sql = sql + " and l.locationName = %s"
-        data = data + (location,)
-
-    if not noneOrEmpty(key_terms):
-        sql = sql + " and (r.disease LIKE %s or r.syndrome LIKE %s)"
-        formatted_key_terms = "%" + key_terms + "%"
-        data = data + (formatted_key_terms, formatted_key_terms,)
-    
-    result = retrieve_data(mycursor, sql, data)
+    result = search(start_date, end_date, location, key_terms, db_controller.getDbConnection())
 
     # Return list of articles
     return jsonify(result)
 
-@app.route('/getDatabase', methods=['GET'])
-def get_all_reports():
-    mydb = connect_to_db()
+def search(start_date, end_date, location, key_terms, db):
+    mycursor = db.cursor()
 
-    # Execute query to gather articles which satisfy data constraint
-    mycursor = mydb.cursor()
+    # Base SQL Query
     sql = """
         select
-            a.linkToArticle,
-            a.pubDate,
-            a.articleName,
-            a.mainText,
-            r.eventDate,
-            l.locationName,
-            r.disease,
-            r.syndrome
-        from
-            articles a
-        left join
-            reports r on r.articleID = a.articleID
-        left join
-            locations l on r.locationID = l.locationID
+            a.LinkToArticle,
+            a.PubDate,
+            a.ArticleName,
+            a.MainText,
+            r.EventDate,
+            r.ReportID
+        from Articles a
+        join Reports r on r.ArticleID = a.ArticleID
+        where a.ArticleID = a.ArticleID
     """
-    mycursor.execute(sql)
-    results = mycursor.fetchall()
-    article_list = []
-    for article in results:
-        article_list.append(convert(article))
-    result = article_list
+    data = ()
+    if not noneOrEmpty(start_date):
+        # Convert start date time to datetime datatype
+        start = datetime.strptime(start_date, '%Y-%m-%dT%H:%M:%S')
+        sql = sql + " and a.PubDate >= %s"
+        data = data + (start,)
 
+    if not noneOrEmpty(end_date):
+        end = datetime.strptime(end_date, '%Y-%m-%dT%H:%M:%S')
+        sql = sql + " and a.PubDate <= %s"
+        data = data + (end,)
+
+    mycursor.execute(sql, data)
+    results = mycursor.fetchall()
+    result_list = []
+    for result in results:
+        report_list = []
+        reportId = result[5]
+        locations = getLocationsForReport(reportId, mycursor, location)
+        diseases = getDiseasesForReport(reportId, mycursor, key_terms)
+        syndromes = getSyndromesForReport(reportId, mycursor, key_terms)
+        
+        if not noneOrEmpty(location) and len(locations) == 0:
+            continue
+        if not noneOrEmpty(key_terms) and len(diseases) == 0 and len(syndromes) == 0:
+            continue
+
+        report = {
+            'event_date': result[4],
+            'locations': locations,
+            'diseases': diseases,
+            'syndromes': syndromes
+        }
+        report_list.append(report)
+
+        article = {
+            'url': result[0],
+            'date_of_publication': result[1],
+            'headline': result[2],
+            'main_text': result[3],
+            'reports': report_list
+        }
+
+        result_list.append(article)
+
+    db.close()
+
+    return result_list
+
+@app.route('/getDatabase', methods=['GET'])
+def get_all_reports():
+    mydb = db_controller.getDbConnection()
+
+    # Execute query to gather articles which satisfy data constraint
+    result = search(None, None, None, None, mydb)
+
+    mydb.close()
     # Return list of articles
     return jsonify(result)
 
@@ -178,4 +154,78 @@ def get_all_reports():
 # @app.route('/images', methods=['GET'])
 # @app.route('/list/diseases', methods=['GET'])
 # @app.route('/list/syndromes', methods=['GET'])
-app.run()
+
+def getLocationsForReport(reportId, cursor, location=None):
+    locationQuery = """
+        SELECT l.LocationName
+        FROM Locations l 
+        join Report_Locations rl on rl.LocationID = l.LocationID
+        join Reports r on rl.ReportID = r.ReportID
+        where r.ReportID = %s
+    """
+
+    locationData = (reportId,)
+    if not noneOrEmpty(location):
+        locationQuery = locationQuery + " and l.locationName = %s"
+        locationData = locationData + (location,)
+    
+    cursor.execute(locationQuery, locationData)
+    results = cursor.fetchall()
+
+    locations = []
+    for location in results:
+        locations.append(location[0])
+
+    return locations
+
+def getDiseasesForReport(reportId, cursor, key_terms=None):
+    query = """
+        SELECT d.DiseaseName
+        FROM Diseases d 
+        join Report_Diseases rd on rd.DiseaseID = d.DiseaseID
+        join Reports r on rd.ReportID = r.ReportID
+        where r.ReportID = %s
+    """
+
+    data = (reportId,)
+    if not noneOrEmpty(key_terms):
+        query = query + " and d.DiseaseName LIKE %s"
+        formatted_key_terms = "%" + key_terms + "%"
+        data = data + (formatted_key_terms,)
+    
+    cursor.execute(query, data)
+    results = cursor.fetchall()
+
+    diseases = []
+    for disease in results:
+        diseases.append(disease[0])
+
+    return diseases
+
+def getSyndromesForReport(reportId, cursor, key_terms=None):
+    query = """
+        SELECT s.SyndromeName
+        FROM Syndromes s
+        join Report_Syndromes rs on rs.SyndromeID = s.SyndromeID
+        join Reports r on rs.ReportID = r.ReportID
+        where r.ReportID = %s
+    """
+
+    data = (reportId,)
+    if not noneOrEmpty(key_terms):
+        query = query + " and s.SyndromeName LIKE %s"
+        formatted_key_terms = "%" + key_terms + "%"
+        data = data + (formatted_key_terms,)
+    
+    cursor.execute(query, data)
+    results = cursor.fetchall()
+
+    syndromes = []
+    for syndrome in results:
+        syndromes.append(syndrome[0])
+
+    return syndromes
+
+
+if __name__ == "__main__":
+    app.run()

@@ -9,8 +9,8 @@ def getDbConnection():
     db = mysql.connector.connect(
         host = "localhost",
         user="root",
-        password="password",
-        database="seng_mcnuggets"
+        password="newrootpassword",
+        database="testdb"
     )
     return db
 
