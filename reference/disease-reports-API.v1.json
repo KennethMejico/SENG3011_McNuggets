@@ -46,7 +46,6 @@
             "in": "query",
             "name": "key_terms",
             "description": "The key words to search for in articles.",
-            "required": true
           },
           {
             "schema": {
