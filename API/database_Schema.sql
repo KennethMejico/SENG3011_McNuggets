@@ -31,12 +31,12 @@ CREATE TABLE IF NOT EXISTS Articles (
 CREATE TABLE IF NOT EXISTS Reports (
     ReportID INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,                                        /* Primary Key */
     ArticleID INTEGER NOT Null,                                         /*  */
-    LocationID INTEGER NOT NULL,                                                 /* IF NULL get location from article location*/
-    Disease varchar(100) NOT NULL,                                      /*  */
-    Syndrome varchar(100) NOT NULL,                                     /*  */
+    -- LocationID INTEGER NOT NULL,                                                 /* IF NULL get location from article location*/
+    -- Disease varchar(100) NOT NULL,                                      /*  */
+    -- Syndrome varchar(100) NOT NULL,                                     /*  */
     EventDate DATE,                                                     /* IF NULL get date from article */
-    FOREIGN KEY (ArticleID) REFERENCES Articles(ArticleID), 
-    FOREIGN KEY (LocationID) REFERENCES Locations(LocationID)
+    FOREIGN KEY (ArticleID) REFERENCES Articles(ArticleID) 
+    -- FOREIGN KEY (LocationID) REFERENCES Locations(LocationID)
 );
 
 CREATE TABLE IF NOT EXISTS Report_Locations (
