@@ -45,8 +45,7 @@
             },
             "in": "query",
             "name": "key_terms",
-            "description": "The key words to search for in articles.",
-            "required": true
+            "description": "The key words to search for in articles."
           },
           {
             "schema": {
