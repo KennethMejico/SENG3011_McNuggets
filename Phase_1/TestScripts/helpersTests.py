@@ -9,7 +9,7 @@ from helpers import *
 def setup():
     res1 = "28 Feb 2021 <a href=\"javascript:;\" id=\"id8219231\" class=\"bcl\"> Ebola update (20): USA, Guinea, Sub-Saharan Africa</a>"
     res2 = "01 Sep 2020 <a href=\"javascript:;\" id=\"id7823938\" class=\"bcl\"> Announcement (04): ProMED anniversary award 2020</a>"
-    return {"res1": res1, "res2": res2, "scraper": Scraper()}
+    return {"res1": res1, "res2": res2}
 
 def test_findDate(setup):
     assert(findDate(setup["res1"]) == "28 Feb 2021")
