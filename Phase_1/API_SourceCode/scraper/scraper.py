@@ -219,4 +219,3 @@ class Scraper:
     def run(self):
         self.fetch()
         self.process()
-
