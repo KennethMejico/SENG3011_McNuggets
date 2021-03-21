@@ -18,7 +18,7 @@ def findDate(string):
 
 def findID(string):
     """Finds the id of an article for the string format returned by promedmail.org"""
-    return re.search('(?<=id=\"id)\d+(?=\")|$', string).group()
+    return re.search('(?<=id=\"id)\\d+(?=\")|$', string).group()
 
 def findName(string):
     """Finds the name of an article for the string format returned by promedmail.org"""
@@ -31,7 +31,7 @@ def printInfo(key, date, aid, name):
     >>> Article ID: {aid}.    Article Name: {name}.
     """
     print(f"Location Key: {key}.    Article Date: {date}.\
-        Article ID: {aid}.    Article Name: {name}.")
+    Article ID: {aid}.    Article Name: {name}.")
 
 def processData(jsonResponse):
     """Processes data for the JSON response given by promedmail.org"""
