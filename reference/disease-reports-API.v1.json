@@ -6,216 +6,11 @@
   },
   "servers": [
     {
-      "url": "http://localhost:3000"
+      "url": "https://yezisizxhb.execute-api.ap-southeast-2.amazonaws.com/default/"
     }
   ],
   "paths": {
-    "/users/{userId}": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "integer"
-          },
-          "name": "userId",
-          "in": "path",
-          "required": true,
-          "description": "Id of an existing user."
-        }
-      ],
-      "get": {
-        "summary": "Get User Info by User ID",
-        "tags": [],
-        "responses": {
-          "200": {
-            "description": "User Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/User"
-                },
-                "examples": {
-                  "Get User Alice Smith": {
-                    "value": {
-                      "id": 142,
-                      "firstName": "Alice",
-                      "lastName": "Smith",
-                      "email": "alice.smith@gmail.com",
-                      "dateOfBirth": "1997-10-31",
-                      "emailVerified": true,
-                      "signUpDate": "2019-08-24"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "User Not Found"
-          }
-        },
-        "operationId": "get-users-userId",
-        "description": "Retrieve the information of the user with the matching user ID."
-      },
-      "patch": {
-        "summary": "Update User Information",
-        "operationId": "patch-users-userId",
-        "responses": {
-          "200": {
-            "description": "User Updated",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/User"
-                },
-                "examples": {
-                  "Updated User Rebecca Baker": {
-                    "value": {
-                      "id": 13,
-                      "firstName": "Rebecca",
-                      "lastName": "Baker",
-                      "email": "rebecca@gmail.com",
-                      "dateOfBirth": "1985-10-02",
-                      "emailVerified": false,
-                      "createDate": "2019-08-24"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "User Not Found"
-          },
-          "409": {
-            "description": "Email Already Taken"
-          }
-        },
-        "description": "Update the infromation of an existing user.",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "firstName": {
-                    "type": "string"
-                  },
-                  "lastName": {
-                    "type": "string"
-                  },
-                  "email": {
-                    "type": "string",
-                    "description": "If a new email is given, the user's email verified property will be set to false."
-                  },
-                  "dateOfBirth": {
-                    "type": "string"
-                  }
-                }
-              },
-              "examples": {
-                "Update First Name": {
-                  "value": {
-                    "firstName": "Rebecca"
-                  }
-                },
-                "Update Email": {
-                  "value": {
-                    "email": "rebecca@gmail.com"
-                  }
-                },
-                "Update Last Name & Date of Birth": {
-                  "value": {
-                    "lastName": "Baker",
-                    "dateOfBirth": "1985-10-02"
-                  }
-                }
-              }
-            }
-          },
-          "description": "Patch user properties to update."
-        }
-      }
-    },
-    "/user": {
-      "post": {
-        "summary": "Create New User",
-        "operationId": "post-user",
-        "responses": {
-          "200": {
-            "description": "User Created",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/User"
-                },
-                "examples": {
-                  "New User Bob Fellow": {
-                    "value": {
-                      "id": 12,
-                      "firstName": "Bob",
-                      "lastName": "Fellow",
-                      "email": "bob.fellow@gmail.com",
-                      "dateOfBirth": "1996-08-24",
-                      "emailVerified": false,
-                      "createDate": "2020-11-18"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Missing Required Information"
-          },
-          "409": {
-            "description": "Email Already Taken"
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "firstName": {
-                    "type": "string"
-                  },
-                  "lastName": {
-                    "type": "string"
-                  },
-                  "email": {
-                    "type": "string"
-                  },
-                  "dateOfBirth": {
-                    "type": "string",
-                    "format": "date"
-                  }
-                },
-                "required": [
-                  "firstName",
-                  "lastName",
-                  "email",
-                  "dateOfBirth"
-                ]
-              },
-              "examples": {
-                "Create User Bob Fellow": {
-                  "value": {
-                    "firstName": "Bob",
-                    "lastName": "Fellow",
-                    "email": "bob.fellow@gmail.com",
-                    "dateOfBirth": "1996-08-24"
-                  }
-                }
-              }
-            }
-          },
-          "description": "Post the necessary fields for the API to create a new user."
-        },
-        "description": "Create a new user."
-      }
-    },
-    "/search": {
+    "example-search": {
       "get": {
         "summary": "Search for disease reports",
         "tags": [],
@@ -228,7 +23,7 @@
               "example": "2021-12-31T23:59:59"
             },
             "in": "query",
-            "name": "from_date",
+            "name": "start_date",
             "description": "The earliest publication date that will be returned, in the format \"yyyy-MM-ddTHH:mm:ss\"",
             "required": true
           },
@@ -239,7 +34,7 @@
               "example": "2021-12-31T23:59:59"
             },
             "in": "query",
-            "name": "to_date",
+            "name": "end_date",
             "description": "The latest publication date that will be returned, in the format \"yyyy-MM-ddTHH:mm:ss\"",
             "required": true
           },
@@ -259,8 +54,7 @@
             },
             "in": "query",
             "name": "location",
-            "description": "The location to look for reports about",
-            "required": true
+            "description": "The location to look for reports about"
           },
           {
             "schema": {
@@ -272,8 +66,132 @@
             "name": "timezone",
             "description": "The timezone the dates and times will be assumed to be in"
           }
-        ]
-      }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "date_of_publication": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "headline": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "main_text": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "reports": {
+                      "type": "array",
+                      "uniqueItems": true,
+                      "minItems": 1,
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "event_date": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "locations": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "minItems": 1,
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "country": {
+                                  "type": "string"
+                                },
+                                "location": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          },
+                          "diseases": {
+                            "type": "array",
+                            "items": {
+                              "type": "object"
+                            }
+                          },
+                          "syndromes": {
+                            "type": "array",
+                            "items": {
+                              "type": "object"
+                            }
+                          }
+                        },
+                        "required": [
+                          "event_date"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "url",
+                    "date_of_publication",
+                    "headline",
+                    "main_text"
+                  ]
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "url": "www.who.int/lalala_fake_article",
+                      "date_of_publication": "2018-12-12 xx:xx:xx",
+                      "headline": "Outbreaks in Southern Vietnam",
+                      "main_text": "Three people infected by what is thought to be H5N1 or H7N9  in Ho Chi Minh city. First infection occurred on 1 Dec 2018, and latest is report on 10 December. Two in hospital, one has recovered. Furthermore, two people with fever and rash infected by an unknown disease.",
+                      "reports": [
+                        {
+                          "event_date": "2018-12-01 xx:xx:xx to 2018-12-10 xx:xx:xx",
+                          "locations": [
+                            {
+                              "geonames-id": 1566083
+                            }
+                          ],
+                          "diseases": [
+                            "influenza a/h5n1",
+                            "influenza a/h7n9"
+                          ],
+                          "syndromes": []
+                        },
+                        {
+                          "event_date": "2018-12-01 xx:xx:xx to 2018-12-10 xx:xx:xx",
+                          "locations": [
+                            {
+                              "country": "Australia",
+                              "location": "Sydney"
+                            }
+                          ],
+                          "diseases": [
+                            "unknown"
+                          ],
+                          "syndromes": [
+                            "Acute fever and rash"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": " Users may input four parameters:\n        1. start_date\n        2. end_date\n        3. key_terms\n        4. location\n        The API will return a list of articles in JSON format filtered by the parameters.\n        Both dates (1. and 2.) have to respect the following format: “yyyy-MM-ddTHH:mm:ss”"
+      },
+      "parameters": []
     },
     "/count": {
       "get": {
@@ -295,7 +213,7 @@
               "type": "string"
             },
             "in": "query",
-            "name": "from_date",
+            "name": "start_date",
             "required": true
           },
           {
@@ -303,7 +221,7 @@
               "type": "string"
             },
             "in": "query",
-            "name": "to_date",
+            "name": "end_date",
             "required": true
           }
         ]
@@ -345,71 +263,89 @@
         "operationId": "get-images",
         "description": "Searches for images associated with the keywords inputted"
       }
-    },
-    "/testFunction": {
-      "get": {
-        "summary": "Your GET endpoint",
-        "tags": [],
-        "responses": {},
-        "operationId": "get-helloworld"
-      },
-      "parameters": []
     }
   },
   "components": {
     "schemas": {
-      "User": {
-        "title": "User",
+      "article": {
+        "title": "article",
         "type": "object",
-        "description": "",
-        "x-examples": {
-          "Alice Smith": {
-            "id": 142,
-            "firstName": "Alice",
-            "lastName": "Smith",
-            "email": "alice.smith@gmail.com",
-            "dateOfBirth": "1997-10-31",
-            "emailVerified": true,
-            "signUpDate": "2019-08-24"
-          }
-        },
         "properties": {
-          "id": {
-            "type": "integer",
-            "description": "Unique identifier for the given user."
-          },
-          "firstName": {
+          "url": {
             "type": "string"
           },
-          "lastName": {
+          "date_of_publication": {
             "type": "string"
           },
-          "email": {
-            "type": "string",
-            "format": "email"
+          "headline": {
+            "type": "string"
           },
-          "dateOfBirth": {
-            "type": "string",
-            "format": "date",
-            "example": "1997-10-31"
+          "main_text": {
+            "type": "string"
           },
-          "emailVerified": {
-            "type": "boolean",
-            "description": "Set to true if the user's email has been verified."
-          },
-          "createDate": {
-            "type": "string",
-            "format": "date",
-            "description": "The date that the user was created."
+          "reports": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "diseases": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "syndromes": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "event_date": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "locations": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
           }
-        },
-        "required": [
-          "id",
-          "firstName",
-          "lastName",
-          "email",
-          "emailVerified"
-        ]
+        }
+      },
+      "report": {
+        "title": "report",
+        "type": "object",
+        "properties": {
+          "diseases": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "syndromes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "event_dates": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "locations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
       }
     }
   }
