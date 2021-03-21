@@ -7,10 +7,11 @@ import re
 def getDbConnection():
     # change this to your own config for now until we set up on AWS
     db = mysql.connector.connect(
-        host = "localhost",
-        user="root",
-        password="newrootpassword",
-        database="testdb"
+        host="mcnuggetsdb.ckxxjj5qvkgp.ap-southeast-2.rds.amazonaws.com",
+        port="3306",
+        user="McNuggetsAdmin",
+        password="Boysenberry",
+        database="mcnuggetsdb"
     )
     return db
 
@@ -22,7 +23,7 @@ def executeSchema(db):
     
     statement = ""
     with db.cursor() as cursor:
-        for line in open('database_Schema.sql', 'r'):
+        for line in open('Phase_1/API_SourceCode/database_Schema.sql', 'r'):
             if re.match(r'--', line):  # ignore sql comment lines
                 continue
             if not re.search(r';$', line):  # keep appending lines that don't end in ';'
@@ -33,7 +34,7 @@ def executeSchema(db):
                 statement = ""
     db.commit()
 
-    with open('jsonFiles/disease_list.json', 'r') as f:
+    with open('Phase_1/API_SourceCode/jsonFiles/disease_list.json', 'r') as f:
         diseases = json.load(f)
         results = []
         for disease in diseases:
@@ -44,7 +45,7 @@ def executeSchema(db):
             cursor.executemany(query, results)
         db.commit()
     
-    with open('jsonFiles/syndrome_list.json', 'r') as f:
+    with open('Phase_1/API_SourceCode/jsonFiles/syndrome_list.json', 'r') as f:
         syndromes = json.load(f)
         results = []
         for syndrome in syndromes:

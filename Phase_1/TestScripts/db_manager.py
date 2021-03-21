@@ -8,26 +8,28 @@ import db_controller
 
 def getServerConnection():
     server = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="newrootpassword",
+        host="mcnuggetsdb.ckxxjj5qvkgp.ap-southeast-2.rds.amazonaws.com",
+        port="3306",
+        user="McNuggetsAdmin",
+        password="Boysenberry"
 
     )
     return server
 
 def getDbConnection():
     mydb = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="newrootpassword",
-        database="TestDb",
+        host="mcnuggetsdb.ckxxjj5qvkgp.ap-southeast-2.rds.amazonaws.com",
+        port="3306",
+        user="McNuggetsAdmin",
+        password="Boysenberry",
+        database="mcnuggetsdb"
     )
     return mydb
 
 def setup():
     serverConn = getServerConnection()
     cursor = serverConn.cursor()
-    cursor.execute("CREATE DATABASE IF NOT EXISTS TestDb")
+    cursor.execute("CREATE DATABASE IF NOT EXISTS mcnuggetsdb")
     serverConn.close()
 
     dbConn = getDbConnection()
@@ -44,7 +46,7 @@ def teardown():
     serverConn = getServerConnection()
     cursor = serverConn.cursor()
 
-    query = "DROP DATABASE TestDb"
+    query = "DROP DATABASE mcnuggetsdb"
     cursor.execute(query)
 
     serverConn.close()
