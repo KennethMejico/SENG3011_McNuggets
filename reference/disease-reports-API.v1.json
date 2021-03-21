@@ -1,0 +1,352 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "disease reports API",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "https://yezisizxhb.execute-api.ap-southeast-2.amazonaws.com/default/"
+    }
+  ],
+  "paths": {
+    "example-search": {
+      "get": {
+        "summary": "Search for disease reports",
+        "tags": [],
+        "operationId": "get-search",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "pattern": "[0-9]{4}-[0-1][0-9]-[0-3][0-9]T[0-2][0-9]:[0-5][0-9]:[0-5][0-9]",
+              "example": "2021-12-31T23:59:59"
+            },
+            "in": "query",
+            "name": "start_date",
+            "description": "The earliest publication date that will be returned, in the format \"yyyy-MM-ddTHH:mm:ss\"",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string",
+              "pattern": "[0-9]{4}-[0-1][0-9]-[0-3][0-9]T[0-2][0-9]:[0-5][0-9]:[0-5][0-9]",
+              "example": "2021-12-31T23:59:59"
+            },
+            "in": "query",
+            "name": "end_date",
+            "description": "The latest publication date that will be returned, in the format \"yyyy-MM-ddTHH:mm:ss\"",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "covid-19,vaccinations,rollout"
+            },
+            "in": "query",
+            "name": "key_terms",
+            "description": "The key words to search for in articles."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "Sydney"
+            },
+            "in": "query",
+            "name": "location",
+            "description": "The location to look for reports about"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "GMT+11",
+              "pattern": "GMT[+-]\\d\\d?"
+            },
+            "in": "query",
+            "name": "timezone",
+            "description": "The timezone the dates and times will be assumed to be in"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "date_of_publication": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "headline": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "main_text": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "reports": {
+                      "type": "array",
+                      "uniqueItems": true,
+                      "minItems": 1,
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "event_date": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "locations": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "minItems": 1,
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "country": {
+                                  "type": "string"
+                                },
+                                "location": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          },
+                          "diseases": {
+                            "type": "array",
+                            "items": {
+                              "type": "object"
+                            }
+                          },
+                          "syndromes": {
+                            "type": "array",
+                            "items": {
+                              "type": "object"
+                            }
+                          }
+                        },
+                        "required": [
+                          "event_date"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "url",
+                    "date_of_publication",
+                    "headline",
+                    "main_text"
+                  ]
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "url": "www.who.int/lalala_fake_article",
+                      "date_of_publication": "2018-12-12 xx:xx:xx",
+                      "headline": "Outbreaks in Southern Vietnam",
+                      "main_text": "Three people infected by what is thought to be H5N1 or H7N9  in Ho Chi Minh city. First infection occurred on 1 Dec 2018, and latest is report on 10 December. Two in hospital, one has recovered. Furthermore, two people with fever and rash infected by an unknown disease.",
+                      "reports": [
+                        {
+                          "event_date": "2018-12-01 xx:xx:xx to 2018-12-10 xx:xx:xx",
+                          "locations": [
+                            {
+                              "geonames-id": 1566083
+                            }
+                          ],
+                          "diseases": [
+                            "influenza a/h5n1",
+                            "influenza a/h7n9"
+                          ],
+                          "syndromes": []
+                        },
+                        {
+                          "event_date": "2018-12-01 xx:xx:xx to 2018-12-10 xx:xx:xx",
+                          "locations": [
+                            {
+                              "country": "Australia",
+                              "location": "Sydney"
+                            }
+                          ],
+                          "diseases": [
+                            "unknown"
+                          ],
+                          "syndromes": [
+                            "Acute fever and rash"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": " Users may input four parameters:\n        1. start_date\n        2. end_date\n        3. key_terms\n        4. location\n        The API will return a list of articles in JSON format filtered by the parameters.\n        Both dates (1. and 2.) have to respect the following format: “yyyy-MM-ddTHH:mm:ss”"
+      },
+      "parameters": []
+    },
+    "/count": {
+      "get": {
+        "summary": "Count the mentions of diseases",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-count",
+        "description": "Returns a count of the number of mentions of each disease in the time range by default, or the number of mentions of each of the keywords if specified",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "keywords"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "start_date",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "end_date",
+            "required": true
+          }
+        ]
+      },
+      "parameters": []
+    },
+    "/list/diseases": {
+      "get": {
+        "summary": "List the disases known",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-list-diseases",
+        "description": "Returns a list of diseases found by the API"
+      }
+    },
+    "/list/syndromes": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-list-syndromes",
+        "description": "Returns a list of syndromes found by the API"
+      }
+    },
+    "/getDatabase": {
+      "get": {
+        "summary": "Return database",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-getDatabase",
+        "description": "Just returns the whole damn database. Maybe not wanted or needed."
+      }
+    },
+    "/images": {
+      "get": {
+        "summary": "Searches for images",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-images",
+        "description": "Searches for images associated with the keywords inputted"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "article": {
+        "title": "article",
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          },
+          "date_of_publication": {
+            "type": "string"
+          },
+          "headline": {
+            "type": "string"
+          },
+          "main_text": {
+            "type": "string"
+          },
+          "reports": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "diseases": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "syndromes": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "event_date": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "locations": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "report": {
+        "title": "report",
+        "type": "object",
+        "properties": {
+          "diseases": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "syndromes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "event_dates": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "locations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}
