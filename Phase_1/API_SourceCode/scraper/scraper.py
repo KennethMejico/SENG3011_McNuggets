@@ -220,10 +220,3 @@ class Scraper:
         self.fetch()
         self.process()
 
-
-
-
-#TESTING
-if __name__ == "__main__":
-    scraper = Scraper()
-    scraper.fetchTopicalOneEachFeed()
