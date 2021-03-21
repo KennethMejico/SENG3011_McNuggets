@@ -1,6 +1,7 @@
 import pytest
 import json
-from API.scraper.helpers import *
+sys.path.append(os.path.abspath("Phase_1/API_SourceCode/scraper"))
+from helpers import *
 
 # Not all of these will be implemented most likely
 

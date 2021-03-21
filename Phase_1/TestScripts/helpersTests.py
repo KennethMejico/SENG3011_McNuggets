@@ -1,7 +1,7 @@
 import pytest
 import json
 import sys, os
-sys.path.append(os.path.abspath("API/scraper"))
+sys.path.append(os.path.abspath("Phase_1/API_SourceCode/scraper"))
 from helpers import *
 # py -m pytest Phase_1\TestScripts\helpersTests.py
 
