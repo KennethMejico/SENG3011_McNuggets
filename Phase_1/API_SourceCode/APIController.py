@@ -137,23 +137,67 @@ def search(start_date, end_date, location, key_terms, db):
 
     return result_list
 
-@app.route('/getDatabase', methods=['GET'])
+@app.route('/list/reports', methods=['GET'])
 def get_all_reports():
     mydb = db_controller.getDbConnection()
 
-    # Execute query to gather articles which satisfy data constraint
     result = search(None, None, None, None, mydb)
-
     mydb.close()
-    # Return list of articles
+
     return jsonify(result)
+
+@app.route('/list/diseases', methods=['GET'])
+def get_all_diseases():
+    db = db_controller.getDbConnection()
+    cursor = db.cursor()
+
+    query = "SELECT DiseaseName from Diseases"
+    cursor.execute(query)
+    results = cursor.fetchall()
+    db.close()
+
+    diseases = []
+    for result in results:
+        diseases.append(result[0])
+
+    return jsonify(diseases)
+
+@app.route('/list/syndromes', methods=['GET'])
+def get_all_syndromes():
+    db = db_controller.getDbConnection()
+    cursor = db.cursor()
+
+    query = "SELECT SyndromeName from Syndromes"
+    cursor.execute(query)
+    results = cursor.fetchall()
+    db.close()
+
+    syndromes = []
+    for result in results:
+        syndromes.append(result[0])
+
+    return jsonify(syndromes)
+
+@app.route('/list/locations', methods=['GET'])
+def get_all_locations():
+    db = db_controller.getDbConnection()
+    cursor = db.cursor()
+
+    query = "SELECT LocationName from Locations"
+    cursor.execute(query)
+    results = cursor.fetchall()
+    db.close()
+
+    locations = []
+    for result in results:
+        locations.append(result[0])
+
+    return jsonify(locations)
 
 #@app.route('/count', methods=['GET'])
 
 # Possible Endpoints\
 # @app.route('/images', methods=['GET'])
-# @app.route('/list/diseases', methods=['GET'])
-# @app.route('/list/syndromes', methods=['GET'])
 
 def getLocationsForReport(reportId, cursor, location=None):
     locationQuery = """
