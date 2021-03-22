@@ -247,14 +247,164 @@
         "description": "Returns a list of syndromes found by the API"
       }
     },
-    "/getDatabase": {
+    "/allReports": {
       "get": {
-        "summary": "Return database",
+        "summary": "Gets all disease reports",
         "tags": [],
         "responses": {},
         "operationId": "get-getDatabase",
-        "description": "Just returns the whole damn database. Maybe not wanted or needed."
-      }
+        "description": "Returns all disease reports in the database. The data would be returned in the same format as the search endpoint so essentially it is a search without any parameters.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "description": "",
+                "minItems": 1,
+                "uniqueItems": true,
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "url",
+                    "date_of_publication",
+                    "headline",
+                    "main_text",
+                    "reports"
+                  ],
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "date_of_publication": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "headline": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "main_text": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "reports": {
+                      "type": "array",
+                      "uniqueItems": true,
+                      "minItems": 1,
+                      "items": {
+                        "required": [
+                          "event_date"
+                        ],
+                        "properties": {
+                          "event_date": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "locations": {
+                            "type": "array",
+                            "items": {
+                              "required": [],
+                              "properties": {}
+                            }
+                          },
+                          "diseases": {
+                            "type": "array",
+                            "items": {
+                              "required": [],
+                              "properties": {}
+                            }
+                          },
+                          "syndromes": {
+                            "type": "array",
+                            "items": {
+                              "required": [],
+                              "properties": {}
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "example-1": {
+                  "value": [
+                    {
+                      "url": "www.some_url.com",
+                      "date_of_publication": "Fri, 16 Dec 2016 00:00:00 GMT",
+                      "headline": "Measles Update: Australia Sydney",
+                      "main_text": "Measles warning for Sydney after 3 infectious adults visit multiple locations\n-----------------------------------------------------------------------------\nHealth authorities have warned the public to be on alert for measles symptoms after 3 people contracted the highly contagious disease in Sydney this month [December 2016].\n\nAll 3 adults spent considerable time in the Sydney metropolitan area while they were infectious, NSW [New South Wales] Health reported on Friday [16 Dec 2016].\n\nHealth experts continue to warn people to check they have been immunised against measles. For further information visit: https://www.betterhealth.vic.gov.au/\n\nThe 3 cases visited multiple locations between 26 Nov and 15 Dec [2016] including:\n- Inner city hospital emergency departments\n- GP clinics and medical centres in George Street, Sydney, Darlinghurst, Leichhardt, Camperdown and Bondi\n- Restaurants and shops in the CBD, Ultimo, Bondi, Bondi Junction, Leichhardt, Double Bay, Chatswood and Marrickville\n- Public transport on routes in the centre, north and east of the city.\n",
+                      "reports": [
+                        {
+                          "event_date": "Fri, 16 Dec 2016 00:00:00 GMT",
+                          "locations": [
+                            "Sydney, New South Wales, Australia"
+                          ],
+                          "diseases": [
+                            "measles"
+                          ],
+                          "syndromes": [
+                            "Influenza-like illness",
+                            "Acute fever and rash"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "url": "www.someurl/minato",
+                      "date_of_publication": "Sat, 21 Mar 2020 00:00:00 GMT",
+                      "headline": "COVID Update: Minato City Tokyo Japan",
+                      "main_text": "New COVID infections: 500 found in Minato City of Tokyo, They were seen around these places",
+                      "reports": [
+                        {
+                          "event_date": "Fri, 21 Feb 2020 00:00:00 GMT",
+                          "locations": [
+                            "Tokyo, Japan",
+                            "Minato City, Tokyo, Japan"
+                          ],
+                          "diseases": [
+                            "COVID-19"
+                          ],
+                          "syndromes": [
+                            "Acute respiratory syndrome",
+                            "Influenza-like illness",
+                            "Fever of unknown Origin"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "url": "www.someurl/tokyo",
+                      "date_of_publication": "Fri, 28 Aug 2020 00:00:00 GMT",
+                      "headline": "COVID Update: Tokyo Japan",
+                      "main_text": "New COVID infections: 2000 found in Tokyo, Please get tested if you are feeling any of the symptoms",
+                      "reports": [
+                        {
+                          "event_date": "Fri, 28 Aug 2020 00:00:00 GMT",
+                          "locations": [
+                            "Tokyo, Japan"
+                          ],
+                          "diseases": [
+                            "COVID-19"
+                          ],
+                          "syndromes": [
+                            "Acute respiratory syndrome",
+                            "Influenza-like illness",
+                            "Fever of unknown Origin"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": []
     },
     "/images": {
       "get": {
