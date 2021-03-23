@@ -250,7 +250,7 @@
             }
           }
         },
-        "description": " Users may input four parameters:\n        1. start_date\n        2. end_date\n        3. key_terms\n        4. location\n        The API will return a list of articles in JSON format filtered by the parameters.\n        Both dates (1. and 2.) have to respect the following format: “yyyy-MM-ddTHH:mm:ss” and each key_term should be separated by ','.\n        Will return a 200 OK response in json format or a 400 Bad Request response if the required parameters are not given."
+        "description": "Users may input four parameters:\n1. *start_date*\n2. *end_date*\n3. *key_terms*\n4. *location*\n\nThe API will return a list of articles in JSON format filtered by the parameters.\n> Both dates (1. and 2.) have to respect the following format: “yyyy-MM-ddTHH:mm:ss” and each key_term should be separated by ','.\n> Will return a 200 OK response in json format or a 400 Bad Request response if the required parameters are not given."
       },
       "parameters": []
     },
