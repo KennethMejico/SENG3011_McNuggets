@@ -117,7 +117,8 @@ class Scraper:
         eventDate = articleDate
         locationID = articleMarkerID
 
-        db_controller.reportToDB(articleID, diseaseType, eventDate, locationID, symptoms)
+        # print (f"Disease Type: {diseaseType}  ||  Report Date: {str(eventDate)}  ||  Location ID: {str(locationID)}  ||  Symptoms:  {symptoms}")
+        # db_controller.reportToDB(articleID, diseaseType, eventDate, locationID, symptoms)
 
     def processData(self, response):
         """Processes data for the JSON response given by promedmail.org"""
