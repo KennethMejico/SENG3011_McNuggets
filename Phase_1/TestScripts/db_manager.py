@@ -22,14 +22,14 @@ def getDbConnection():
         port="3306",
         user="McNuggetsAdmin",
         password="Boysenberry",
-        database="mcnuggetsdb"
+        database="testmcnuggetsdb"
     )
     return mydb
 
 def setup():
     serverConn = getServerConnection()
     cursor = serverConn.cursor()
-    cursor.execute("CREATE DATABASE IF NOT EXISTS mcnuggetsdb")
+    cursor.execute("CREATE DATABASE IF NOT EXISTS testmcnuggetsdb")
     serverConn.close()
 
     dbConn = getDbConnection()
@@ -46,7 +46,7 @@ def teardown():
     serverConn = getServerConnection()
     cursor = serverConn.cursor()
 
-    query = "DROP DATABASE mcnuggetsdb"
+    query = "DROP DATABASE testmcnuggetsdb"
     cursor.execute(query)
 
     serverConn.close()
