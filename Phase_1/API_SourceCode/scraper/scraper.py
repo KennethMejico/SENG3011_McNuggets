@@ -35,6 +35,14 @@ class Scraper:
     keyword         = ''
     diesesIds 	    = ''
 
+    possibleSymptoms = ['pain', 'chills', 'fever', 'paresthesia', 'numbness', 'dizzy', 'dry mouth', 'mouth dry', 'nausea', 'vomiting', 'breath shortness',
+    'short of breath', 'sleepy', 'febrile onset', 'headache', 'vomiting', 'tiredness', 'jaundice', 'mild symptoms', 'thirsty', 'weak', 'sweaty', 'thirst',
+    'irregular breathing', 'impaired breathing', 'hearing loss', 'vision loss', 'itchiness', 'rash', 'blindness', 'taste', 'impaired speech', 'blurred vision',
+    'muscle weakness', 'swelling', 'fatigue', 'pyrexia', 'shivering', 'malaise', 'arrythmia', 'chest pain', 'bradycardia', 'palpitations', 'halitosis', 'sore throat',
+    'bleeding', 'constipation', 'diarrhea', 'hematochezia', 'fecal incontinence','blisters', 'edema', 'ataxia', 'confusion', 'phobia', 'pelvic pain', 'stiffness', 'insomnia',
+    'unconsciousness', 'hallucination', 'muscle cramps', 'paralysis', 'sores', 'abrasion', 'cough', 'sneeze', 'sneezing', 'flu-like symptoms', 'running nose', 'seizures', 'delirium',
+    'coma', 'brain damage', 'death', 'mucas']
+
     debugging = True
 
     # REQUEST URL
@@ -87,34 +95,58 @@ class Scraper:
         print(f"Location Key: {key}.    Article Date: {date}.   Article ID: {aid}.    Article Name: {name}.")
 
     def generateReports(self, articleDate, articleID, articleMarkerID, articleName, articleText):
-        pass
+        LAN = articleName.lower()
+        # If it contains announcement, that means it isn't a health thing
+        if 'announcement' in LAN:
+            return
+        
+        # If the title contains unknown, undiagnosed that means it is an unknown cause of disease.
+        # Else the title of the disease is in the title
+        if 'undiagnosed' in LAN or 'unknown' in LAN:
+            diseaseType = 'unknown'
+        else:
+            diseaseType = LAN.split(':')[0]
+            diseaseType = re.sub("[\(\[].*?[\)\]]", "", diseaseType)
+            diseaseType = re.sub('update', '', diseaseType)
+        
+        symptoms = []
+        for symptom in self.possibleSymptoms:
+            if symptom in articleText:
+                symptoms.append(symptom)
+
+        eventDate = articleDate
+        locationID = articleMarkerID
+
+        db_controller.reportToDB(articleID, diseaseType, eventDate, locationID, symptoms)
 
     def processData(self, response):
         """Processes data for the JSON response given by promedmail.org"""
         contents = response['contents']
         lastDate = Date.today()
+
         for key in sorted(contents):
             markerID = key
             # db_controller.addMarker(markerID, response['markers'][markerID])  # TODO write to DB
+            
             for item in contents[key]:
                 date  = self.findDate(item)
                 aid   = self.findID(item)
                 name  = self.findName(item)
-                # self.printInfo(markerID, date, aid, name)                     # FOR DEBUGGING. REMOVE IN PRODUCTION # TODO
+                # self.printInfo(key, date, aid, name)
                 tempDate = Date.fromtimestamp(time.mktime(time.strptime(date, "%d %b %Y")))
                 if tempDate < lastDate:
                     lastDate = tempDate
-                """ dataReq = {
+                dataReq = {
                     'action' : 'get_latest_post_data',
                     'alertId': aid,
                 }
                 soup = BeautifulSoup(requests.post(self.url, dataReq, headers=self.headers).json()['post'], "html5lib")
-                text = soup.find('div', attrs={'class':'text1'}).get_text(separator=" ") """
-                # print(text + "\n\n\n\n")                                      # FOR DEBUGGING. REMOVE IN PRODUCTION # TODO
+                text = soup.find('div', attrs={'class':'text1'}).get_text(separator=" ")
                 
                 # db_controller.writeToDB(markerID, date, aid, name, text)      # TODO write to DB
 
-                #self.generateReports(date, aid, markerID, name, text)
+                self.generateReports(date, aid, markerID, name, text)
+
         return (lastDate, len(contents))
                 
 
