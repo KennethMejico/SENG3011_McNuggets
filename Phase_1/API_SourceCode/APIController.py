@@ -194,7 +194,55 @@ def get_all_locations():
 
     return jsonify(locations)
 
-#@app.route('/count', methods=['GET'])
+# Returns a count of the number of mentions of each disease in the time range
+# by default, or the number of mentions of each of the keywords if specified
+@app.route('/count', methods=['GET'])
+def get_count():
+    # Retrieve parameters
+    query_parameters = request.args
+    start_date = query_parameters.get('start_date')
+    end_date = query_parameters.get('end_date')
+    key_terms = query_parameters.get('key_terms')
+
+    if noneOrEmpty(start_date) or noneOrEmpty(end_date):
+        return dates_not_given(400)
+
+    db = db_controller.getDbConnection()
+
+    mycursor = db.cursor()
+
+    # Base SQL Query
+    sql = """
+        select
+            r.EventDate,
+            d.DiseaseName,
+            count(*)
+        from Diseases d
+        join Report_Diseases rd on rd.DiseaseID = d.DiseaseID
+        join Reports r on rd.ReportID = r.ReportID
+        where r.ReportID = r.ReportID
+    """
+    data = ()
+    if not noneOrEmpty(start_date):
+        # Convert start date time to datetime datatype
+        start = datetime.strptime(start_date, '%Y-%m-%dT%H:%M:%S')
+        sql = sql + " and r.EventDate >= %s"
+        data = data + (start,)
+
+    if not noneOrEmpty(end_date):
+        end = datetime.strptime(end_date, '%Y-%m-%dT%H:%M:%S')
+        sql = sql + " and r.EventDate <= %s"
+        data = data + (end,)
+    sql = sql + "group by d.DiseaseName"
+
+    mycursor.execute(sql, data)
+    results = mycursor.fetchall()
+    diseases = {}
+    for disease in results:
+        diseases[disease[1]] = disease[2]
+
+    # Return list of articles
+    return jsonify(diseases)
 
 # Possible Endpoints\
 # @app.route('/images', methods=['GET'])
@@ -210,8 +258,9 @@ def getLocationsForReport(reportId, cursor, location=None):
 
     locationData = (reportId,)
     if not noneOrEmpty(location):
-        locationQuery = locationQuery + " and l.locationName = %s"
-        locationData = locationData + (location,)
+        locationQuery = locationQuery + " and l.locationName LIKE %s"
+        formatted_location = "%" + location + "%"
+        locationData = locationData + (formatted_location,)
     
     cursor.execute(locationQuery, locationData)
     results = cursor.fetchall()
@@ -233,9 +282,15 @@ def getDiseasesForReport(reportId, cursor, key_terms=None):
 
     data = (reportId,)
     if not noneOrEmpty(key_terms):
-        query = query + " and d.DiseaseName LIKE %s"
-        formatted_key_terms = "%" + key_terms + "%"
-        data = data + (formatted_key_terms,)
+        query = query + " and "
+        split_terms = key_terms.split(',')
+        l = len(split_terms)
+        for index, term in enumerate(split_terms):
+            query = query + "d.DiseaseName LIKE %s"
+            formatted_key_terms = "%" + term + "%"
+            data = data + (formatted_key_terms,)
+            if index < (l - 1):
+                query = query + " or "
     
     cursor.execute(query, data)
     results = cursor.fetchall()
@@ -257,9 +312,15 @@ def getSyndromesForReport(reportId, cursor, key_terms=None):
 
     data = (reportId,)
     if not noneOrEmpty(key_terms):
-        query = query + " and s.SyndromeName LIKE %s"
-        formatted_key_terms = "%" + key_terms + "%"
-        data = data + (formatted_key_terms,)
+        query = query + " and "
+        split_terms = key_terms.split(',')
+        l = len(split_terms)
+        for index, term in enumerate(split_terms):
+            query = query + "d.SyndromeName LIKE %s"
+            formatted_key_terms = "%" + term + "%"
+            data = data + (formatted_key_terms,)
+            if index < (l - 1):
+                query = query + " or "
     
     cursor.execute(query, data)
     results = cursor.fetchall()
