@@ -35,7 +35,7 @@ class Scraper:
     keyword         = ''
     diesesIds 	    = ''
 
-    possibleSymptoms = ['pain', 'chills', 'fever', 'paresthesia', 'numbness', 'dizzy', 'dry mouth', 'mouth dry', 'nausea', 'vomiting', 'breath shortness',
+    possibleSymptoms = ['pain', 'chills', 'fever', 'paresthesia', 'numbness', 'dizzy', 'dizziness', 'dry mouth', 'mouth dry', 'nausea', 'vomiting', 'breath shortness',
     'short of breath', 'sleepy', 'febrile onset', 'headache', 'vomiting', 'tiredness', 'jaundice', 'mild symptoms', 'thirsty', 'weak', 'sweaty', 'thirst',
     'irregular breathing', 'impaired breathing', 'hearing loss', 'vision loss', 'itchiness', 'rash', 'blindness', 'taste', 'impaired speech', 'blurred vision',
     'muscle weakness', 'swelling', 'fatigue', 'pyrexia', 'shivering', 'malaise', 'arrythmia', 'chest pain', 'bradycardia', 'palpitations', 'halitosis', 'sore throat',
