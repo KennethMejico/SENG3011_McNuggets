@@ -258,32 +258,105 @@
       "get": {
         "summary": "/count",
         "tags": [],
-        "responses": {},
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "log": {
+                      "type": "object",
+                      "required": [
+                        "team_name",
+                        "accessed_time",
+                        "data_source"
+                      ],
+                      "properties": {
+                        "team_name": {
+                          "type": "string"
+                        },
+                        "accessed_time": {
+                          "type": "string"
+                        },
+                        "data_source": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "response": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "diseaseName": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "log",
+                    "response"
+                  ]
+                },
+                "examples": {
+                  "count-example-1": {
+                    "value": {
+                      "log": {
+                        "team_name": "McNuggets",
+                        "accessed_time": "2021-03-23T17:09:17",
+                        "data_source": "promedmail.org"
+                      },
+                      "response": {
+                        "measles": 1,
+                        "covid-19": 2,
+                        "malaria": 1
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "headers": {
+              "countHeader": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Please input a start and end date."
+              }
+            }
+          }
+        },
         "operationId": "get-count",
-        "description": "Returns a count of the number of mentions of each disease in the time range by default, or the number of mentions of each of the keywords if specified",
+        "description": "Returns a count of the number of mentions of each disease in the time range.",
         "parameters": [
           {
             "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "keywords"
-          },
-          {
-            "schema": {
-              "type": "string"
+              "type": "string",
+              "pattern": "[0-9]{4}-[0-1][0-9]-[0-3][0-9]T[0-2][0-9]:[0-5][0-9]:[0-5][0-9]",
+              "example": "2021-12-31T23:59:59"
             },
             "in": "query",
             "name": "start_date",
-            "required": true
+            "required": true,
+            "description": "The earliest publication date that will be returned, in the format \"yyyy-MM-ddTHH:mm:ss\""
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "example": "2021-12-31T23:59:59",
+              "pattern": "[0-9]{4}-[0-1][0-9]-[0-3][0-9]T[0-2][0-9]:[0-5][0-9]:[0-5][0-9]"
             },
             "in": "query",
             "name": "end_date",
-            "required": true
+            "required": true,
+            "description": "The latest publication date that will be returned, in the format \"yyyy-MM-ddTHH:mm:ss\""
           }
         ]
       },
