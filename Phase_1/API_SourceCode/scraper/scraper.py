@@ -8,6 +8,7 @@ from datetime import date as Date
 import time
 import requests
 from bs4 import BeautifulSoup
+from dateutil.relativedelta import relativedelta
 
 #import db_controller as db_controller
 import sys
@@ -34,16 +35,18 @@ class Scraper:
     keyword         = ''
     diesesIds 	    = ''
 
+    debugging = True
+
     # REQUEST URL
     url = "https://promedmail.org/wp-admin/admin-ajax.php"
     data = {
         'action' 	:   'get_latest_posts',
-        'edate' 	: 	self.edate,
-        'return_map': 	self.return_map,
-        'feed_id' 	: 	self.feed_id,
-        'seltype' 	: 	self.seltype,
-        'keyword'	: 	self.keyword,
-        'diesesIds'	:   self.diesesIds
+        'edate' 	: 	edate,
+        'return_map': 	return_map,
+        'feed_id' 	: 	feed_id,
+        'seltype' 	: 	seltype,
+        'keyword'	: 	keyword,
+        'diesesIds'	:   diesesIds
     }
     """ data2 = {
         'action' : 'get_latest_post_data',
@@ -68,7 +71,12 @@ class Scraper:
 
     def findName(self, string):
         """Finds the name of an article for the string format returned by promedmail.org"""
-        return re.search('<a.*> (.+?)</a>', string).group(1)
+        try:
+            return re.search('<a.*> ?(.+?)</a>', string).group(1)
+        except:
+            if self.debugging:
+                print(string)
+            return ""
 
     def printInfo(self, key, date, aid, name):
         """
@@ -76,8 +84,7 @@ class Scraper:
         >>> Location Key: {key}.    Article Date: {date}.
         >>> Article ID: {aid}.    Article Name: {name}.
         """
-        print(f"Location Key: {key}.    Article Date: {date}.\
-            Article ID: {aid}.    Article Name: {name}.")
+        print(f"Location Key: {key}.    Article Date: {date}.   Article ID: {aid}.    Article Name: {name}.")
 
     def generateReports(self, articleDate, articleID, articleMarkerID, articleName, articleText):
         pass
@@ -86,7 +93,7 @@ class Scraper:
         """Processes data for the JSON response given by promedmail.org"""
         contents = response['contents']
         lastDate = Date.today()
-        for key in contents:
+        for key in sorted(contents):
             markerID = key
             # db_controller.addMarker(markerID, response['markers'][markerID])  # TODO write to DB
             for item in contents[key]:
@@ -97,18 +104,18 @@ class Scraper:
                 tempDate = Date.fromtimestamp(time.mktime(time.strptime(date, "%d %b %Y")))
                 if tempDate < lastDate:
                     lastDate = tempDate
-                dataReq = {
+                """ dataReq = {
                     'action' : 'get_latest_post_data',
                     'alertId': aid,
                 }
                 soup = BeautifulSoup(requests.post(self.url, dataReq, headers=self.headers).json()['post'], "html5lib")
-                text = soup.find('div', attrs={'class':'text1'}).get_text(separator=" ")
+                text = soup.find('div', attrs={'class':'text1'}).get_text(separator=" ") """
                 # print(text + "\n\n\n\n")                                      # FOR DEBUGGING. REMOVE IN PRODUCTION # TODO
                 
                 # db_controller.writeToDB(markerID, date, aid, name, text)      # TODO write to DB
 
-                self.generateReports(date, aid, markerID, name, text)
-        return lastDate
+                #self.generateReports(date, aid, markerID, name, text)
+        return (lastDate, len(contents))
                 
 
     def fetch(self, edate):
@@ -130,13 +137,15 @@ class Scraper:
     def run(self, debugging):
         edate = ''
         jsonResponse = self.fetch(edate)
-        while (jsonResponse['contents'].keys()):
-            rdate = self.processData(jsonResponse)
+        while (jsonResponse['contents']):
+            rdate, responseCount = self.processData(jsonResponse)
             if debugging:
                 print(str(rdate))
             if rdate == Date.today():
                 break
-            edate = rdate.year + '-' + rdate.month + '-' + rdate.day
+            if responseCount == 1:
+                rdate += relativedelta(months=-6)
+            edate = str(rdate)
             jsonResponse = self.fetch(edate)
 
     def getLatest(self):
@@ -206,16 +215,20 @@ class Scraper:
             finally:
                 print("\n\n\n\n\n\n\n")
         
-    def fetch(self):
+    def fetchSimple(self):
         response = requests.post(self.url, self.data, headers=self.headers)
         self.jsonResponse = response.json()
 
-    def process(self):
+    def processSimple(self):
         print("Processing Data Now")
         # helpers.processData(self.jsonResponse)
         db_controller.writeToDB(self.jsonResponse)
         print("Data Proccessed")
 
-    def run(self):
-        self.fetch()
-        self.process()
+    def runSimple(self):
+        self.fetchSimple()
+        self.processSimple()
+
+if __name__ == "__main__":
+    sc = Scraper()
+    sc.run(True)
