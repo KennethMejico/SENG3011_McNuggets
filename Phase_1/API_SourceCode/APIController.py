@@ -70,7 +70,7 @@ def filter_search():
     result = search(start_date, end_date, location, key_terms, db_controller.getDbConnection())
 
     # Return list of articles
-    return jsonify(result)
+    return jsonify(addLog(result))
 
 def search(start_date, end_date, location, key_terms, db):
     mycursor = db.cursor()
@@ -102,6 +102,7 @@ def search(start_date, end_date, location, key_terms, db):
 
     mycursor.execute(sql, data)
     results = mycursor.fetchall()
+
     result_list = []
     for result in results:
         report_list = []
@@ -109,7 +110,7 @@ def search(start_date, end_date, location, key_terms, db):
         locations = getLocationsForReport(reportId, mycursor, location)
         diseases = getDiseasesForReport(reportId, mycursor, key_terms)
         syndromes = getSyndromesForReport(reportId, mycursor, key_terms)
-        
+
         if not noneOrEmpty(location) and len(locations) == 0:
             continue
         if not noneOrEmpty(key_terms) and len(diseases) == 0 and len(syndromes) == 0:
@@ -121,7 +122,9 @@ def search(start_date, end_date, location, key_terms, db):
             'diseases': diseases,
             'syndromes': syndromes
         }
+
         report_list.append(report)
+        
 
         article = {
             'url': result[0],
@@ -131,7 +134,14 @@ def search(start_date, end_date, location, key_terms, db):
             'reports': report_list
         }
 
-        result_list.append(article)
+        if not noneOrEmpty(key_terms):
+            split_terms = key_terms.split(',')
+            for term in split_terms:
+                if term.lower() in syndromes or term.lower() in diseases:
+                    result_list.append(article)
+                    break
+        else:
+            result_list.append(article)
 
     db.close()
 
@@ -144,7 +154,7 @@ def get_all_reports():
     result = search(None, None, None, None, mydb)
     mydb.close()
 
-    return jsonify(result)
+    return jsonify(addLog(result))
 
 @app.route('/list/diseases', methods=['GET'])
 def get_all_diseases():
@@ -160,7 +170,7 @@ def get_all_diseases():
     for result in results:
         diseases.append(result[0])
 
-    return jsonify(diseases)
+    return jsonify(addLog(diseases))
 
 @app.route('/list/syndromes', methods=['GET'])
 def get_all_syndromes():
@@ -176,7 +186,7 @@ def get_all_syndromes():
     for result in results:
         syndromes.append(result[0])
 
-    return jsonify(syndromes)
+    return jsonify(addLog(syndromes))
 
 @app.route('/list/locations', methods=['GET'])
 def get_all_locations():
@@ -192,7 +202,7 @@ def get_all_locations():
     for result in results:
         locations.append(result[0])
 
-    return jsonify(locations)
+    return jsonify(addLog(locations))
 
 # Returns a count of the number of mentions of each disease in the time range
 # by default, or the number of mentions of each of the keywords if specified
@@ -242,7 +252,7 @@ def get_count():
         diseases[disease[1]] = disease[2]
 
     # Return list of articles
-    return jsonify(diseases)
+    return jsonify(addLog(diseases))
 
 # Possible Endpoints\
 # @app.route('/images', methods=['GET'])
@@ -280,24 +290,13 @@ def getDiseasesForReport(reportId, cursor, key_terms=None):
         where r.ReportID = %s
     """
 
-    data = (reportId,)
-    if not noneOrEmpty(key_terms):
-        query = query + " and "
-        split_terms = key_terms.split(',')
-        l = len(split_terms)
-        for index, term in enumerate(split_terms):
-            query = query + "d.DiseaseName LIKE %s"
-            formatted_key_terms = "%" + term + "%"
-            data = data + (formatted_key_terms,)
-            if index < (l - 1):
-                query = query + " or "
-    
+    data = (reportId,)    
     cursor.execute(query, data)
     results = cursor.fetchall()
 
     diseases = []
     for disease in results:
-        diseases.append(disease[0])
+        diseases.append(disease[0].lower())
 
     return diseases
 
@@ -311,25 +310,29 @@ def getSyndromesForReport(reportId, cursor, key_terms=None):
     """
 
     data = (reportId,)
-    if not noneOrEmpty(key_terms):
-        query = query + " and "
-        split_terms = key_terms.split(',')
-        l = len(split_terms)
-        for index, term in enumerate(split_terms):
-            query = query + "d.SyndromeName LIKE %s"
-            formatted_key_terms = "%" + term + "%"
-            data = data + (formatted_key_terms,)
-            if index < (l - 1):
-                query = query + " or "
     
     cursor.execute(query, data)
     results = cursor.fetchall()
 
     syndromes = []
     for syndrome in results:
-        syndromes.append(syndrome[0])
+        syndromes.append(syndrome[0].lower())
 
     return syndromes
+
+def addLog(results):
+    log = {
+        "team_name": "McNuggets",
+        "accessed_time": datetime.now().strftime('%Y-%m-%dT%H:%M:%S'),
+        "data_source": "promedmail.org"
+    }
+
+    response = {
+        "log": log,
+        "response": results
+    }
+
+    return response
 
 
 if __name__ == "__main__":
