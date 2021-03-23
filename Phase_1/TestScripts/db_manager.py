@@ -27,6 +27,8 @@ def getDbConnection():
     return mydb
 
 def setup():
+    db_controller.setTest()
+
     serverConn = getServerConnection()
     cursor = serverConn.cursor()
     cursor.execute("CREATE DATABASE IF NOT EXISTS testmcnuggetsdb")

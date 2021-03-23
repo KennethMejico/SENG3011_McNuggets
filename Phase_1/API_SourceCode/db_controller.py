@@ -3,16 +3,29 @@ import mysql.connector # pip3 install mysql-connector-python
 import json
 import re
 
+testing = False
+def setTest():
+    global testing
+    testing = True
 
 def getDbConnection():
     # change this to your own config for now until we set up on AWS
-    db = mysql.connector.connect(
-        host="mcnuggetsdb.ckxxjj5qvkgp.ap-southeast-2.rds.amazonaws.com",
-        port="3306",
-        user="McNuggetsAdmin",
-        password="Boysenberry",
-        database="mcnuggetsdb"
-    )
+    if (testing):
+        db = mysql.connector.connect(
+            host="mcnuggetsdb.ckxxjj5qvkgp.ap-southeast-2.rds.amazonaws.com",
+            port="3306",
+            user="McNuggetsAdmin",
+            password="Boysenberry",
+            database="testmcnuggetsdb"
+        )
+    else:
+        db = mysql.connector.connect(
+            host="mcnuggetsdb.ckxxjj5qvkgp.ap-southeast-2.rds.amazonaws.com",
+            port="3306",
+            user="McNuggetsAdmin",
+            password="Boysenberry",
+            database="mcnuggetsdb"
+        )
     return db
 
 def executeSchema(db):
