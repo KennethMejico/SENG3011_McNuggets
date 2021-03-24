@@ -243,14 +243,14 @@
                 },
                 "examples": {
                   "example-1": {
-                    "value": "<h1>400</h1><p>Please input a start and end date.</p>"
+                    "value": "<h1>400</h1><p>Please input a start and end date and ensure that the start date is before the end date.</p>"
                   }
                 }
               }
             }
           }
         },
-        "description": "Users may input four parameters:\n1. *start_date*\n2. *end_date*\n3. *key_terms*\n4. *location*\n\nThe API will return a list of articles in JSON format filtered by the parameters.\n> Both dates (1. and 2.) have to respect the following format: “yyyy-MM-ddTHH:mm:ss” and each key_term should be separated by ','.\n> Will return a 200 OK response in json format or a 400 Bad Request response if the required parameters are not given."
+        "description": "Users may input four parameters:\n1. *start_date*\n2. *end_date*\n3. *key_terms*\n4. *location*\n\nThe API will return a list of articles in JSON format filtered by the parameters.\n> Both dates (1. and 2.) have to respect the following format: “yyyy-MM-ddTHH:mm:ss” and the start date must be before the end date. Each key_term should be separated by ','. The currently supported key_terms can be found in /list/diseases, /list/syndromes, and /list/keywords\n> Will return a 200 OK response in json format or a 400 Bad Request response if the required parameters are not given."
       },
       "parameters": []
     },
@@ -328,13 +328,13 @@
                 "schema": {
                   "type": "string"
                 },
-                "description": "Please input a start and end date."
+                "description": "Please input a start and end date and ensure that the start date is before the end date."
               }
             }
           }
         },
         "operationId": "get-count",
-        "description": "Returns a count of the number of mentions of each disease in the time range.",
+        "description": "Returns a count of the number of mentions of each disease in the time range. The start date entered must be before the end date",
         "parameters": [
           {
             "schema": {
