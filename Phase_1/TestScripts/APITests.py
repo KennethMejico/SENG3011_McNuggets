@@ -3,6 +3,7 @@ This test file is for the internal API endpoints
 '''
 #py -m pytest Phase_1\TestScripts\APITests.py
 
+import json
 import db_manager
 import sys
 import os
