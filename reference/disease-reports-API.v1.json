@@ -849,7 +849,7 @@
     },
     "/list/keywords": {
       "get": {
-        "summary": "Your GET endpoint",
+        "summary": "/list/keywords",
         "tags": [],
         "responses": {
           "200": {
