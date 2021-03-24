@@ -1,0 +1,13 @@
+[
+    { "name": "Outbreak" },
+    { "name": "Infection" },
+    { "name": "Fever" },
+    { "name": "Virus" },
+    { "name": "Epidemic" },
+    { "name": "Infectious" },
+    { "name": "Illness" },
+    { "name": "Bacteria" },
+    { "name": "Emerging" },
+    { "name": "Unknown virus" },
+    { "name": "Myster(ious)y disease" }
+]
