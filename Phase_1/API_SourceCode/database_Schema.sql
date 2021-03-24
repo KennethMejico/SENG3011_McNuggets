@@ -57,6 +57,11 @@ CREATE TABLE IF NOT EXISTS Syndromes (
 	SyndromeName varchar(100) NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS Keywords (
+    KeywordID INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    Keyword varchar(100) NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS Report_Diseases (
 	ReportID INTEGER NOT NULL,
 	DiseaseID INTEGER NOT NULL,
@@ -71,6 +76,14 @@ CREATE TABLE IF NOT EXISTS Report_Syndromes (
 	CONSTRAINT PK_Report_Syndromes PRIMARY KEY (ReportID, SyndromeID),
 	FOREIGN KEY (ReportID) REFERENCES Reports(ReportID),
 	FOREIGN KEY (SyndromeID) REFERENCES Syndromes(SyndromeID)
+);
+
+CREATE TABLE IF NOT EXISTS Report_Keywords (
+	ReportID INTEGER NOT NULL,
+	KeywordID INTEGER NOT NULL,
+	CONSTRAINT PK_Report_Keywords PRIMARY KEY (ReportID, KeywordID),
+	FOREIGN KEY (ReportID) REFERENCES Reports(ReportID),
+	FOREIGN KEY (KeywordID) REFERENCES Keywords(KeywordID)
 );
 
 CREATE TABLE IF NOT EXISTS metaData (
