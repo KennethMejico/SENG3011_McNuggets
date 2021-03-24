@@ -35,7 +35,7 @@ class Scraper:
     keyword         = ''
     diesesIds 	    = ''
 
-    possibleSymptoms = ['pain', 'chills', 'fever', 'paresthesia', 'numbness', 'dizzy', 'dizziness', 'dry mouth', 'mouth dry', 'nausea', 'vomiting', 'breath shortness',
+    possibleSymptoms = ['pain', 'chills', 'fever', 'paresthesia', 'numbness', 'dizzy', 'dizziness', 'dry mouth', 'mouth dry', 'nausea', 'breath shortness',
     'short of breath', 'sleepy', 'febrile onset', 'headache', 'vomiting', 'tiredness', 'jaundice', 'mild symptoms', 'thirsty', 'weak', 'sweaty', 'thirst',
     'irregular breathing', 'impaired breathing', 'hearing loss', 'vision loss', 'itchiness', 'rash', 'blindness', 'taste', 'impaired speech', 'blurred vision',
     'muscle weakness', 'swelling', 'fatigue', 'pyrexia', 'shivering', 'malaise', 'arrythmia', 'chest pain', 'bradycardia', 'palpitations', 'halitosis', 'sore throat',
@@ -117,7 +117,7 @@ class Scraper:
         eventDate = articleDate
         locationID = articleMarkerID
 
-        # print (f"Disease Type: {diseaseType}  ||  Report Date: {str(eventDate)}  ||  Location ID: {str(locationID)}  ||  Symptoms:  {symptoms}")
+        print (f"Disease Type: {diseaseType}  ||  Report Date: {str(eventDate)}  ||  Location ID: {str(locationID)}  ||  Symptoms:  {symptoms}")
         # db_controller.reportToDB(articleID, diseaseType, eventDate, locationID, symptoms) # TODO
 
     def processData(self, response):
@@ -145,7 +145,7 @@ class Scraper:
                 soup = BeautifulSoup(requests.post(self.url, dataReq, headers=self.headers).json()['post'], "html5lib")
                 text = soup.find('div', attrs={'class':'text1'}).get_text(separator=" ")
                 
-                # db_controller.writeToDB(markerID, date, aid, name, text)      # TODO write to DB
+                # db_controller.articleToDB(markerID, date, aid, name, text)      # TODO write to DB
 
                 self.generateReports(date, aid, markerID, name, text)
 
