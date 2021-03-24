@@ -108,9 +108,9 @@ def search(start_date, end_date, location, key_terms, db):
         report_list = []
         reportId = result[5]
         locations = getLocationsForReport(reportId, mycursor, location)
-        diseases = getDiseasesForReport(reportId, mycursor, key_terms)
-        syndromes = getSyndromesForReport(reportId, mycursor, key_terms)
-        keywords = getKeywordsForReport(reportId, mycursor, key_terms)
+        diseases = getDiseasesForReport(reportId, mycursor)
+        syndromes = getSyndromesForReport(reportId, mycursor)
+        keywords = getKeywordsForReport(reportId, mycursor)
 
         if not noneOrEmpty(location) and len(locations) == 0:
             continue
@@ -282,7 +282,7 @@ def getLocationsForReport(reportId, cursor, location=None):
 
     return locations
 
-def getDiseasesForReport(reportId, cursor, key_terms=None):
+def getDiseasesForReport(reportId, cursor):
     query = """
         SELECT d.DiseaseName
         FROM Diseases d 
@@ -301,7 +301,7 @@ def getDiseasesForReport(reportId, cursor, key_terms=None):
 
     return diseases
 
-def getSyndromesForReport(reportId, cursor, key_terms=None):
+def getSyndromesForReport(reportId, cursor):
     query = """
         SELECT s.SyndromeName
         FROM Syndromes s
