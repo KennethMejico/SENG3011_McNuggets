@@ -188,6 +188,7 @@ class Scraper:
             jsonResponse = self.fetch(edate)
             if db_controller.idInDB(dbConn, jsonResponse['first_alert']):
                 break
+        dbConn.close()
 
     def getLatest(self):
         jsonresponse = self.fetch('')
