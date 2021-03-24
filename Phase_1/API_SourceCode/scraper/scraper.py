@@ -96,7 +96,7 @@ class Scraper:
         """
         print(f"Location Key: {key}.    Article Date: {date}.   Article ID: {aid}.    Article Name: {name}.")
 
-    def generateReports(self, articleDate, articleID, articleMarkerID, articleName, articleText):
+    def generateReports(self, dbConn, articleDate, articleID, articleMarkerID, articleName, articleText):
         LAN = articleName.lower()
         # If it contains announcement, that means it isn't a health thing
         if 'announcement' in LAN:
@@ -120,16 +120,16 @@ class Scraper:
         locationID = articleMarkerID
 
         print (f"Disease Type: {diseaseType}  ||  Report Date: {str(eventDate)}  ||  Location ID: {str(locationID)}  ||  Symptoms:  {symptoms}")
-        # db_controller.reportToDB(articleID, diseaseType, eventDate, locationID, symptoms) # TODO
+        db_controller.reportToDB(dbConn, articleID, diseaseType, eventDate, locationID, symptoms)
 
-    def processData(self, response):
+    def processData(self, dbConn, response):
         """Processes data for the JSON response given by promedmail.org"""
         contents = response['contents']
         lastDate = Date.today()
 
         for key in sorted(contents):
             markerID = key
-            # db_controller.addMarker(markerID, response['markers'][markerID])  # TODO write to DB
+            db_controller.markerToDB(dbConn, markerID, response['markers'][markerID])
             
             for item in contents[key]:
                 date  = self.findDate(item)
@@ -147,10 +147,11 @@ class Scraper:
                 soup = BeautifulSoup(requests.post(self.url, dataReq, headers=self.headers).json()['post'], "html5lib")
                 text = soup.find('div', attrs={'class':'text1'}).get_text(separator=" ")
                 
-                # db_controller.articleToDB(markerID, date, aid, name, text)      # TODO write to DB
+                db_controller.articleToDB(dbConn, markerID, date, aid, name, text)
 
-                self.generateReports(date, aid, markerID, name, text)
+                self.generateReports(dbConn, date, aid, markerID, name, text)
 
+        dbConn.commit()
         return (lastDate, len(contents))
 
     def fetch(self, edate):
@@ -169,10 +170,14 @@ class Scraper:
         return response.json()
 
     def run(self):
+        dbConn = db_controller.getDbConnection()
         edate = ''
         jsonResponse = self.fetch(edate)
+        if db_controller.idInDB(dbConn, jsonResponse['first_alert']):
+            return
+        
         while (jsonResponse['contents']):
-            rdate, responseCount = self.processData(jsonResponse)
+            rdate, responseCount = self.processData(dbConn, jsonResponse)
             if self.debugging:
                 print(str(rdate))
             if rdate == Date.today():
@@ -181,6 +186,8 @@ class Scraper:
                 rdate += relativedelta(months=-6)
             edate = str(rdate)
             jsonResponse = self.fetch(edate)
+            if db_controller.idInDB(dbConn, jsonResponse['first_alert']):
+                break
 
     def getLatest(self):
         jsonresponse = self.fetch('')

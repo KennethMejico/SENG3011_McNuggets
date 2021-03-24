@@ -136,4 +136,19 @@ def insertLocations(jsonResponse):
     dbConn.commit()
     print(cursor.rowcount, "was inserted")
     dbConn.close()
-    
+
+def idInDB(dbConnection, articleID):
+    # TODO
+    pass
+
+def markerToDB(dbConn, markerID, markerIDContents):
+    # TODO
+    pass
+
+def articleToDB(dbConn, markerID, date, aid, name, text):
+    # TODO
+    pass
+
+def reportToDB(dbConn, articleID, diseaseType, eventDate, locationID, symptoms):
+    # TODO 
+    pass
