@@ -118,7 +118,7 @@ class Scraper:
         locationID = articleMarkerID
 
         # print (f"Disease Type: {diseaseType}  ||  Report Date: {str(eventDate)}  ||  Location ID: {str(locationID)}  ||  Symptoms:  {symptoms}")
-        # db_controller.reportToDB(articleID, diseaseType, eventDate, locationID, symptoms)
+        # db_controller.reportToDB(articleID, diseaseType, eventDate, locationID, symptoms) # TODO
 
     def processData(self, response):
         """Processes data for the JSON response given by promedmail.org"""
@@ -132,11 +132,12 @@ class Scraper:
             for item in contents[key]:
                 date  = self.findDate(item)
                 aid   = self.findID(item)
-                name  = self.findName(item)
                 # self.printInfo(key, date, aid, name)
                 tempDate = Date.fromtimestamp(time.mktime(time.strptime(date, "%d %b %Y")))
                 if tempDate < lastDate:
                     lastDate = tempDate
+                
+                name  = self.findName(item)
                 dataReq = {
                     'action' : 'get_latest_post_data',
                     'alertId': aid,
