@@ -43,7 +43,7 @@ class Scraper:
     'unconsciousness', 'hallucination', 'muscle cramps', 'paralysis', 'sores', 'abrasion', 'cough', 'sneeze', 'sneezing', 'flu-like symptoms', 'running nose', 'seizures', 'delirium',
     'coma', 'brain damage', 'death', 'mucas']
 
-    debugging = True
+    debugging = False
 
     # REQUEST URL
     url = "https://promedmail.org/wp-admin/admin-ajax.php"
@@ -168,12 +168,12 @@ class Scraper:
         return response.json()
     
 
-    def run(self, debugging):
+    def run(self):
         edate = ''
         jsonResponse = self.fetch(edate)
         while (jsonResponse['contents']):
             rdate, responseCount = self.processData(jsonResponse)
-            if debugging:
+            if self.debugging:
                 print(str(rdate))
             if rdate == Date.today():
                 break
@@ -265,4 +265,4 @@ class Scraper:
 
 if __name__ == "__main__":
     sc = Scraper()
-    sc.run(True)
+    sc.run()
