@@ -135,4 +135,14 @@ def insertReports(dbConn):
     ]
     cursor.executemany(syndrome_query, syndrome_data)
 
+    keyword_query = "INSERT IGNORE INTO Report_Keywords (ReportID, KeywordID) VALUE (%s, %s)"
+    keyword_data = [
+        ("1", db_controller.getKeywordId(dbConn, "Infection")),
+        ("2", db_controller.getKeywordId(dbConn, "Outbreak")),
+        ("2", db_controller.getKeywordId(dbConn, "Virus")),
+        ("3", db_controller.getKeywordId(dbConn, "Outbreak")),
+        ("3", db_controller.getKeywordId(dbConn, "Virus"))
+    ]
+    cursor.executemany(keyword_query, keyword_data)
+
     dbConn.commit()

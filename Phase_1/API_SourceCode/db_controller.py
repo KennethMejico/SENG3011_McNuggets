@@ -52,7 +52,7 @@ def executeSchema(db):
         results = []
         for disease in diseases:
             if getDiseaseId(db, disease["name"]) is None:
-                results.append((disease["name"],))
+                results.append((disease["name"].lower(),))
         query = "INSERT INTO Diseases (DiseaseName) VALUE (%s)"
         with db.cursor() as cursor:
             cursor.executemany(query, results)
@@ -63,15 +63,26 @@ def executeSchema(db):
         results = []
         for syndrome in syndromes:
             if getSyndromeId(db, syndrome["name"]) is None:
-                results.append((syndrome["name"],))
+                results.append((syndrome["name"].lower(),))
         query = "INSERT INTO Syndromes (SyndromeName) VALUE (%s)"
+        with db.cursor() as cursor:
+            cursor.executemany(query, results)
+        db.commit()
+    
+    with open('Phase_1/API_SourceCode/jsonFiles/keyword_list.json', 'r') as f:
+        keywords = json.load(f)
+        results = []
+        for keyword in keywords:
+            if getKeywordId(db, keyword["name"]) is None:
+                results.append((keyword["name"].lower(),))
+        query = "INSERT INTO Keywords (Keyword) VALUE (%s)"
         with db.cursor() as cursor:
             cursor.executemany(query, results)
         db.commit()
 
 def getDiseaseId(db, name):
     with db.cursor() as cursor:
-        query = f'SELECT DiseaseID FROM Diseases WHERE DiseaseName = "{name}"'
+        query = f'SELECT DiseaseID FROM Diseases WHERE DiseaseName = "{name.lower()}"'
         cursor.execute(query)
         result = cursor.fetchone()
         if result is None:
@@ -81,7 +92,17 @@ def getDiseaseId(db, name):
 
 def getSyndromeId(db, name):
     with db.cursor() as cursor:
-        query = f'SELECT SyndromeId FROM Syndromes WHERE SyndromeName = "{name}"'
+        query = f'SELECT SyndromeId FROM Syndromes WHERE SyndromeName = "{name.lower()}"'
+        cursor.execute(query)
+        result = cursor.fetchone()
+        if result is None:
+            return None
+        else:
+            return result[0]
+
+def getKeywordId(db, name):
+    with db.cursor() as cursor:
+        query = f'SELECT KeywordID FROM Keywords WHERE Keyword = "{name.lower()}"'
         cursor.execute(query)
         result = cursor.fetchone()
         if result is None:

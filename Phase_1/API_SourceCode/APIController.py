@@ -110,10 +110,11 @@ def search(start_date, end_date, location, key_terms, db):
         locations = getLocationsForReport(reportId, mycursor, location)
         diseases = getDiseasesForReport(reportId, mycursor, key_terms)
         syndromes = getSyndromesForReport(reportId, mycursor, key_terms)
+        keywords = getKeywordsForReport(reportId, mycursor, key_terms)
 
         if not noneOrEmpty(location) and len(locations) == 0:
             continue
-        if not noneOrEmpty(key_terms) and len(diseases) == 0 and len(syndromes) == 0:
+        if not noneOrEmpty(key_terms) and len(diseases) == 0 and len(syndromes) == 0 and len(keywords) == 0:
             continue
 
         report = {
@@ -137,7 +138,7 @@ def search(start_date, end_date, location, key_terms, db):
         if not noneOrEmpty(key_terms):
             split_terms = key_terms.split(',')
             for term in split_terms:
-                if term.lower() in syndromes or term.lower() in diseases:
+                if term.lower() in syndromes or term.lower() in diseases or term.lower() in keywords:
                     result_list.append(article)
                     break
         else:
@@ -319,6 +320,26 @@ def getSyndromesForReport(reportId, cursor, key_terms=None):
         syndromes.append(syndrome[0].lower())
 
     return syndromes
+
+def getKeywordsForReport(reportId, cursor):
+    query = """
+        SELECT k.Keyword
+        FROM Keywords k
+        join Report_Keywords rk on rk.KeywordID = k.KeywordID
+        join Reports r on rk.ReportID = r.ReportID
+        where r.ReportID = %s
+    """
+    
+    data = (reportId,)
+    
+    cursor.execute(query, data)
+    results = cursor.fetchall()
+
+    keywords = []
+    for keyword in results:
+        keywords.append(keyword[0].lower())
+
+    return keywords
 
 def addLog(results):
     log = {
