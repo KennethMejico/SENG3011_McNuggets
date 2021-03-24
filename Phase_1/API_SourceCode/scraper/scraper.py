@@ -35,13 +35,15 @@ class Scraper:
     keyword         = ''
     diesesIds 	    = ''
 
-    possibleSymptoms = ['pain', 'chills', 'fever', 'paresthesia', 'numbness', 'dizzy', 'dizziness', 'dry mouth', 'mouth dry', 'nausea', 'breath shortness',
-    'short of breath', 'sleepy', 'febrile onset', 'headache', 'vomiting', 'tiredness', 'jaundice', 'mild symptoms', 'thirsty', 'weak', 'sweaty', 'thirst',
-    'irregular breathing', 'impaired breathing', 'hearing loss', 'vision loss', 'itchiness', 'rash', 'blindness', 'taste', 'impaired speech', 'blurred vision',
-    'muscle weakness', 'swelling', 'fatigue', 'pyrexia', 'shivering', 'malaise', 'arrythmia', 'chest pain', 'bradycardia', 'palpitations', 'halitosis', 'sore throat',
-    'bleeding', 'constipation', 'diarrhea', 'hematochezia', 'fecal incontinence','blisters', 'edema', 'ataxia', 'confusion', 'phobia', 'pelvic pain', 'stiffness', 'insomnia',
-    'unconsciousness', 'hallucination', 'muscle cramps', 'paralysis', 'sores', 'abrasion', 'cough', 'sneeze', 'sneezing', 'flu-like symptoms', 'running nose', 'seizures', 'delirium',
-    'coma', 'brain damage', 'death', 'mucas']
+    possibleSymptoms = [
+        'pain', 'chills', 'fever', 'paresthesia', 'numbness', 'dizzy', 'dizziness', 'dry mouth', 'mouth dry', 'nausea', 'breath shortness',
+        'short of breath', 'sleepy', 'febrile onset', 'headache', 'vomiting', 'tiredness', 'jaundice', 'mild symptoms', 'thirsty', 'weak', 'sweaty', 'thirst',
+        'irregular breathing', 'impaired breathing', 'hearing loss', 'vision loss', 'itchiness', 'rash', 'blindness', 'taste', 'impaired speech', 'blurred vision',
+        'muscle weakness', 'swelling', 'fatigue', 'pyrexia', 'shivering', 'malaise', 'arrythmia', 'chest pain', 'bradycardia', 'palpitations', 'halitosis', 'sore throat',
+        'bleeding', 'constipation', 'diarrhea', 'hematochezia', 'fecal incontinence','blisters', 'edema', 'ataxia', 'confusion', 'phobia', 'pelvic pain', 'stiffness', 'insomnia',
+        'unconsciousness', 'hallucination', 'muscle cramps', 'paralysis', 'sores', 'abrasion', 'cough', 'sneeze', 'sneezing', 'flu-like symptoms', 'running nose', 'seizures', 
+        'delirium','coma', 'brain damage', 'death', 'mucas'
+    ]
 
     debugging = False
 
@@ -150,7 +152,6 @@ class Scraper:
                 self.generateReports(date, aid, markerID, name, text)
 
         return (lastDate, len(contents))
-                
 
     def fetch(self, edate):
         """ Makes a data request to a the promedmail database, for a specific date given by edate """
@@ -166,7 +167,6 @@ class Scraper:
         }
         response = requests.post(self.url, data, headers=self.headers)
         return response.json()
-    
 
     def run(self):
         edate = ''
