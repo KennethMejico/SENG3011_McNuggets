@@ -10,7 +10,7 @@
     }
   ],
   "paths": {
-    "example-search": {
+    "/search": {
       "get": {
         "summary": "/search",
         "tags": [],
