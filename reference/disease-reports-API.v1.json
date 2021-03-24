@@ -846,6 +846,86 @@
         "operationId": "get-list-locations",
         "description": "Returns a list of all location names found by the API. The list is not sorted in any way and will not contain duplicates."
       }
+    },
+    "/list/keywords": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "log": {
+                      "type": "object",
+                      "properties": {
+                        "team_name": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "accessed_time": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "data_source": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "team_name",
+                        "accessed_time",
+                        "data_source"
+                      ]
+                    },
+                    "response": {
+                      "type": "array",
+                      "items": {
+                        "required": [],
+                        "properties": {}
+                      }
+                    }
+                  },
+                  "required": [
+                    "log",
+                    "response"
+                  ]
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "log": {
+                        "team_name": "McNuggets",
+                        "accessed_time": "2021-03-24T12:55:41",
+                        "data_source": "promedmail.org"
+                      },
+                      "response": [
+                        "outbreak",
+                        "infection",
+                        "fever",
+                        "virus",
+                        "epidemic",
+                        "infectious",
+                        "illness",
+                        "bacteria",
+                        "emerging",
+                        "unknown virus",
+                        "myster(ious)y disease"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-list-keywords",
+        "description": "Returns a list of keywords that are currently supported by the API for use in the key_terms parameter of the /search endpoint. The list will not contain any duplicates and will not be sorted in any way."
+      }
     }
   },
   "components": {
