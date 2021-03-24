@@ -138,8 +138,12 @@ def insertLocations(jsonResponse):
     dbConn.close()
 
 def idInDB(dbConnection, articleID):
-    # TODO
-    pass
+    commandOutput = None
+    query = "SELECT ArticleID FROM Articles WHERE ArticleID=%s"
+    cursor = dbConnection.cursor()
+    cursor.execute(query, articleID)
+    commandOutput = cursor.fetchone()
+    return True if commandOutput is not None else False
 
 def markerToDB(dbConnection, markerID, markerIDContents):
     # TODO

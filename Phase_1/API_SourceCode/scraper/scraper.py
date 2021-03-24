@@ -272,5 +272,6 @@ class Scraper:
         self.processSimple()
 
 if __name__ == "__main__":
+    # Testing
     sc = Scraper()
     sc.run()
