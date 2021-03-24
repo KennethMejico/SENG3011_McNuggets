@@ -141,14 +141,14 @@ def idInDB(dbConnection, articleID):
     # TODO
     pass
 
-def markerToDB(dbConn, markerID, markerIDContents):
+def markerToDB(dbConnection, markerID, markerIDContents):
     # TODO
     pass
 
-def articleToDB(dbConn, markerID, date, aid, name, text):
+def articleToDB(dbConnection, markerID, date, aid, name, text):
     # TODO
     pass
 
-def reportToDB(dbConn, articleID, diseaseType, eventDate, locationID, symptoms):
+def reportToDB(dbConnection, articleID, diseaseType, eventDate, locationID, symptoms):
     # TODO 
     pass
