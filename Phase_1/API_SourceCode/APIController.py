@@ -19,7 +19,7 @@ def page_not_found(e):
 
 @app.errorhandler(400)
 def dates_not_given(e):
-    return "<h1>400</h1><p>Please input a start and end date.</p>", 400
+    return "<h1>400</h1><p>Please input a start and end date and ensure that the start date is before the end date.</p>", 400
 
 @app.route('/', methods=['GET'])
 def home():
@@ -65,6 +65,11 @@ def filter_search():
     location = query_parameters.get('location')
 
     if noneOrEmpty(start_date) or noneOrEmpty(end_date):
+        return dates_not_given(400)
+    
+    start = datetime.strptime(start_date, '%Y-%m-%dT%H:%M:%S')
+    end = datetime.strptime(end_date, '%Y-%m-%dT%H:%M:%S')
+    if start > end:
         return dates_not_given(400)
     
     result = search(start_date, end_date, location, key_terms, db_controller.getDbConnection())
@@ -205,6 +210,22 @@ def get_all_locations():
 
     return jsonify(addLog(locations))
 
+@app.route('/list/keywords', methods=['GET'])
+def get_all_keywords():
+    db = db_controller.getDbConnection()
+    cursor = db.cursor()
+
+    query = "SELECT Keyword from Keywords"
+    cursor.execute(query)
+    results = cursor.fetchall()
+    db.close()
+
+    keywords = []
+    for result in results:
+        keywords.append(result[0])
+
+    return jsonify(addLog(keywords))
+
 # Returns a count of the number of mentions of each disease in the time range
 # by default, or the number of mentions of each of the keywords if specified
 @app.route('/count', methods=['GET'])
@@ -213,9 +234,13 @@ def get_count():
     query_parameters = request.args
     start_date = query_parameters.get('start_date')
     end_date = query_parameters.get('end_date')
-    key_terms = query_parameters.get('key_terms')
 
     if noneOrEmpty(start_date) or noneOrEmpty(end_date):
+        return dates_not_given(400)
+    
+    start = datetime.strptime(start_date, '%Y-%m-%dT%H:%M:%S')
+    end = datetime.strptime(end_date, '%Y-%m-%dT%H:%M:%S')
+    if start > end:
         return dates_not_given(400)
 
     db = db_controller.getDbConnection()
