@@ -236,6 +236,7 @@ def reportToDB(dbConnection, articleID, diseaseType, eventDate, locationID, symp
     data3 = (reportID, diseaseType)
     data4Array = [(reportID, symptom) for symptom in symptoms]
 
+    # Putting it in there
     cursor.execute(query2, data2)
     cursor.execute(query3, data3)
     cursor.executemany(query4, data4Array)
