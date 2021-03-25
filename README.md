@@ -4,6 +4,8 @@
 * [Deliverable 1](#deliverable1)
   1. [Design Details](#designdetails)
   2. [Management Information](#maninfo)
+* [Deliverable 2](#deliverable2)
+* [Deliverable 3](#deliverable3)
 ## Project Overview 🍟 <a name="projoverview"></a>
 Ever since COVID-19's breakout, more awareness and emphasis has been placed on the effectiveness of communication and knowledge of disease and outbreaks. The **McNuggets** aim to to develop a platform that would contribute to an alert society with complete access to vital health information. This platform will automate the extraction of data from available sources in order to produce the following information for the public:
 * Outbreak alerts: Important notifications regarding outbreaks of a new disease, existing disease in a new area, etc.
@@ -35,3 +37,9 @@ Our main software tools currently in use to assist project management are:
 * Selenium / Requests
 
 More information can be found in our [Management Information Report](https://github.com/KennethMejico/SENG3011_McNuggets/blob/main/Reports/Management%20Information.md).
+
+## Deliverable 2 🍟 <a name="deliverable2"></a>
+### Something
+Words
+### Somethingaaaa
+Words
