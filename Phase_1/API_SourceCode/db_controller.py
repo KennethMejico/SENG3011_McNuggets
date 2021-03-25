@@ -155,10 +155,19 @@ def markerToDB(dbConnection, markerID, markerIDContents):
         Args:
             >>> dbConnection: Database connection object to push data to.
             >>> markerID: integer markerID
-            >>> markerIDContents: dictionary of markerIDContents
+            >>> markerIDContents: array of markerIDContents
     """
-    # TODO
-    pass
+    markerName = markerIDContents[1]
+    markerLatitude = markerIDContents[2]
+    markerLongitude = markerIDContents[3]
+    cursor = dbConnection.cursor()
+    query = """
+        INSERT IGNORE 
+        INTO Locations(LocationID, Latitude, Longitude, LocationName) 
+        VALUES (%s, %s, %s, %s)
+    """
+    data = (markerID, markerLatitude, markerLongitude, markerName)
+    cursor.execute(query, data)
 
 def articleToDB(dbConnection, markerID, date, aid, name, text):
     """
@@ -172,8 +181,15 @@ def articleToDB(dbConnection, markerID, date, aid, name, text):
             >>> name: Article Headline
             >>> text: Article Text
     """
-    # TODO
-    pass
+    articleLink = ""
+    cursor = dbConnection.cursor()
+    query = """
+        INSERT IGNORE
+        INTO Articles(ArticleID, PubDate, ArticleName, MainText, LinkToArticle)
+        VALUES (%s, %s, %s, %s, %s)
+    """
+    data = (aid, date, name, text, articleLink)
+    cursor.execute(query, data)
 
 def reportToDB(dbConnection, articleID, diseaseType, eventDate, locationID, symptoms):
     """
@@ -187,5 +203,10 @@ def reportToDB(dbConnection, articleID, diseaseType, eventDate, locationID, symp
             >>> locationID: Report Location
             >>> symptoms: Array of symptoms
     """
-    # TODO 
-    pass
+    
+    cursor = dbConnection.cursor()
+    query = """
+        
+    """
+    data = ()
+    cursor.execute(query, data)
