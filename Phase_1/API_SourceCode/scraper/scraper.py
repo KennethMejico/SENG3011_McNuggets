@@ -160,8 +160,11 @@ class Scraper:
                     'action' : 'get_latest_post_data',
                     'alertId': aid,
                 }
-                soup = BeautifulSoup(requests.post(self.url, dataReq, headers=self.headers).json()['post'], "html5lib")
-                text = soup.find('div', attrs={'class':'text1'}).get_text(separator=" ")
+                try:
+                    soup = BeautifulSoup(requests.post(self.url, dataReq, headers=self.headers).json()['post'], "html5lib")
+                    text = soup.find('div', attrs={'class':'text1'}).get_text(separator=" ")
+                except:
+                    continue
                 
                 db_controller.articleToDB(dbConn, markerID, date, aid, name, text)
 

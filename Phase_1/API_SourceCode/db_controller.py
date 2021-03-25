@@ -150,7 +150,7 @@ def idInDB(dbConnection, articleID):
 
 def markerToDB(dbConnection, markerID, markerIDContents):
     """
-        Pushes marker content to a database. Will not Commit.
+        Pushes marker content to a database.
 
         Args:
             >>> dbConnection: Database connection object to push data to.
@@ -168,9 +168,11 @@ def markerToDB(dbConnection, markerID, markerIDContents):
     data = (markerID, markerLatitude, markerLongitude, markerName)
     cursor.execute(query, data)
 
+    dbConnection.commit()
+
 def articleToDB(dbConnection, markerID, date, aid, name, text):
     """
-        Pushes article data to a given database connection. Will not Commit
+        Pushes article data to a given database connection.
 
         Args:
             >>> dbConnection: Database connection object to push data to.
@@ -190,9 +192,11 @@ def articleToDB(dbConnection, markerID, date, aid, name, text):
     data = (aid, date, name, text, articleLink)
     cursor.execute(query, data)
 
+    dbConnection.commit()
+
 def reportToDB(dbConnection, articleID, diseaseType, eventDate, locationID, symptoms):
     """
-        Pushes report data to a given database connection. Will not Commit
+        Pushes report data to a given database connection.
 
         Args:
             >>> dbConnection: Database connection object to push data to.
@@ -212,14 +216,12 @@ def reportToDB(dbConnection, articleID, diseaseType, eventDate, locationID, symp
         VALUES (%s, %s);
     """
     query3 = """
-        CALL select_or_insert_disease(%s, @disease_id);
         INSERT IGNORE INTO Report_Diseases (ReportID, DiseaseID)
-        VALUES (%s, (SELECT @disease_id));
+        VALUES (%s, %s);
     """
     query4 = """
-        CALL select_or_insert_syndrome(%s, @syndrome_id);
         INSERT IGNORE INTO Report_Syndromes (ReportID, SyndromeID)
-        VALUES (%s, (SELECT @syndrome_id));
+        VALUES (%s, %s);
     """
 
     cursor = dbConnection.cursor()
@@ -231,10 +233,19 @@ def reportToDB(dbConnection, articleID, diseaseType, eventDate, locationID, symp
     
     # Report details now that we have reportID
     data2 = (reportID, locationID)
-    data3 = (diseaseType, reportID)
-    data4Array = [(symptom, reportID) for symptom in symptoms]
-
-    # Putting it in there
     cursor.execute(query2, data2)
+
+    args = [diseaseType, 0]
+    resultArgs = cursor.callproc('select_or_insert_disease', args)
+    diseaseID = resultArgs[1]
+    data3 = (reportID, diseaseID)
     cursor.execute(query3, data3)
-    cursor.executemany(query4, data4Array)
+
+    for symptom in symptoms:
+        args = [symptom, 0]
+        resultArgs = cursor.callproc('select_or_insert_syndrome', args)
+        symptomID = resultArgs[1]
+        data4 = (reportID, symptomID)
+        cursor.execute(query4, data4)
+    
+    dbConnection.commit()
