@@ -203,33 +203,39 @@ def reportToDB(dbConnection, articleID, diseaseType, eventDate, locationID, symp
             >>> locationID: Report Location
             >>> symptoms: Array of symptoms
     """
-    
-    cursor = dbConnection.cursor()
+    # Function Queries
     query1 = """
         INSERT IGNORE
         INTO Reports (ArticleID, EventDate)
         VALUES (%s, %s);
-    """
+    """ 
     query2 = """
         INSERT IGNORE
         INTO Report_Locations (ReportID, LocationID)
-        VALUES ();
+        VALUES (%s, %s);
     """
     query3 = """
         INSERT IGNORE
         INTO Report_Diseases (ReportID, DiseaseID)
-        VALUES ();
+        VALUES (%s, (SELECT DiseaseID from Diseases where DiseaseName like "%s"));
     """
     query4 = """
         INSERT IGNORE
         INTO Report_Syndromes (ReportID, SyndromeID)
-        VALUES ();
+        VALUES (%s, (SELECT SyndromeID from Syndromes where SyndromeName like "%s"));
     """
-    data1 = ()
-    data2 = ()
-    data3 = ()
-    data4 = ()
+
+    cursor = dbConnection.cursor()
+    #Initial Report into DB
+    data1 = (articleID, eventDate)
     cursor.execute(query1, data1)
+    reportID = cursor.lastrowid
+    
+    # Report details now that we have reportID
+    data2 = (reportID, locationID)
+    data3 = (reportID, diseaseType)
+    data4Array = [(reportID, symptom) for symptom in symptoms]
+
     cursor.execute(query2, data2)
     cursor.execute(query3, data3)
-    cursor.executemany(query4, data4)
+    cursor.executemany(query4, data4Array)
