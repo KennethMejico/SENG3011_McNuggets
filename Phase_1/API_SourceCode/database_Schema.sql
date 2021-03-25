@@ -128,6 +128,7 @@ CREATE TABLE IF NOT EXISTS metaData (
 -- */
 
 delimiter $$
+
 create procedure select_or_insert_disease(IN diseaseSearch varchar(100), OUT diseaseID INTEGER)
 begin
     IF EXISTS(SELECT DiseaseID FROM Diseases WHERE DiseaseName = diseaseSearch) THEN 
