@@ -226,6 +226,7 @@ def reportToDB(dbConnection, articleID, diseaseType, eventDate, locationID, symp
     """
 
     cursor = dbConnection.cursor()
+    
     #Initial Report into DB
     data1 = (articleID, eventDate)
     cursor.execute(query1, data1)
