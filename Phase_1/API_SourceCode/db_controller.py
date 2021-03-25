@@ -206,7 +206,10 @@ def reportToDB(dbConnection, articleID, diseaseType, eventDate, locationID, symp
     
     cursor = dbConnection.cursor()
     query = """
-        
+        Reports (ArticleID, EventDate)
+        Report_Locations (ReportID, LocationID)
+        Report_Diseases (ReportID, DiseaseID)
+        Report_Syndromes (ReportID, SyndromeID)
     """
     data = ()
     cursor.execute(query, data)

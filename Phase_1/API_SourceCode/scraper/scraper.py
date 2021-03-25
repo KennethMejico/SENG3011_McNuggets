@@ -195,8 +195,6 @@ class Scraper:
                 rdate += relativedelta(months=-6)
             edate = str(rdate)
             jsonResponse = self.fetch(edate)
-            if db_controller.idInDB(dbConn, jsonResponse['first_alert']):
-                break
         dbConn.close()
 
     def getLatest(self):
