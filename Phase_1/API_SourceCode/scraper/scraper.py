@@ -97,6 +97,15 @@ class Scraper:
         print(f"Location Key: {key}.    Article Date: {date}.   Article ID: {aid}.    Article Name: {name}.")
 
     def generateReports(self, dbConn, articleDate, articleID, articleMarkerID, articleName, articleText):
+        """
+            Generates reports and inserts it into a database
+            >>> self is a scraper object
+            >>> dbConn is a database connection object
+            >>> articleDate is the date from the article
+            >>> articleMarkerID is the marker ID from an article
+            >>> articleName is the name of the article
+            >>> articleText is the text of the article
+        """
         LAN = articleName.lower()
         # If it contains announcement, that means it isn't a health thing
         if 'announcement' in LAN:

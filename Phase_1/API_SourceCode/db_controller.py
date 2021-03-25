@@ -138,6 +138,9 @@ def insertLocations(jsonResponse):
     dbConn.close()
 
 def idInDB(dbConnection, articleID):
+    """
+        Checks if specific article ID is in a given database connection
+    """
     commandOutput = None
     query = "SELECT ArticleID FROM Articles WHERE ArticleID=%s"
     cursor = dbConnection.cursor()
@@ -146,13 +149,43 @@ def idInDB(dbConnection, articleID):
     return True if commandOutput is not None else False
 
 def markerToDB(dbConnection, markerID, markerIDContents):
+    """
+        Pushes marker content to a database. Will not Commit.
+
+        Args:
+            >>> dbConnection: Database connection object to push data to.
+            >>> markerID: integer markerID
+            >>> markerIDContents: dictionary of markerIDContents
+    """
     # TODO
     pass
 
 def articleToDB(dbConnection, markerID, date, aid, name, text):
+    """
+        Pushes article data to a given database connection. Will not Commit
+
+        Args:
+            >>> dbConnection: Database connection object to push data to.
+            >>> articleID: Article ID
+            >>> date: Date
+            >>> aid: Article ID
+            >>> name: Article Headline
+            >>> text: Article Text
+    """
     # TODO
     pass
 
 def reportToDB(dbConnection, articleID, diseaseType, eventDate, locationID, symptoms):
+    """
+        Pushes report data to a given database connection. Will not Commit
+
+        Args:
+            >>> dbConnection: Database connection object to push data to.
+            >>> articleID: Article ID
+            >>> diseaseType: Disease Type
+            >>> eventDate: Event Date
+            >>> locationID: Report Location
+            >>> symptoms: Array of symptoms
+    """
     # TODO 
     pass
