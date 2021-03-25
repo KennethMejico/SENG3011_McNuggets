@@ -215,14 +215,16 @@ def reportToDB(dbConnection, articleID, diseaseType, eventDate, locationID, symp
         VALUES (%s, %s);
     """
     query3 = """
+        CALL select_or_insert_disease(%s, @disease_id)
         INSERT IGNORE
         INTO Report_Diseases (ReportID, DiseaseID)
-        VALUES (%s, (SELECT DiseaseID from Diseases where DiseaseName like "%s"));
+        VALUES (%s, (SELECT @disease_id));
     """
     query4 = """
+        CALL select_or_insert_syndrome(%s, @syndrome_id)
         INSERT IGNORE
         INTO Report_Syndromes (ReportID, SyndromeID)
-        VALUES (%s, (SELECT SyndromeID from Syndromes where SyndromeName like "%s"));
+        VALUES (%s, (SELECT @syndrome_id));
     """
 
     cursor = dbConnection.cursor()
@@ -234,8 +236,8 @@ def reportToDB(dbConnection, articleID, diseaseType, eventDate, locationID, symp
     
     # Report details now that we have reportID
     data2 = (reportID, locationID)
-    data3 = (reportID, diseaseType)
-    data4Array = [(reportID, symptom) for symptom in symptoms]
+    data3 = (diseaseType, reportID)
+    data4Array = [(symptom, reportID) for symptom in symptoms]
 
     # Putting it in there
     cursor.execute(query2, data2)

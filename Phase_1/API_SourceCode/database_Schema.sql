@@ -129,24 +129,24 @@ CREATE TABLE IF NOT EXISTS metaData (
 
 delimiter $$
 
-create procedure select_or_insert_disease(IN diseaseSearch varchar(100), OUT diseaseID INTEGER)
+create procedure select_or_insert_disease(IN diseaseSearch varchar(100), OUT disease_ID INTEGER)
 begin
     IF EXISTS(SELECT DiseaseID FROM Diseases WHERE DiseaseName = diseaseSearch) THEN 
-        SELECT DiseaseID into diseaseID FROM Diseases WHERE DiseaseName = diseaseSearch;
+        SELECT DiseaseID into disease_ID FROM Diseases WHERE DiseaseName = diseaseSearch;
     ELSE
         INSERT INTO Diseases (DiseaseName) VALUES (diseaseSearch);
-        SELECT LAST_INSERT_ID() into diseaseID;
+        SELECT LAST_INSERT_ID() into disease_ID;
 END IF;
 end $$
 
 
-create procedure select_or_insert_syndrome(IN syndromeSearch varchar(100), OUT syndromeID INTEGER)
+create procedure select_or_insert_syndrome(IN syndromeSearch varchar(100), OUT syndrome_ID INTEGER)
 begin
     IF EXISTS(SELECT SyndromeID FROM Syndromes WHERE SyndromeName = syndromeSearch) THEN 
-        SELECT SyndromeID into syndromeID FROM Syndromes WHERE SyndromeName = syndromeSearch;
+        SELECT SyndromeID into syndrome_ID FROM Syndromes WHERE SyndromeName = syndromeSearch;
     ELSE
         INSERT INTO Syndromes (SyndromeName) VALUES (syndromeSearch);
-        SELECT LAST_INSERT_ID() into syndromeID;
+        SELECT LAST_INSERT_ID() into syndrome_ID;
 END IF;
 end $$
 
