@@ -205,25 +205,21 @@ def reportToDB(dbConnection, articleID, diseaseType, eventDate, locationID, symp
     """
     # Function Queries
     query1 = """
-        INSERT IGNORE
-        INTO Reports (ArticleID, EventDate)
+        INSERT IGNORE INTO Reports (ArticleID, EventDate)
         VALUES (%s, %s);
     """ 
     query2 = """
-        INSERT IGNORE
-        INTO Report_Locations (ReportID, LocationID)
+        INSERT IGNORE INTO Report_Locations (ReportID, LocationID)
         VALUES (%s, %s);
     """
     query3 = """
         CALL select_or_insert_disease(%s, @disease_id)
-        INSERT IGNORE
-        INTO Report_Diseases (ReportID, DiseaseID)
+        INSERT IGNORE INTO Report_Diseases (ReportID, DiseaseID)
         VALUES (%s, (SELECT @disease_id));
     """
     query4 = """
         CALL select_or_insert_syndrome(%s, @syndrome_id)
-        INSERT IGNORE
-        INTO Report_Syndromes (ReportID, SyndromeID)
+        INSERT IGNORE INTO Report_Syndromes (ReportID, SyndromeID)
         VALUES (%s, (SELECT @syndrome_id));
     """
 
