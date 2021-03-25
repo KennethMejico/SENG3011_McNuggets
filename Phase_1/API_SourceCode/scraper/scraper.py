@@ -135,7 +135,7 @@ class Scraper:
         """Processes data for the JSON response given by promedmail.org"""
         contents = response['contents']
         lastDate = Date.today()
-
+        updates = False
         for key in sorted(contents):
             markerID = key
             db_controller.markerToDB(dbConn, markerID, response['markers'][markerID])
@@ -143,11 +143,18 @@ class Scraper:
             for item in contents[key]:
                 date  = self.findDate(item)
                 aid   = self.findID(item)
+                
                 # self.printInfo(key, date, aid, name)
                 tempDate = Date.fromtimestamp(time.mktime(time.strptime(date, "%d %b %Y")))
+                
                 if tempDate < lastDate:
                     lastDate = tempDate
                 
+                if db_controller.idInDB(dbConn, aid): 
+                    # This returns true if the article is already in db, therefore skip it
+                    continue
+                
+                updates = True
                 name  = self.findName(item)
                 dataReq = {
                     'action' : 'get_latest_post_data',
@@ -158,10 +165,10 @@ class Scraper:
                 
                 db_controller.articleToDB(dbConn, markerID, date, aid, name, text)
 
-                self.generateReports(dbConn, date, aid, markerID, name, text)
+                self.generateReports(dbConn, tempDate, aid, markerID, name, text)
 
         dbConn.commit()
-        return (lastDate, len(contents))
+        return (lastDate, len(contents), updates)
 
     def fetch(self, edate):
         """ Makes a data request to a the promedmail database, for a specific date given by edate """
@@ -186,15 +193,18 @@ class Scraper:
             return
         
         while (jsonResponse['contents']):
-            rdate, responseCount = self.processData(dbConn, jsonResponse)
+            rdate, responseCount, updates = self.processData(dbConn, jsonResponse)
             if self.debugging:
                 print(str(rdate))
+            if updates == False:
+                break
             if rdate == Date.today():
                 break
             if responseCount == 1:
                 rdate += relativedelta(months=-6)
             edate = str(rdate)
             jsonResponse = self.fetch(edate)
+
         dbConn.close()
 
     def getLatest(self):

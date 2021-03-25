@@ -205,11 +205,31 @@ def reportToDB(dbConnection, articleID, diseaseType, eventDate, locationID, symp
     """
     
     cursor = dbConnection.cursor()
-    query = """
-        Reports (ArticleID, EventDate)
-        Report_Locations (ReportID, LocationID)
-        Report_Diseases (ReportID, DiseaseID)
-        Report_Syndromes (ReportID, SyndromeID)
+    query1 = """
+        INSERT IGNORE
+        INTO Reports (ArticleID, EventDate)
+        VALUES (%s, %s);
     """
-    data = ()
-    cursor.execute(query, data)
+    query2 = """
+        INSERT IGNORE
+        INTO Report_Locations (ReportID, LocationID)
+        VALUES ();
+    """
+    query3 = """
+        INSERT IGNORE
+        INTO Report_Diseases (ReportID, DiseaseID)
+        VALUES ();
+    """
+    query4 = """
+        INSERT IGNORE
+        INTO Report_Syndromes (ReportID, SyndromeID)
+        VALUES ();
+    """
+    data1 = ()
+    data2 = ()
+    data3 = ()
+    data4 = ()
+    cursor.execute(query1, data1)
+    cursor.execute(query2, data2)
+    cursor.execute(query3, data3)
+    cursor.executemany(query4, data4)
