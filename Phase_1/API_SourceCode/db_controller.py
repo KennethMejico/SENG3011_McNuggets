@@ -162,9 +162,8 @@ def markerToDB(dbConnection, markerID, markerIDContents):
     markerLongitude = markerIDContents[3]
     cursor = dbConnection.cursor()
     query = """
-        INSERT IGNORE 
-        INTO Locations(LocationID, Latitude, Longitude, LocationName) 
-        VALUES (%s, %s, %s, %s)
+        INSERT IGNORE INTO Locations(LocationID, Latitude, Longitude, LocationName) 
+        VALUES (%s, %s, %s, %s);
     """
     data = (markerID, markerLatitude, markerLongitude, markerName)
     cursor.execute(query, data)
@@ -186,7 +185,7 @@ def articleToDB(dbConnection, markerID, date, aid, name, text):
     query = """
         INSERT IGNORE
         INTO Articles(ArticleID, PubDate, ArticleName, MainText, LinkToArticle)
-        VALUES (%s, %s, %s, %s, %s)
+        VALUES (%s, %s, %s, %s, %s);
     """
     data = (aid, date, name, text, articleLink)
     cursor.execute(query, data)
