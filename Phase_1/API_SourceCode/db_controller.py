@@ -142,9 +142,9 @@ def idInDB(dbConnection, articleID):
         Checks if specific article ID is in a given database connection
     """
     commandOutput = None
-    query = "SELECT ArticleID FROM Articles WHERE ArticleID=%s"
+    query = "SELECT ArticleID FROM Articles WHERE ArticleID=%s;"
     cursor = dbConnection.cursor()
-    cursor.execute(query, articleID)
+    cursor.execute(query, (articleID,))
     commandOutput = cursor.fetchone()
     return True if commandOutput is not None else False
 
@@ -213,12 +213,12 @@ def reportToDB(dbConnection, articleID, diseaseType, eventDate, locationID, symp
         VALUES (%s, %s);
     """
     query3 = """
-        CALL select_or_insert_disease(%s, @disease_id)
+        CALL select_or_insert_disease(%s, @disease_id);
         INSERT IGNORE INTO Report_Diseases (ReportID, DiseaseID)
         VALUES (%s, (SELECT @disease_id));
     """
     query4 = """
-        CALL select_or_insert_syndrome(%s, @syndrome_id)
+        CALL select_or_insert_syndrome(%s, @syndrome_id);
         INSERT IGNORE INTO Report_Syndromes (ReportID, SyndromeID)
         VALUES (%s, (SELECT @syndrome_id));
     """
