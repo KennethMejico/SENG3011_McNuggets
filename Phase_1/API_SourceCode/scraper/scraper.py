@@ -210,6 +210,56 @@ class Scraper:
 
         dbConn.close()
 
+    def update(self):
+        """
+            Very similar to the runSimple function. 
+            Will gather and process data for any reports in the last two days
+
+            Use the run method for a more comprehensive table update.
+        """
+        dbConn = db_controller.getDbConnection()
+        edate = ''
+        jsonResponse = self.fetch(edate)
+        if db_controller.idInDB(dbConn, jsonResponse['first_alert']):
+            return
+        contents = jsonResponse['contents']
+        today = Date.today()
+        twoDaysAgo = today + relativedelta(day=-2)
+        for key in sorted(contents):
+            markerID = key
+            db_controller.markerToDB(dbConn, markerID, jsonResponse['markers'][markerID])
+            for item in contents[key]:
+                date  = self.findDate(item)
+                aid   = self.findID(item)
+                
+                tempDate = Date.fromtimestamp(time.mktime(time.strptime(date, "%d %b %Y")))
+                if tempDate < twoDaysAgo:
+                    # Skip it if it was from before 2 days ago
+                    continue
+
+                if db_controller.idInDB(dbConn, aid): 
+                    # This returns true if the article is already in db, therefore skip it
+                    # Faster to make call to db then with requests hopefully
+                    continue
+                
+                name  = self.findName(item)
+                dataReq = {
+                    'action' : 'get_latest_post_data',
+                    'alertId': aid,
+                }
+
+                try:
+                    soup = BeautifulSoup(requests.post(self.url, dataReq, headers=self.headers).json()['post'], "html5lib")
+                    text = soup.find('div', attrs={'class':'text1'}).get_text(separator=" ")
+                except:
+                    continue
+
+                db_controller.articleToDB(dbConn, markerID, date, aid, name, text)
+
+                self.generateReports(dbConn, tempDate, aid, markerID, name, text)
+                
+        dbConn.commit()
+
     def getLatest(self):
         jsonresponse = self.fetch('')
         dataReq = {
