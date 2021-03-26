@@ -136,4 +136,155 @@ def insertLocations(jsonResponse):
     dbConn.commit()
     print(cursor.rowcount, "was inserted")
     dbConn.close()
+
+def idInDB(dbConnection, articleID):
+    """
+        Checks if specific article ID is in a given database connection
+    """
+    commandOutput = None
+    query = "SELECT ArticleID FROM Articles WHERE ArticleID=%s;"
+    cursor = dbConnection.cursor()
+    cursor.execute(query, (articleID,))
+    commandOutput = cursor.fetchone()
+    return True if commandOutput is not None else False
+
+def markerToDB(dbConnection, markerID, markerIDContents):
+    """
+        Pushes marker content to a database.
+
+        Args:
+            >>> dbConnection: Database connection object to push data to.
+            >>> markerID: integer markerID
+            >>> markerIDContents: array of markerIDContents
+    """
+    markerName = markerIDContents[1]
+    markerLatitude = markerIDContents[2]
+    markerLongitude = markerIDContents[3]
+    cursor = dbConnection.cursor()
+    query = """
+        INSERT IGNORE INTO Locations(LocationID, Latitude, Longitude, LocationName) 
+        VALUES (%s, %s, %s, %s);
+    """
+    data = (markerID, markerLatitude, markerLongitude, markerName)
+    cursor.execute(query, data)
+
+    dbConnection.commit()
+
+def articleToDB(dbConnection, markerID, date, aid, name, text):
+    """
+        Pushes article data to a given database connection.
+
+        Args:
+            >>> dbConnection: Database connection object to push data to.
+            >>> articleID: Article ID
+            >>> date: Date
+            >>> aid: Article ID
+            >>> name: Article Headline
+            >>> text: Article Text
+    """
+    articleLink = ""
+    cursor = dbConnection.cursor()
+    query = """
+        INSERT IGNORE
+        INTO Articles(ArticleID, PubDate, ArticleName, MainText, LinkToArticle)
+        VALUES (%s, %s, %s, %s, %s);
+    """
+    data = (aid, date, name, text, articleLink)
+    cursor.execute(query, data)
+
+    dbConnection.commit()
+
+def reportToDB(dbConnection, articleID, diseaseType, eventDate, locationID, symptoms):
+    """
+        Pushes report data to a given database connection.
+
+        Args:
+            >>> dbConnection: Database connection object to push data to.
+            >>> articleID: Article ID
+            >>> diseaseType: Disease Type
+            >>> eventDate: Event Date
+            >>> locationID: Report Location
+            >>> symptoms: Array of symptoms
+    """
+    # Function Queries
+    query1 = """
+        INSERT IGNORE INTO Reports (ArticleID, EventDate)
+        VALUES (%s, %s);
+    """ 
+    query2 = """
+        INSERT IGNORE INTO Report_Locations (ReportID, LocationID)
+        VALUES (%s, %s);
+    """
+    query3 = """
+        INSERT IGNORE INTO Report_Diseases (ReportID, DiseaseID)
+        VALUES (%s, %s);
+    """
+    query4 = """
+        INSERT IGNORE INTO Report_Syndromes (ReportID, SyndromeID)
+        VALUES (%s, %s);
+    """
+
+    cursor = dbConnection.cursor()
     
+    #Initial Report into DB
+    data1 = (articleID, eventDate)
+    cursor.execute(query1, data1)
+    reportID = cursor.lastrowid
+    
+    # Report details now that we have reportID
+    data2 = (reportID, locationID)
+    cursor.execute(query2, data2)
+
+    args = [diseaseType, 0]
+    resultArgs = cursor.callproc('select_or_insert_disease', args)
+    diseaseID = resultArgs[1]
+    data3 = (reportID, diseaseID)
+    cursor.execute(query3, data3)
+
+    for symptom in symptoms:
+        args = [symptom, 0]
+        resultArgs = cursor.callproc('select_or_insert_syndrome', args)
+        symptomID = resultArgs[1]
+        data4 = (reportID, symptomID)
+        cursor.execute(query4, data4)
+    
+    dbConnection.commit()
+
+def keywordAddition():
+    db = getDbConnection()
+    cursor = db.cursor()
+
+    with open('Phase_1/API_SourceCode/jsonFiles/keyword_list.json', 'r') as f:
+        keywords = json.load(f)
+        results = []
+        for keyword in keywords:
+            if getKeywordId(db, keyword["name"]) is None:
+                results.append((keyword["name"].lower(),))
+        query = "INSERT INTO Keywords (Keyword) VALUE (%s)"
+        cursor.executemany(query, results)
+        db.commit()
+    
+    
+    query1 = "SELECT Keyword FROM Keywords"
+    query2 = """
+        SELECT ReportID 
+        FROM Reports 
+        WHERE Reports.ArticleID in (
+            SELECT ArticleID 
+            FROM Articles 
+            WHERE LOWER(MainText) LIKE %s
+        );
+    """
+
+    cursor.execute(query1)
+    kwords = [row[0] for row in cursor.fetchall()]
+
+    for kword in kwords:
+        if kword == "myster(ious)y disease":
+            data2 = ("%"+"mysterious"+"%", )
+        else:
+            data2 = ("%"+kword+"%", )
+        
+
+""" if __name__ == "__main__":
+    keywordAddition() """

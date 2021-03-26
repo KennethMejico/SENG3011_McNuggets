@@ -1,42 +1,25 @@
-/*  CONSTANTS   */
-
-/*  CREATING TABLES */
 
 CREATE TABLE IF NOT EXISTS Locations (
    LocationID INTEGER NOT NULL PRIMARY KEY,
-   CHECK (LocationID > 0),             									 /*  */
-   Latitude NUMERIC(10, 6) NOT NULL,                                    /*  */
-   Longitude NUMERIC(10, 6) NOT NULL,                                   /*  */
-   LocationName VARCHAR(100) NOT NULL                                   /*  */
+   CHECK (LocationID > 0), 
+   Latitude NUMERIC(10, 6) NOT NULL, 
+   Longitude NUMERIC(10, 6) NOT NULL,  
+   LocationName VARCHAR(100) NOT NULL  
 );
 
 CREATE TABLE IF NOT EXISTS Articles (
-    ArticleID INTEGER NOT NULL CHECK (ArticleID > 0) PRIMARY KEY,       /* Primary Key */
-    PubDate DATE NOT NULL,												/*  */
-    ArticleName VARCHAR(100),                                           /* HEADLINE */
-    -- LocationID INTEGER NOT NULL CHECK (LocationID > 0),                            /*  */
-    MainText TEXT NOT NULL,                                             /*  */
-    LinkToArticle TEXT NOT NULL                                        /* URL */
-    -- FOREIGN KEY (LocationID) REFERENCES Locations(LocationID)
+    ArticleID INTEGER NOT NULL CHECK (ArticleID > 0) PRIMARY KEY,
+    PubDate DATE NOT NULL,	
+    ArticleName VARCHAR(100), 
+    MainText TEXT NOT NULL, 
+    LinkToArticle TEXT NOT NULL 
 );
 
--- CREATE TABLE IF NOT EXISTS Article_Locations (
--- 	ArticleID INTEGER NOT NULL CHECK (ArticleID > 0),
--- 	LocationID INTEGER NOT NULL CHECK (LocationID > 0),
--- 	CONSTRAINT PK_Article_Locations PRIMARY KEY (ArticleID, LocationID),
--- 	FOREIGN KEY (ArticleID) REFERENCES Articles(ArticleID),
---     FOREIGN KEY (LocationID) REFERENCES Locations(LocationID)
--- );
-
 CREATE TABLE IF NOT EXISTS Reports (
-    ReportID INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,                                        /* Primary Key */
-    ArticleID INTEGER NOT Null,                                         /*  */
-    -- LocationID INTEGER NOT NULL,                                                 /* IF NULL get location from article location*/
-    -- Disease varchar(100) NOT NULL,                                      /*  */
-    -- Syndrome varchar(100) NOT NULL,                                     /*  */
-    EventDate DATE,                                                     /* IF NULL get date from article */
+    ReportID INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT, 
+    ArticleID INTEGER NOT Null, 
+    EventDate DATE,
     FOREIGN KEY (ArticleID) REFERENCES Articles(ArticleID) 
-    -- FOREIGN KEY (LocationID) REFERENCES Locations(LocationID)
 );
 
 CREATE TABLE IF NOT EXISTS Report_Locations (
@@ -91,39 +74,27 @@ CREATE TABLE IF NOT EXISTS metaData (
 	lastUserToUpdate TEXT NOT NULL
 );
 
+delimiter $$
 
--- /* UPDATE FUNCTIONS */
+create procedure select_or_insert_disease(IN diseaseSearch varchar(100), OUT disease_ID INTEGER)
+begin
+    IF EXISTS(SELECT DiseaseID FROM Diseases WHERE DiseaseName = diseaseSearch) THEN 
+        SELECT DiseaseID into disease_ID FROM Diseases WHERE DiseaseName = diseaseSearch;
+    ELSE
+        INSERT INTO Diseases (DiseaseName) VALUES (diseaseSearch);
+        SELECT LAST_INSERT_ID() into disease_ID;
+END IF;
+end $$
 
--- /*
 
--- CREATE FUNCTION check_reports_insert() 
--- 	RETURNS TRIGGER 
--- 	LANGUAGE PLPGSQL
--- 	AS $$
--- 	BEGIN
--- 		NEW.LOCATIONID =  COALESCE ( ( OLD.LOCATIONID ), ( SELECT  LOCATIONID  from  articles  where  articles.articleID == old.articleID ) );
--- 		NEW.EVENTDATE  =  COALESCE ( ( OLD.EVENTDATE  ), ( SELECT  PUBDATE     from  articles  where  articles.articleID == old.articleID ) );
--- 		RETURN NEW;
--- 	END;
--- 	$$
+create procedure select_or_insert_syndrome(IN syndromeSearch varchar(100), OUT syndrome_ID INTEGER)
+begin
+    IF EXISTS(SELECT SyndromeID FROM Syndromes WHERE SyndromeName = syndromeSearch) THEN 
+        SELECT SyndromeID into syndrome_ID FROM Syndromes WHERE SyndromeName = syndromeSearch;
+    ELSE
+        INSERT INTO Syndromes (SyndromeName) VALUES (syndromeSearch);
+        SELECT LAST_INSERT_ID() into syndrome_ID;
+END IF;
+end $$
 
--- CREATE TRIGGER IF NOT EXISTS reports_Insert
--- 	BEFORE INSERT ON "REPORTS"
--- 	FOR EACH ROW WHEN reports.locationID IS NULL OR reports.eventDate IS NULL
--- 	EXECUTE PROCEDURE check_reports_insert();
-
--- */
-
--- /* 
--- CREATE FUNCTION update_metaData()
--- 	RETURNS TRIGGER
--- 	LANGUAGE PLPGSQL
--- 	AS $$
--- 	BEGIN
--- 		UPDATE metaData SET
--- 		lastUpdated = ( SELECT NOW() ),
--- 		lastUserToUpdate = ( SELECT CURRENT_USER );
--- 	END;
--- 	$$ 
--- */
-	
+delimiter ;
