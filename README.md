@@ -39,7 +39,13 @@ Our main software tools currently in use to assist project management are:
 More information can be found in our [Management Information Report](https://github.com/KennethMejico/SENG3011_McNuggets/blob/main/Reports/Management%20Information.md).
 
 ## Deliverable 2 🍟 <a name="deliverable2"></a>
-### Something
-Words
-### Somethingaaaa
-Words
+### API Design Details
+The final architecture, justification of implementation, and challenges addressed for our project can be found here: [Design Details Report: Deliverable 2](https://github.com/KennethMejico/SENG3011_McNuggets/blob/main/Reports/Design%20Details.md#deliverable2)
+
+Our architecture begins with a scraper that scrapes data from ProMedMail.org, which then stores that data into a MySQL database, (AWS Relational Database Service). We have a Python backend API that is run on AWS Lambda, which then takes user input (HTTP requests) from the Amazon API gateway and uses queries to retrieve data from RDS. It then formats it and returns a JSON response to the user.
+### API Testing
+A complete guide to our testing methodology can be found here: [Testing Documentation](https://github.com/KennethMejico/SENG3011_McNuggets/blob/main/Reports/Testing%20Documentation.md)
+### API Documentation
+Our API Documentation was completed on Stoplight, and can be found here: [McNuggets Stoplight](https://unsw-seng-mcnuggets.stoplight.io/docs/seng3011-mcnuggets)
+### API Implementation
+The API has been implemented on AWS Lambda, and can be called using our Stoplight's try it out feature. Log files have also been implemented, including details such as team name, accessed time, and data source.
