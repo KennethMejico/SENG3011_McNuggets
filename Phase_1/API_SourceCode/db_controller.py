@@ -275,6 +275,11 @@ def keywordAddition():
             WHERE LOWER(MainText) LIKE %s
         );
     """
+    query3 = """
+        INSERT IGNORE INTO 
+        Report_Keywords(ReportID, KeywordID)
+        VALUES (%s, (SELECT KeywordID FROM Keywords WHERE Keywords.Keyword = %s))
+    """
 
     cursor.execute(query1)
     kwords = [row[0] for row in cursor.fetchall()]
@@ -284,6 +289,10 @@ def keywordAddition():
             data2 = ("%"+"mysterious"+"%", )
         else:
             data2 = ("%"+kword+"%", )
+        cursor.execute(query2, data2)
+        reportIDs = [row[0] for row in cursor.fetchall()]
+        for reportID in reportIDs:
+            cursor.execute(query3, (reportID, kword, ))
         
 
 """ if __name__ == "__main__":
