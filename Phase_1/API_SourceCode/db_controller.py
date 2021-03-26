@@ -101,14 +101,14 @@ def getSyndromeId(db, name):
             return result[0]
 
 def getKeywordId(db, name):
-    with db.cursor() as cursor:
-        query = f'SELECT KeywordID FROM Keywords WHERE Keyword = "{name.lower()}"'
-        cursor.execute(query)
-        result = cursor.fetchone()
-        if result is None:
-            return None
-        else:
-            return result[0]
+    cursor = db.cursor()
+    query = f'SELECT KeywordID FROM Keywords WHERE Keyword = "{name.lower()}"'
+    cursor.execute(query)
+    result = cursor.fetchone()
+    if result is None:
+        return None
+    else:
+        return result[0]
 
 def writeToDB(jsonResponse):
     insertLocations(jsonResponse)
@@ -293,7 +293,10 @@ def keywordAddition():
         reportIDs = [row[0] for row in cursor.fetchall()]
         for reportID in reportIDs:
             cursor.execute(query3, (reportID, kword, ))
+    
+    db.commit()
+    db.close()
         
 
-""" if __name__ == "__main__":
-    keywordAddition() """
+if __name__ == "__main__":
+    keywordAddition() 
