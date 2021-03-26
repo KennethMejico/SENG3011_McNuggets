@@ -52,5 +52,5 @@ In order to stay organised, we have created a gantt chart that roughly outlines 
 ![SENG3011 Gantt Chart (1)](https://user-images.githubusercontent.com/53299898/109443085-c7714a00-7a8d-11eb-8ce7-05bab485e1a7.png)
 
 ## Deliverable 2 🍟 <a name="deliverable2"></a>
-### Management Issues <a name="maniss"></a>
+### Management Issues: <a name="maniss"></a>
 During the middle of deliverable 2, one of our members, Vicknesh, had chosen to drop the course and was initially part of API development. As a result, Kenneth had taken his place, and the entire workload of the project felt much heavier without an integral member. The deadline extension did help in alleviating this pressure, but the project would have definitely benefitted with Vicknesh's presence.
