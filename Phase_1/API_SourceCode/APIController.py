@@ -83,71 +83,58 @@ def search(start_date, end_date, location, key_terms, db):
     # Base SQL Query
     sql = """
         select
+            r.ReportID,
             a.LinkToArticle,
             a.PubDate,
             a.ArticleName,
-            a.MainText,
-            r.EventDate,
-            r.ReportID
+            a.mainText,
+            r.EventDate
         from Articles a
         join Reports r on r.ArticleID = a.ArticleID
-        where a.ArticleID = a.ArticleID
-    """
+        where r.ReportID = r.ReportID"""
     data = ()
     if not noneOrEmpty(start_date):
         # Convert start date time to datetime datatype
         start = datetime.strptime(start_date, '%Y-%m-%dT%H:%M:%S')
-        sql = sql + " and a.PubDate >= %s"
+        sql = sql + " and r.EventDate >= %s"
         data = data + (start,)
 
     if not noneOrEmpty(end_date):
         end = datetime.strptime(end_date, '%Y-%m-%dT%H:%M:%S')
-        sql = sql + " and a.PubDate <= %s"
+        sql = sql + " and r.EventDate <= %s"
         data = data + (end,)
 
     mycursor.execute(sql, data)
     results = mycursor.fetchall()
-
     result_list = []
     for result in results:
         report_list = []
-        reportId = result[5]
+        reportId = result[0]
         locations = getLocationsForReport(reportId, mycursor, location)
-        diseases = getDiseasesForReport(reportId, mycursor)
-        syndromes = getSyndromesForReport(reportId, mycursor)
-        keywords = getKeywordsForReport(reportId, mycursor)
-
+        diseases = getDiseasesForReport(reportId, mycursor, key_terms)
+        syndromes = getSyndromesForReport(reportId, mycursor, key_terms)
+        
         if not noneOrEmpty(location) and len(locations) == 0:
             continue
-        if not noneOrEmpty(key_terms) and len(diseases) == 0 and len(syndromes) == 0 and len(keywords) == 0:
+        if not noneOrEmpty(key_terms) and len(diseases) == 0 and len(syndromes) == 0:
             continue
 
         report = {
-            'event_date': result[4],
+            'event_date': result[5],
             'locations': locations,
             'diseases': diseases,
             'syndromes': syndromes
         }
-
         report_list.append(report)
-        
 
         article = {
-            'url': result[0],
-            'date_of_publication': result[1],
-            'headline': result[2],
-            'main_text': result[3],
+            'url': result[1],
+            'date_of_publication': result[2],
+            'headline': result[3],
+            'main_text': result[4],
             'reports': report_list
         }
-
-        if not noneOrEmpty(key_terms):
-            split_terms = key_terms.split(',')
-            for term in split_terms:
-                if term.lower() in syndromes or term.lower() in diseases or term.lower() in keywords:
-                    result_list.append(article)
-                    break
-        else:
-            result_list.append(article)
+        result_list.append(article)
 
     db.close()
 
