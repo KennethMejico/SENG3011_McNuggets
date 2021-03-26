@@ -578,7 +578,7 @@
         "summary": "/list/reports",
         "tags": [],
         "operationId": "get-list-reports",
-        "description": "Returns all disease reports in the database. The data would be returned in the same format as the search endpoint so essentially it is a search without any parameters.",
+        "description": "Returns all disease reports in the database since the last day. The data would be returned in the same format as the search endpoint so essentially it is a search over the last day with no other parameters.",
         "responses": {
           "200": {
             "description": "OK",
