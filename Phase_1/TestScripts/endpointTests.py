@@ -88,13 +88,15 @@ def test_badParams():
 
 def test_search():
     parameters = {
-        "start_date": "2017-01-01T00:00:00",
+        "start_date": "2018-01-01T00:00:00",
         "end_date": "2019-01-01T00:00:00",
         "location": "Australia",
         "key_terms": "Gangrene,Buruli Ulcer",
         "timezone": "+11"
     }
     r = requests.get("https://4k6yve9rsa.execute-api.ap-southeast-2.amazonaws.com/default/mcnuggets/search", params=parameters)
+    # Fails because of timeout
+    print(r.json())
     assert len(r.json()["response"]) == 2
     # Should get two results
     # https://www.theage.com.au/national/victoria/flesh-eating-ulcer-cases-rapidly-increase-spread-on-victorian-coast-20181020-p50ax6.html
@@ -105,6 +107,7 @@ def test_listDiseases():
         expected = json.load(f)
     # Call API, put the response json in response
     r = requests.get("https://4k6yve9rsa.execute-api.ap-southeast-2.amazonaws.com/default/mcnuggets/list/diseases")
+    # Format no longer used
     assert(sort_json(expected) == sort_json(r.json()["response"]))
 
 def test_listSyndromes():
@@ -112,6 +115,7 @@ def test_listSyndromes():
         expected = json.load(f)
     # Call API, put the response json in response
     r = requests.get("https://4k6yve9rsa.execute-api.ap-southeast-2.amazonaws.com/default/mcnuggets/list/syndromes")
+    # Format no longer used
     assert(sort_json(expected) == sort_json(r.json()["response"]))
 
 def test_listKeywords():
@@ -119,6 +123,7 @@ def test_listKeywords():
         expected = json.load(f)
     # Call API, put the response json in response
     r = requests.get("https://4k6yve9rsa.execute-api.ap-southeast-2.amazonaws.com/default/mcnuggets/list/keywords")
+    # Format no longer used
     assert(sort_json(expected) == sort_json(r.json()["response"]))
 
 def test_listLocations():
@@ -129,4 +134,10 @@ def test_listReports():
     pass
 
 def test_count():
-    pass
+    parameters = {
+        "start_date": "2021-2-24T23:59:59",
+        "end_date": "2021-2-25T23:59:59",
+    }
+    r = requests.get("https://4k6yve9rsa.execute-api.ap-southeast-2.amazonaws.com/default/mcnuggets/count", params=parameters)
+    r2 = requests.get("https://4k6yve9rsa.execute-api.ap-southeast-2.amazonaws.com/default/mcnuggets/search", params=parameters)
+    assert(r.json()["response"] == {"salmonellosis, st typhimurium - usa": 1, "covid-19  ": 1, "foot & mouth disease - iran": 1, "salmonellosis, st enteritidis - canada": 1, "ebola  ": 1, "plague - congo dr": 1, "cholera, diarrhea & dysentery  ": 1, "salmonellosis - uk": 1})
