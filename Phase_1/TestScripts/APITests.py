@@ -21,5 +21,6 @@ def setup():
 
 def test_search(setup):
     #print(client.get("/"))
+    # Designed to fail so we get output showing result
     print(APIController.search("2016-12-10T23:59:59", "2016-12-20T23:59:59", "Sydney, New South Wales, Australia", "Measles", db_manager.getDbConnection()))
     assert 1 == 0
