@@ -249,3 +249,42 @@ def reportToDB(dbConnection, articleID, diseaseType, eventDate, locationID, symp
         cursor.execute(query4, data4)
     
     dbConnection.commit()
+
+def keywordAddition():
+    db = getDbConnection()
+    cursor = db.cursor()
+
+    with open('Phase_1/API_SourceCode/jsonFiles/keyword_list.json', 'r') as f:
+        keywords = json.load(f)
+        results = []
+        for keyword in keywords:
+            if getKeywordId(db, keyword["name"]) is None:
+                results.append((keyword["name"].lower(),))
+        query = "INSERT INTO Keywords (Keyword) VALUE (%s)"
+        cursor.executemany(query, results)
+        db.commit()
+    
+    
+    query1 = "SELECT Keyword FROM Keywords"
+    query2 = """
+        SELECT ReportID 
+        FROM Reports 
+        WHERE Reports.ArticleID in (
+            SELECT ArticleID 
+            FROM Articles 
+            WHERE LOWER(MainText) LIKE %s
+        );
+    """
+
+    cursor.execute(query1)
+    kwords = [row[0] for row in cursor.fetchall()]
+
+    for kword in kwords:
+        if kword == "myster(ious)y disease":
+            data2 = ("%"+"mysterious"+"%", )
+        else:
+            data2 = ("%"+kword+"%", )
+        
+
+""" if __name__ == "__main__":
+    keywordAddition() """
