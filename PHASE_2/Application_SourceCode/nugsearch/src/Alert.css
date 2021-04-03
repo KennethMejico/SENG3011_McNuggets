@@ -1,0 +1,25 @@
+.Background {
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    background: #FFF9F4;
+}
+
+.Heading {
+    position: absolute;
+    width: 100%;
+    height: 134.38px;
+    top: 30px;
+
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 56px;
+    line-height: 66px;
+    text-align: center;
+
+    color: #333333;
+
+    opacity: 0.9;
+}
