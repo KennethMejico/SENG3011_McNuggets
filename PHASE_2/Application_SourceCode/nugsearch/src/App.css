@@ -1,6 +1,12 @@
 .App {
   text-align: center;
   background-image: linear-gradient(rgba(0, 0, 0, 0.88), rgba(0, 0, 0, 0.88)), url(nuggetsBackground.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  overflow: hidden;
+  width: 100%;
 }
 
 .NavBar {
@@ -13,8 +19,8 @@
 .NavBarLi {
   float: left;
   list-style-type: none;
-  margin: 14px 16px;
-  padding: 14px 16px;
+  margin: 10px 16px;
+  padding: 10px 16px;
   display: inline;
 }
 
@@ -43,8 +49,8 @@
   font-size: 20px;
   line-height: 27px;
   color: #FFFFFF;
-  margin: 14px 16px 14px 0px;
-  padding: 14px 0px;
+  margin: 10px 16px 10px 0px;
+  padding: 10px 0px;
 }
 
 

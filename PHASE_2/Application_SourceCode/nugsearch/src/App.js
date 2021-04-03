@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import nugLogo from './nugSearchLogo300.png'
+import Search from './Search.js'
 import './App.css';
 
 function App() {
@@ -15,20 +16,7 @@ function App() {
           <li className="NavBarLi"><a href="about.asp">Alerts</a></li>
         </ul>
       </div>
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Search />
     </div>
   );
 }

@@ -2,6 +2,13 @@ from flask import Flask
 
 app = Flask(__name__)
 
+@app.route('/currentLocation')
+def currentLocation():
+    print ("Sydney")
+    return {
+        "location": "Sydney"
+    }
+
 @app.route('/search')
 def search():
     return {}
