@@ -2,6 +2,7 @@
     position: relative;
     width: 100%;
     height: 100%;
+    overflow: auto;
 
     background: #FFF9F4;
 }
@@ -22,4 +23,107 @@
     color: #333333;
 
     opacity: 0.9;
+}
+
+.CovidImage {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 180px;
+    width: 70%;
+    height: 462px;
+}
+
+.AlertText {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 140.62%;
+    /* or 28px */
+
+    text-align: justify;
+    font-feature-settings: 'cpsp' on, 'ss01' on, 'ss02' on, 'ss05' on, 'ss06' on, 'ss07' on, 'kern' off, 'liga' off;
+
+    color: #000000;
+
+    padding-top: 50px;
+    padding-bottom: 100px;
+}
+
+.OtherHeading {
+    position: absolute;
+    width: 100%;
+    height: 34px;
+
+    font-family: Noto Sans;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 140.62%;
+    /* identical to box height, or 34px */
+
+    text-align: center;
+
+    color: #000000;
+
+    padding-bottom: 200px;
+}
+
+.Divider {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 0px;
+    width: 50%;
+
+    border: 1px solid #000000;
+}
+
+/* .Alert1 {
+    position: absolute;
+    width: 304px;
+    height: 176px;
+    left: 230px;
+    padding-top: 150px;
+    padding-bottom: 100px;
+}
+
+.Alert2 {
+    position: absolute;
+    width: 304px;
+    height: 176px;
+    left: 565px;
+    padding-top: 1150px;
+    padding-bottom: 100px;
+}
+
+.Alert3 {
+    position: absolute;
+    width: 304px;
+    height: 176px;
+    left: 900px;
+    padding-top: 150px;    
+    padding-bottom: 100px;
+} */
+
+.row {
+    padding-top: 100px;
+    padding-bottom: 150px;
+}
+
+.column {
+    float: left;
+    width: 33.3%;
+}
+
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
 }
