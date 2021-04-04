@@ -4,6 +4,10 @@
   1. [API Module Development](#apidev)
   2. [Module Interactions](#modint)
   3. [Development Stack](#devstack)
+* [Deliverable 2](#deliverable2)
+  1. [Final Architecture](#finarch)
+  2. [Implementation Justification](#justif)
+  3. [Challenges](#challenges)
 ## Deliverable 1 🥓 <a name="deliverable1"></a>
 ### API Module Development <a name="apidev"></a>
 Question: *Describe how you intend to develop the API module and provide the ability to run it in Web service mode*
@@ -159,3 +163,143 @@ Furthermore, we are using a virtual env so that we are all working in the same a
 
 Instructions found here for other operating systems:
 https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/
+
+## Deliverable 2 🥓 <a name="deliverable2"></a>
+### Software Architecture <a name="finarch"></a>
+
+![](https://lh3.googleusercontent.com/1-ryL9QM9Tf7DiXG1yUqZ9E9CxdDiNyeRaJbtFzIncNLkqKLmctu_1jgObk4zpguiEKoBfBROSSUe5tSnZL0_tv2kIJJD4YPuvUrtvDQTEgl-AMV_gKHgfDo3ngE1rRoh3auRmqp)
+
+### Database Schema
+
+![](https://lh4.googleusercontent.com/LFRgwUVtQkB1_03oa7-DMJq0Crb-KAmgGrQaHXUD7dlQO1H-gvW9NWODo1yKsOxwM7nUGt7NcFdR8_kGQABEETeEuaafSfeD67f7lil2HdwTqSLO5Fyik-n1jQSadlKpNH8matec)
+
+### Justification of Implementation <a name="justif"></a>
+
+Prior to our final formulation of our API architecture, we had outlined many components that we had planned to use for our development stack here: <https://github.com/KennethMejico/SENG3011_McNuggets/blob/main/Reports/Design%20Details.md#devstack>
+
+As detailed above, the planned architecture differs slightly from our final architecture, most notably we had changes in the following categories:
+
+| Category | Planned | Final |
+|----------|------|------|
+|SQL Database| DB on AWS services|RDS DB on AWS Lambda|
+|Online Backend|AWS Lambda/Elastic Beanstalk|AWS Lambda|
+|Database Management System|PostgreSQL (psycopg2)|mySQL (mysql.connector)|
+|Scraping|Requests/Selenium|Requests/BeautifulSoup|
+
+-   SQL Database: We had initially planned on using an AWS database but were unsure of the limitations that other changes could impose. In completing further research and attempts at implementation, we had decided to go with Amazon Relational Database Service (RDS), as opposed to other AWS databases:
+
+-   Relational (Aurora, RDS, Redshift): Used for traditional applications, ERP, CRM, e-commerce
+
+-   Key-value (DynamoDB): High-traffic web apps, e-commerce systems, gaming applications
+
+-   In-memory (ElastiCache): Caching, session management, gaming leaderboards, geospatial applications
+
+-   Document (DocumentDB): Content management, catalogs, user profiles
+
+-   Wide Column (Keyspaced): High scale industrial apps for equipment maintenance, fleet management, and route optimization
+
+-   Graph (Neptune): Fraud detection, social networking, recommendation engines
+
+-   Time series (Timestream): IoT applications, DevOps, industrial telemetry
+
+-   Ledger (QLDB): Systems of record, supply chain, registrations, banking transactions
+
+With respect to all use cases for each type of database, we believe that our API would best fall under the relational category as a 'traditional application', as well as for the fact that our database would be stored in SQL form. In comparison to other options under the relation database type, we chose RDS due to its ease of use and free tier availability. RDS is more cost effective in comparison to Aurora, where although Redshift does have a 2-month free trial, RDS and it's ease of use outweighs Redshift for our project's timeframe.
+
+-   Web Server Hosting: Our team had initially attempted to use AWS Elastic Beanstalk but found that the number of errors and difficulty of working with uploaded code made this approach sustainable. With this in mind, we opted to use AWS Lambda as it was much easier to set up and utilise.
+
+-   Database Management System: The main reason for a change in our database system was mainly the result of developer preference, i.e. the group member working on the SQL database had more experience using MySQL as opposed to PostgreSQL, and therefore a greater preference for the former.
+
+-   Scraping: Our initial plan had involved using requests and Selenium, though through further development on the scraper, there was better familiarity and ease in mainly using requests, as well as BeautifulSoup for HTML parsing.\
+Here is the final architecture of our development stack:
+
+#### Final Architecture:
+|Category|Used Component|
+|----------|------|
+|Data Source|ProMedMail.org|
+|Backend Language|Python|
+|Web Scraping|Requests/BeautifulSoup Libraries|
+|Web Framework (Local hosting only)|Flask|
+|Operating System|Linux|
+|Online Backend|AWS Lambda|
+|Database Management System|MySQL|
+|MySQL Database|AWS Relational Database Service (RDS)|
+|Data Formatting|JSON|
+|Testing|Pytest library|
+|Misc. Libraries|datetime, mysql.connector, relativedelta, time, re, sys, os|\
+
+Due to their respective components being given as default or necessary for the project, the following categories have not been given a comparison:
+
+-   Data Source
+-   Data Formatting
+-   Misc. Libraries
+-   Web Framework
+-   Operating System
+
+#### Backend Language
+|Language|Pros|Cons|
+|----------|------|------|
+|**Python**|<ul><li>Easy API calls</li><li>Readability</li><li>Supports procedural and object-oriented programming</li><li>Can be run on multiple platforms</li><li>Automatic memory management</li><li>Simplified unit testing</li></ul>|<ul><li>Relatively slow performance</li><li>High memory consumption due to flexibility of data types</li><li>Has errors that only show up in runtime as language is dynamically typed</li><li>Needs large degree of unit testing</li></ul>|
+|Java/C#|<ul><li>Relatively high performance</li><li>Compiled</li><li>Statically typed so errors can be detected during runtime</li><li>Object oriented - offers maintainability and modularity</li></ul>|<ul><li>Not as readable and beginner friendly as python</li></ul>|
+|JavaScript|<ul><li>Covers full stack of development</li><li>Manages backend and frontend</li><li>Common language allows for better team efficiency with less resources</li><li>Extensive code reusability</li><li>Relatively high performance</li></ul>|<ul><li>Insufficiency with computation-heavy back end</li><li>The drawback of each item in the stack causes framework to have to inherit the flaws of each part</li></ul>|
+|C/C++|<ul><li>High performance and efficient</li><li>Statically typed so errors can be detected during runtime</li></ul>|<ul><li>Need to manually manage memory</li><li>Commonly used to be platform specific</li><li>Can be more complex and therefore harder to use</li></ul>|
+|SQL|<ul><li>Fast data lookup once it is stored</li></ul>|<ul><li>Backend database</li><li>Not for frontend use</li><li>Not used to crawl internet directly</li></ul>|
+
+Justification: We had decided to use Python as our main programming language in developing our API and Web App, as it was the most familiar language for everyone. For the timeframe of the project, the ease of importing packages, less time spent on learning the language, and simple syntax of Python would provide a major advantage for much needed efficiency in the development stages.
+
+#### Web Scraping
+|Scraper|Pros|Cons|
+|----------|------|------|
+|Scrapy|<ul><li>Relatively fast - asynchronous</li></ul>|<ul><li>High learning curve</li><li>Unable to handle JavaScript by default</li></ul>|
+|Selenium|<ul><li>Renders web pages for test automation</li><li>Useful in cases where websites rely on JavaScript</li></ul>|<ul><li> Wasn't originally designed for web scraping</li><li>Slower than HTTP requests</li></ul>|
+|**Requests**|<ul><li>Low overhead</li><li>Makes simplified HTTP requests that are fast and use smaller amounts of data</li><li>Can query databases and web pages</li></ul>|<ul><li>Not very user friendly</li></ul>|
+
+Justification: Using requests was a much easier option, despite Scrapy being much faster, and Selenium being able to work with the JavaScript used on the ProMedMail.org site. Being able to access the AJAX data of the website, we were able to use requests with much more efficiency.
+
+#### Online Backend
+|Backend|Pros|Cons|
+|----------|------|------|
+|**AWS Lambda**|<ul><li>Reduced cost of execution - only pay for computing costs</li><li>Improved resiliency - code is more resilient under load</li></ul>|<ul><li>No control over environment - unable to install packages or software on the environment</li><li>More complex call patterns - functions are timeboxed with timeouts</li></ul>|
+|AWS Elastic Beanstalk|<ul><li>Completely automatic</li><li>Well integrated with AWS services</li><li>Good technical support from docs</li></ul>|<ul><li>Troubleshooting is difficult - unable to see where errors occur</li></ul>|
+
+Justification: As mentioned above, we had chosen to use the AWS RDS as our form of database hosting, and as a result, we had two main choices between AWS Lambda, and AWS Elastic Beanstalk. Elastic Beanstalk was our first choice, as it has the ability to upload whole packages of code, have it run on a preconfigured server, and has a fairly long free trial. However, due to problems regarding configuration, we had decided to abandon Elastic Beanstalk and use Lambda instead, further can be read here: INSERT LINK TO CHALLENGES AND SHORTCOMINGS. 
+
+#### Database Management System
+|DBMS|Pros|Cons|
+|----------|------|------|
+|**MySQL**|<ul><li>Support for multi-user features</li><li>Simple read-heavy operations</li><li>Simple to install and use with broad community</li></ul>|<ul><li>Moves old data to rollback segments, performance is impacted with bulk INSERTs</li><li>Does not work well with long-running SELECTs</li><li>Lack of full-text search and slow concurrent read-writes</li></ul>|
+|PostgreSQL|<ul><li>Parallel processing capability - can run long SELECTs unlike MySQL</li><li>Multi-user features</li></ul>|<ul><li>Storage engine needs extensive work</li><li>More power hungry</li></ul>|
+|SQLite|<ul><li>Small footprint - compact with library under 600KB</li><li>Cache data from client/server locally</li></ul>|<ul><li>Lack of multi-user capabilities</li><li>Is file-based, can cause issues with larger datasets</li></ul>|
+
+Justification: Despite the parallel processing capability of PostgreSQL, we had chosen to use MySQL as it was more familiar to us as a group. It would also be more time efficient, as members already had knowledge on how to set up MySQL databases, whereas precious time to learn to set up PostgreSQL would be wasted.
+
+#### Database Hosting
+|SQL DB|Pros|Cons|
+|----------|------|------|
+|**AWS RDS**|<ul><li>is cheaper because of its simplicity and lower scaling capabilities</li><li>no significant application changes are required </li></ul>|<ul><li>lower scaling capabilities</li><li>Shell access to the underlying operating system is disabled</li><li>access to MySQL user accounts with "SUPER" privilege isn't allowed</li></ul>|
+|AWS Aurora|<ul><li>with Aurora there is no need for capacity planning. Aurora storage will automatically grow, from the minimum of 10 GB up to 64 TiB</li><li>With Aurora, you can provision up to fifteen replicas compared to just five in RDS MySQL</li></ul>|<ul><li>There is a big performance penalty in workloads where heavy writes that update secondary indexes are performed</li><li>Aurora Serverless is better for dev environments or systems which are needed for just a few hours/day or a short period of time</li><li>Aurora instances will cost you ~20% more than RDS MySQL. </li></ul>|
+|AWS Redshift|<ul><li>Very strong load control</li><li>Petabyte scale data storage</li></ul>|<ul><li>Pricing is relatively very expensive</li><li>High maintenance because of its complex architecture</li><li>Redshift needs some administrative tasks to be executed manually by the cluster administrator. </li><li>Relatively slow results</li></ul>|
+
+Justification: Our group had chosen RDS as it was the cheapest option, where Aurora instances would cost 20% more than RDS, and Redshift prices would be very expensive, despite there being a free trial. Redshift seems to require high maintenance and has slow results, so choosing RDS was our best option.
+
+#### Testing
+|Testing Tool|Pros|Cons|
+|----------|------|------|
+|**PyTest**|<ul><li>Prior experience</li><li>Intuitive yet flexible with decorators</li><li>Is actively developed and maintained. </li><li>It is compatible with both unittest and nose test suites</li><li>Has built-in test discovery </li><li>Has a large number of plugins available for use</li></ul>|<ul><li>Low compatibility with testing frameworks outside of the mentioned ones</li></ul>|
+|Robot|<ul><li>Simple to use</li><li>Fast to write</li><li>Extendable</li><li>Open Source</li><li>Good for testing networked applications</li></ul>|<ul><li>Large overhead</li><li>Low Flexibility</li></ul>|
+|unittest|<ul><li>Comes with Python</li></ul>|<ul><li>Simple. Very basic</li></ul>|
+|DocTest|<ul><li>Comes with Python</li><li>Doctests often contain usage examples</li><li>You use the API of your code in the doctest before you actually use it for real</li></ul>|<ul><li>You can't run a subset of the tests.</li><li>If a failure happens in the middle of the doctest, the whole thing stops.</li><li>The coding style is stylized, and has to have printable results.</li><li>Your code is executed in a special way, so it's harder to reason about how it will be executed, harder to add helpers, and harder to program around the tests</li></ul>|
+
+Justification: We had chosen to use PyTest as we all had experience using it during previous software engineering courses.
+
+### Challenges Addressed and Shortcomings <a name="challenges"></a>
+
+#### Multiple Reports per Article
+
+One of the challenges we faced during the development of the API was how to store and process reports which have multiple locations, diseases and syndromes. Initially our solution involved having a Reports table that stored everything (locations, diseases, syndromes, keywords). However, we soon realised that this would result in multiple rows of the same report with the only difference being one disease, one syndrome, one location, or one keyword. To reduce the amount of redundant data we had to store, we decided to create joining tables Report_Locations, Report_Diseases, Report_Syndromes, and Report_Keywords which would only require us to store the ReportID and the other corresponding Id, reducing the amount of data we had to store. Additionally, these tables allow for flexibility in the future as it provides an easy way to isolate one field of a report. The shortcoming or downside associated with this is that it may result in slower performance as more joins are required, however, we did not see this as a significant issue as speed is not required for the purpose of our API as long as the request could be processed in a reasonable amount of time.
+
+Furthermore, to properly generate multiple reports for a given article would involve natural text processing. This is not a feasible task to achieve on upwards of 20,000 individual articles, let alone write a script that could achieve this in a timely manner. Hence we had to look at other methods of generating reports from articles and collecting information about them.This lead to large amounts of problem solving that culminated in our final architecture and scraper operation.
+
+#### Publishing the API
+
+Our team encountered multiple issues while attempting to deploy the API publicly. Our initial plan was to create the API using Flask, and deploy it completely on AWS Elastic Beanstalk. The promises of using Elastic Beanstalk looked enticing - the ability to upload whole packages of code, have it run on a preconfigured server, and a fairly long free trial. However, like a mirage these hopes faded quickly when we ran into numerous issues configuring environment variables, importing external packages and even getting Elastic Beanstalk to identify our main file. When these issues were compounded with the inability to change code in any way other than completely reuploading the whole codebase, several minute long deployment times and a lack of documentation, we gave up on Elastic Beanstalk and looked to another Amazon Webservice, Lambda. We had previously experimented with Lambda in case we ran into issues with Elastic Beanstalk, so we were able to get Lambda working quickly enough to show off an example endpoint for our week five mentor session. We also found that during the switch to Lambda, it was easier to manually direct code to the appropriate endpoints (Using Amazon's API Gateway) than it was to figure out how to integrate Flask, and so the use of Flask was dropped when deploying to Lambda. This, along with a reorganisation of functions, is why we have included a zipped version of the code published to Lambda in our git repository, under the paths "Phase_1/API_SourceCode/lambda_endpoints.zip" and "Phase_1/API_SourceCode/lambda_database_updater.zip." This code integrates with Amazon's API Gateway and environment to receive event information and redirect it to the appropriate functions.

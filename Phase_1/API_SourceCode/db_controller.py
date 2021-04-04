@@ -101,14 +101,14 @@ def getSyndromeId(db, name):
             return result[0]
 
 def getKeywordId(db, name):
-    with db.cursor() as cursor:
-        query = f'SELECT KeywordID FROM Keywords WHERE Keyword = "{name.lower()}"'
-        cursor.execute(query)
-        result = cursor.fetchone()
-        if result is None:
-            return None
-        else:
-            return result[0]
+    cursor = db.cursor()
+    query = f'SELECT KeywordID FROM Keywords WHERE Keyword = "{name.lower()}"'
+    cursor.execute(query)
+    result = cursor.fetchone()
+    if result is None:
+        return None
+    else:
+        return result[0]
 
 def writeToDB(jsonResponse):
     insertLocations(jsonResponse)
@@ -249,3 +249,54 @@ def reportToDB(dbConnection, articleID, diseaseType, eventDate, locationID, symp
         cursor.execute(query4, data4)
     
     dbConnection.commit()
+
+def keywordAddition():
+    db = getDbConnection()
+    cursor = db.cursor()
+
+    with open('Phase_1/API_SourceCode/jsonFiles/keyword_list.json', 'r') as f:
+        keywords = json.load(f)
+        results = []
+        for keyword in keywords:
+            if getKeywordId(db, keyword["name"]) is None:
+                results.append((keyword["name"].lower(),))
+        query = "INSERT INTO Keywords (Keyword) VALUE (%s)"
+        cursor.executemany(query, results)
+        db.commit()
+    
+    
+    query1 = "SELECT Keyword FROM Keywords"
+    query2 = """
+        SELECT ReportID 
+        FROM Reports 
+        WHERE Reports.ArticleID in (
+            SELECT ArticleID 
+            FROM Articles 
+            WHERE LOWER(MainText) LIKE %s
+        );
+    """
+    query3 = """
+        INSERT IGNORE INTO 
+        Report_Keywords(ReportID, KeywordID)
+        VALUES (%s, (SELECT KeywordID FROM Keywords WHERE Keywords.Keyword = %s))
+    """
+
+    cursor.execute(query1)
+    kwords = [row[0] for row in cursor.fetchall()]
+
+    for kword in kwords:
+        if kword == "myster(ious)y disease":
+            data2 = ("%"+"mysterious"+"%", )
+        else:
+            data2 = ("%"+kword+"%", )
+        cursor.execute(query2, data2)
+        reportIDs = [row[0] for row in cursor.fetchall()]
+        for reportID in reportIDs:
+            cursor.execute(query3, (reportID, kword, ))
+    
+    db.commit()
+    db.close()
+        
+
+if __name__ == "__main__":
+    keywordAddition() 

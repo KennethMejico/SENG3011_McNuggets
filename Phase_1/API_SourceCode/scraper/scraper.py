@@ -224,7 +224,7 @@ class Scraper:
             return
         contents = jsonResponse['contents']
         today = Date.today()
-        twoDaysAgo = today + relativedelta(day=-2)
+        twoDaysAgo = today + relativedelta(days=-2)
         for key in sorted(contents):
             markerID = key
             db_controller.markerToDB(dbConn, markerID, jsonResponse['markers'][markerID])
@@ -344,4 +344,4 @@ class Scraper:
 if __name__ == "__main__":
     # Testing
     sc = Scraper()
-    sc.run()
+    sc.update()

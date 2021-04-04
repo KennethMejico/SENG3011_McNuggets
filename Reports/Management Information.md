@@ -6,6 +6,8 @@
   3. [Team Coordination](#teamcoord)
   4. [Meeting Logs](#mlogs)
   5. [Project Planning](#projplan)
+* [Deliverable 2](#deliverable2)
+  1. [Management Issues](#maniss)
 ## Deliverable 1 🍟 <a name="deliverable1"></a>
 For deliverable 1, we had initially sorted out meeting times that we could use for peer programming, standups, admin work, questions, and other miscellaneous enquiries. These meeting times are as follows (flexible and are subject to change):
 * Tuesday 13:00 - 14:20
@@ -48,3 +50,7 @@ For our own convenience, we have created team meeting logs that can be found [he
 In order to stay organised, we have created a gantt chart that roughly outlines important deadlines and our time management plan for each deliverable:
 
 ![SENG3011 Gantt Chart (1)](https://user-images.githubusercontent.com/53299898/109443085-c7714a00-7a8d-11eb-8ce7-05bab485e1a7.png)
+
+## Deliverable 2 🍟 <a name="deliverable2"></a>
+### Management Issues: <a name="maniss"></a>
+During the middle of deliverable 2, one of our members, Vicknesh, had chosen to drop the course and was initially part of API development. As a result, Kenneth had taken his place, and the entire workload of the project felt much heavier without an integral member. The deadline extension did help in alleviating this pressure, but the project would have definitely benefitted with Vicknesh's presence.
