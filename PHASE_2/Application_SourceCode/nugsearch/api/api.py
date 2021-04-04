@@ -11,7 +11,9 @@ def currentLocation():
 
 @app.route('/search')
 def search():
-    return {}
+    return {
+        "result": "Test result"
+    }
 
 @app.route('/getAlert')
 def getAlert():

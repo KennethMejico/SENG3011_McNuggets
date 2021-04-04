@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import nugLogo from './nugSearchLogo300.png'
 import Search from './Search.js'
 import './App.css';

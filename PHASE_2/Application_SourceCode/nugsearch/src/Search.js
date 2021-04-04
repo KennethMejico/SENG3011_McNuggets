@@ -1,39 +1,67 @@
 import React from 'react';
+import nugLogo from './nugSearchLogo300.png'
 import './Search.css'
 
 class Search extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: ''
+            keywords: '',
+            location: '',
+            fromDate: '',
+            toDate: ''
         };
-        this.handleChange = this.handleChange.bind(this);
+        this.changeKeywords = this.changeKeywords.bind(this);
+        this.changeLocation = this.changeLocation.bind(this);
+        this.changeFromDate = this.changeFromDate.bind(this);
+        this.changeToDate = this.changeToDate.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleChange(event) {
-        this.setState({value: event.target.value});
+    changeKeywords(keywords) {
+        this.setState({keywords: keywords})
+    }
+
+    changeLocation(location) {
+        this.setState({location: location})
+    }
+
+    changeFromDate(fromDate) {
+        this.setState({fromDate: fromDate})
+    }
+
+    changeToDate(toDate) {
+        this.setState({toDate: toDate})
+    }
+
+    setLocation = (location) => {
+        this.setState({
+            location: location
+        })
     }
 
     handleSubmit(event) {
-        alert('A name was submitted: ' + this.state.value);
+        fetch('/search')
+        .then(res => res.json())
+        .then(data => {
+            alert("recieved: " + data.result)
+        });
         event.preventDefault();
-    }
-
-    getSubparts = () => {
-
     }
 
     render() {
       return (
         <div>
-            <KeywordForm />
+            <h1><img src={nugLogo} alt="logo" className="MediumLogo"/>NugSearch</h1>
+            <h2>Find the latest news about disease reports in your area</h2>
+            <KeywordForm onChange={this.changeKeywords} keywords={this.state.keywords}/>
             <p />
-            <LocationForm />
+            <LocationForm onChange={this.changeLocation} setLocation={this.setLocation} location={this.state.location}/>
             <p />
-            <DateForm />
+            <DateForm onFromChange={this.changeFromDate} onToChange={this.changeToDate}
+                        fromDate={this.state.fromDate} toDate={this.state.toDate}/>
             <p />
-            <form onSubmit={this.getSubparts}>
+            <form onSubmit={this.handleSubmit}>
                 <input type="submit" value="Submit"/>
             </form>
         </div>
@@ -44,27 +72,18 @@ class Search extends React.Component {
 class KeywordForm extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            value: ''
-        };
         this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleChange(event) {
-        this.setState({value: event.target.value});
-    }
-
-    handleSubmit(event) {
-        alert(this.state.value + "was entered");
-        event.preventDefault();
+        this.props.onChange(event.target.value);
     }
 
     render() {
       return (
         <form>
             <label>
-                <input type="text" value={this.state.value} onChange={this.handleChange} className="KeywordText" placeholder="Search for keywords"/>
+                <input type="text" value={this.props.keywords} onChange={this.handleChange} className="KeywordText" placeholder="Search for keywords"/>
             </label>
         </form>
       );
@@ -74,27 +93,18 @@ class KeywordForm extends React.Component {
 class LocationForm extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            value: ''
-        };
         this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleChange(event) {
-        this.setState({value: event.target.value});
-    }
-
-    handleSubmit(event) {
-        alert(this.state.value + "was entered");
-        event.preventDefault();
+        this.props.onChange(event.target.value);
     }
 
     setDefaultLocation = () => {
         fetch('/currentLocation')
         .then(res => res.json())
         .then(data => {
-            this.setState({value: data.location})
+            this.props.setLocation(data.location)
         });
     }
 
@@ -105,7 +115,7 @@ class LocationForm extends React.Component {
                 <label>
                     Location:
                 </label>
-                <input type="text" value={this.state.value} onChange={this.handleChange} className="LocationText" placeholder="Choose a location"/>
+                <input type="text" value={this.props.location} onChange={this.handleChange} className="LocationText" placeholder="Choose a location"/>
             </form>
             <form>
                 <label>
@@ -121,20 +131,16 @@ class LocationForm extends React.Component {
 class DateForm extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            value: ''
-        };
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleFromChange = this.handleFromChange.bind(this);
+        this.handleToChange = this.handleToChange.bind(this);
     }
 
-    handleChange(event) {
-        this.setState({value: event.target.value});
+    handleFromChange(event) {
+        this.props.onFromChange(event.target.value);
     }
 
-    handleSubmit(event) {
-        alert(this.state.value + "was entered");
-        event.preventDefault();
+    handleToChange(event) {
+        this.props.onToChange(event.target.value);
     }
 
     render() {
@@ -144,13 +150,13 @@ class DateForm extends React.Component {
                 <label>
                     Date Range:
                 </label>
-                <input type="text" value={this.state.value} onChange={this.handleChange} className="DateText" placeholder="yyyy-mm-ddThh:mm:ss"/>
+                <input type="text" value={this.props.fromDate} onChange={this.handleFromChange} className="DateText" placeholder="yyyy-mm-ddThh:mm:ss"/>
             </form>
             <form>
                 <label>
                     -
                 </label>
-                <input type="text" value={this.state.value} onChange={this.handleChange} className="DateText" placeholder="yyyy-mm-ddThh:mm:ss"/>
+                <input type="text" value={this.props.toDate} onChange={this.handleToChange} className="DateText" placeholder="yyyy-mm-ddThh:mm:ss"/>
             </form>
         </div>
       );
