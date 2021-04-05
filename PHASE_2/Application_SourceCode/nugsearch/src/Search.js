@@ -51,7 +51,7 @@ class Search extends React.Component {
 
     render() {
       return (
-        <div>
+        <div className="SearchApp">
             <h1><img src={nugLogo} alt="logo" className="MediumLogo"/>NugSearch</h1>
             <h2>Find the latest news about disease reports in your area</h2>
             <KeywordForm onChange={this.changeKeywords} keywords={this.state.keywords}/>
