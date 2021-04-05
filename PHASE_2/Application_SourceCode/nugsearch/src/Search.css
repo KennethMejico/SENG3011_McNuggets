@@ -1,3 +1,14 @@
+.SearchApp {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.83), rgba(0, 0, 0, 0.83)), url(nuggetsBackground.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    text-align: center;
+    height: 100vh;
+    overflow: hidden;
+    width: 100%;
+}
+
 .KeywordText {
     width: 670px;
     padding: 5px;

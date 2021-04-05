@@ -1,14 +1,15 @@
 .Background {
-    position: relative;
+    height: 100vh;
+    overflow: hidden;
     width: 100%;
-    height: 100%;
-    overflow: auto;
-
-    background: #FFF9F4;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.66), rgba(0, 0, 0, 0.66)), url(COVID-19-1080x515.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .Heading {
-    position: absolute;
+    display: block;
     width: 100%;
     height: 134.38px;
     top: 30px;
@@ -17,21 +18,12 @@
     font-style: normal;
     font-weight: 500;
     font-size: 56px;
-    line-height: 66px;
+    /* /*line-height: 66px; */
     text-align: center;
 
-    color: #333333;
+    color: #ffffff;
 
     opacity: 0.9;
-}
-
-.CovidImage {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    padding-top: 180px;
-    width: 70%;
-    height: 462px;
 }
 
 .AlertText {
@@ -50,14 +42,21 @@
     text-align: justify;
     font-feature-settings: 'cpsp' on, 'ss01' on, 'ss02' on, 'ss05' on, 'ss06' on, 'ss07' on, 'kern' off, 'liga' off;
 
-    color: #000000;
+    color: #ffffff;
 
-    padding-top: 50px;
-    padding-bottom: 100px;
+    /*padding-top: 50px;
+    padding-bottom: 100px;*/
+}
+
+.OtherAlerts {
+    background-color: #111111;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
 }
 
 .OtherHeading {
-    position: absolute;
     width: 100%;
     height: 34px;
 
@@ -72,7 +71,7 @@
 
     color: #000000;
 
-    padding-bottom: 200px;
+    /*padding-bottom: 200px;*/
 }
 
 .Divider {
@@ -85,8 +84,7 @@
     border: 1px solid #000000;
 }
 
-/* .Alert1 {
-    position: absolute;
+.Alert1 {
     width: 304px;
     height: 176px;
     left: 230px;
@@ -95,7 +93,6 @@
 }
 
 .Alert2 {
-    position: absolute;
     width: 304px;
     height: 176px;
     left: 565px;
@@ -104,13 +101,12 @@
 }
 
 .Alert3 {
-    position: absolute;
     width: 304px;
     height: 176px;
     left: 900px;
-    padding-top: 150px;    
+    padding-top: 150px;
     padding-bottom: 100px;
-} */
+}
 
 .row {
     padding-top: 100px;
