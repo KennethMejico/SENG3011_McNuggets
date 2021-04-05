@@ -21,11 +21,11 @@ def currentLocation():
 
 @app.route('/search')
 def search():
-    reqURL = ""
     location = ""
     dateStart = ""
     dateEnd = ""
     kwords = ""
+    reqURL = ""
     return {
         "result": "Test result"
     }
