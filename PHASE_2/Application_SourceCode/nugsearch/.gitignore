@@ -24,3 +24,6 @@ yarn-error.log*
 
 # flask
 __pycache__
+
+apiKey.py
+tempnotes.txt

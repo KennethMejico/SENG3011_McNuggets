@@ -101,11 +101,27 @@ class LocationForm extends React.Component {
     }
 
     setDefaultLocation = () => {
-        fetch('/currentLocation')
-        .then(res => res.json())
-        .then(data => {
-            this.props.setLocation(data.location)
-        });
+        let temp = this;
+        let latitude=null;
+        let longitude=null;
+        navigator.geolocation.getCurrentPosition(
+            function(position) {
+                latitude = position.coords.latitude;
+                longitude = position.coords.longitude;
+                console.log("Lat = "+ latitude + " &lon = " + longitude)
+                fetch('/currentLocation?lat='+latitude+'&lon='+longitude)
+                .then(res => res.json())
+                .then(data => {
+                    //console.log(data)
+                    temp.props.setLocation(data.location)
+                });
+            },
+            function(error) {
+                console.error("Error Code = " + error.code + " - " + error.message);
+                alert("User has disabled location");
+                return;
+            }
+        );
     }
 
     render() {
