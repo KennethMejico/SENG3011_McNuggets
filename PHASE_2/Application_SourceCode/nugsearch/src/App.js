@@ -24,8 +24,8 @@ function App() {
               <li className="NavBarLi"><Link to="/about">About</Link></li>
               <li className="NavBarLi"><Link to="/contact">Contact</Link></li>
               <li className="NavBarLi"><Link to="/alerts">Alerts</Link></li>
-              <li className="NavBarLi"><Link to="/map">Map</Link></li>
-              <li className="NavBarLi"><Link to="/graph">Graph</Link></li>
+              {/*<li className="NavBarLi"><Link to="/map">Map</Link></li>
+              <li className="NavBarLi"><Link to="/graph">Graph</Link></li>*/}
             </ul>
           </nav>
 

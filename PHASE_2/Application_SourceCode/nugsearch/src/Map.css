@@ -9,5 +9,10 @@
 }
 
 .ResultImage {
-    height: 80%;
+    height: 70%;
+}
+
+/* very temporary for demo */
+a {
+    color: #38b6ff
 }
