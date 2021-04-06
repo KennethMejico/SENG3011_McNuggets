@@ -1,0 +1,13 @@
+.ResultBackground {
+    height: 100vh;
+    overflow: hidden;
+    width: 100%;
+    background-color: #181716;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.ResultImage {
+    height: 80%;
+}
