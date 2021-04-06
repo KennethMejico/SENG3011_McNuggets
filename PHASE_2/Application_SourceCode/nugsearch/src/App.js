@@ -1,6 +1,7 @@
 import nugLogo from './nugSearchLogo300.png'
 import Search from './Search.js'
 import Alert from './Alert.js'
+import AlertBadges from './AlertBadges.js'
 import Map from './Map.js'
 import Graph from './Graph.js'
 import './App.css';
@@ -29,11 +30,16 @@ function App() {
             </ul>
           </nav>
 
+          {/* Will be here later <AlertBadges />*/}
+
           <Switch>
+
             <Route path="/about">
+              <AlertBadges />
               <About />
             </Route>
             <Route path="/contact">
+              <AlertBadges />
               <Contact />
             </Route>
             <Route path="/alerts">
@@ -46,6 +52,7 @@ function App() {
               <Graph />
             </Route>
             <Route path="/">
+              <AlertBadges />
               <Home />
             </Route>
           </Switch>
