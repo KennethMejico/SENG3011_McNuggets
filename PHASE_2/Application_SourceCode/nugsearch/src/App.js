@@ -1,6 +1,7 @@
 import nugLogo from './nugSearchLogo300.png'
 import Search from './Search.js'
 import Alert from './Alert.js'
+import AlertBadges from './AlertBadges.js'
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -25,13 +26,10 @@ function App() {
             </ul>
           </nav>
 
-          {fetch('/getAlerts').then(res => res.json()).then(data => {
-            Object.keys(data.alerts).map((alert) => (
-              AlertBadge(alert)
-            ))
-          })}
+          <AlertBadges />
 
           <Switch>
+
             <Route path="/about">
               <About />
             </Route>
@@ -66,14 +64,6 @@ function Contact() {
 
 function Alerts() {
   return <Alert />;
-}
-
-function AlertBadge(alert) {
-  return (
-    <div>
-
-    </div>
-  );
 }
 
 export default App;
