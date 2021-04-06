@@ -25,6 +25,12 @@ function App() {
             </ul>
           </nav>
 
+          {fetch('/getAlerts').then(res => res.json()).then(data => {
+            Object.keys(data.alerts).map((alert) => (
+              AlertBadge(alert)
+            ))
+          })}
+
           <Switch>
             <Route path="/about">
               <About />
@@ -60,6 +66,14 @@ function Contact() {
 
 function Alerts() {
   return <Alert />;
+}
+
+function AlertBadge(alert) {
+  return (
+    <div>
+
+    </div>
+  );
 }
 
 export default App;
