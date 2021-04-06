@@ -1,5 +1,6 @@
 import React from 'react';
 import './AlertBadges.css'
+import { withRouter } from 'react-router-dom';
 
 class AlertBadges extends React.Component {
     constructor(props) {
@@ -15,8 +16,8 @@ class AlertBadges extends React.Component {
         })
     }
 
-    navigateToPage(event) {
-        console.log(event.target.dataset.alertname);
+    navigateToPage = (event) => {
+        this.props.history.push('/alerts?' + event.target.dataset.alertname);
     }
 
     AlertBadge(alert) {
@@ -39,4 +40,4 @@ class AlertBadges extends React.Component {
     }
 }
 
-export default AlertBadges;
+export default withRouter(AlertBadges);

@@ -30,14 +30,16 @@ function App() {
             </ul>
           </nav>
 
-          <AlertBadges />
+          {/* Will be here later <AlertBadges />*/}
 
           <Switch>
 
             <Route path="/about">
+              <AlertBadges />
               <About />
             </Route>
             <Route path="/contact">
+              <AlertBadges />
               <Contact />
             </Route>
             <Route path="/alerts">
@@ -50,6 +52,7 @@ function App() {
               <Graph />
             </Route>
             <Route path="/">
+              <AlertBadges />
               <Home />
             </Route>
           </Switch>
