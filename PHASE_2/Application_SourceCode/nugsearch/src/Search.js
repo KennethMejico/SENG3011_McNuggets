@@ -1,6 +1,7 @@
 import React from 'react';
 import nugLogo from './nugSearchLogo300.png'
 import './Search.css'
+import { withRouter } from 'react-router-dom';
 
 class Search extends React.Component {
     constructor(props) {
@@ -44,9 +45,10 @@ class Search extends React.Component {
         fetch('/search')
         .then(res => res.json())
         .then(data => {
-            alert("recieved: " + data.result)
+            //alert("recieved: " + data.result)
         });
         event.preventDefault();
+        this.props.history.push('/map');
     }
 
     render() {
@@ -163,4 +165,4 @@ class DateForm extends React.Component {
     }
 }
 
-export default Search;
+export default withRouter(Search);
