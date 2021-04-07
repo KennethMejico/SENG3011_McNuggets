@@ -10,6 +10,8 @@
   3. [API Documentation](#apidoc)
   4. [API Implementation](#apiimp)
 * [Deliverable 3](#deliverable3)
+* [Deliverable 4](#deliverable4)
+
 ## Project Overview 🍟 <a name="projoverview"></a>
 Ever since COVID-19's breakout, more awareness and emphasis has been placed on the effectiveness of communication and knowledge of disease and outbreaks. The **McNuggets** aim to to develop a platform that would contribute to an alert society with complete access to vital health information. This platform will automate the extraction of data from available sources in order to produce the following information for the public:
 * Outbreak alerts: Important notifications regarding outbreaks of a new disease, existing disease in a new area, etc.
@@ -53,3 +55,7 @@ A complete guide to our testing methodology can be found here: [Testing Document
 Our API Documentation was completed on Stoplight, and can be found here: [McNuggets Stoplight](https://unsw-seng-mcnuggets.stoplight.io/docs/seng3011-mcnuggets)
 ### API Implementation <a name="apiimp"></a>
 The API has been implemented on AWS Lambda, and can be called using our Stoplight's try it out feature. Log files have also been implemented, including details such as team name, accessed time, and data source.
+
+## Deliverable 3 <a name="deliverable3"></a>
+
+## Deliverable 4 <a name="deliverable4"></a>
