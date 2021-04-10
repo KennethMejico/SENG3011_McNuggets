@@ -24,25 +24,23 @@ function App() {
               <li className="NavBarLi"><Link to="/">Home</Link></li>
               <li className="NavBarLi"><Link to="/about">About</Link></li>
               <li className="NavBarLi"><Link to="/contact">Contact</Link></li>
-              <li className="NavBarLi"><Link to="/alerts">Alerts</Link></li>
+              <li className="NavBarLi"><Link to="/alerts/default">Alerts</Link></li>
               {/*<li className="NavBarLi"><Link to="/map">Map</Link></li>
               <li className="NavBarLi"><Link to="/graph">Graph</Link></li>*/}
             </ul>
           </nav>
 
-          {/* Will be here later <AlertBadges />*/}
+          <AlertBadges />
 
           <Switch>
 
             <Route path="/about">
-              <AlertBadges />
               <About />
             </Route>
             <Route path="/contact">
-              <AlertBadges />
               <Contact />
             </Route>
-            <Route path="/alerts">
+            <Route path="/alerts/:alert">
               <Alerts />
             </Route>
             <Route path="/map">
@@ -52,7 +50,6 @@ function App() {
               <Graph />
             </Route>
             <Route path="/">
-              <AlertBadges />
               <Home />
             </Route>
           </Switch>

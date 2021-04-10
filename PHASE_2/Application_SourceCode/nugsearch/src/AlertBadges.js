@@ -17,7 +17,7 @@ class AlertBadges extends React.Component {
     }
 
     navigateToPage = (event) => {
-        this.props.history.push('/alerts?' + event.target.dataset.alertname);
+        this.props.history.push('/alerts/' + event.target.dataset.alertname);
     }
 
     AlertBadge(alert) {
