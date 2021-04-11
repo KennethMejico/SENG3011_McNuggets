@@ -11,20 +11,29 @@ class AlertBadges extends React.Component {
     }
 
     componentDidMount() {
+        alert = this.props.match.params.alert;
         fetch('/getAlerts').then(res => res.json()).then(data => {
+            var index = data.alerts.indexOf(alert);
+            if (index !== -1) {
+                data.alerts.splice(index, 1);
+            }
             this.setState({alerts: data.alerts});
         })
     }
 
+    componentDidUpdate() {
+        this.componentDidMount();
+    }
+
     navigateToPage = (event) => {
-        this.props.history.push('/alerts?' + event.target.dataset.alertname);
+        this.props.history.push('/alerts/' + event.target.dataset.alertname);
+        this.setState({alerts: []});
     }
 
     AlertBadge(alert) {
         return (
             <div className="AlertBadge" key={alert} data-alertname={alert} onClick={this.navigateToPage}>
-                <p>OUTBREAK OF {alert.toUpperCase()}</p>
-                <p>COULD LEAD TO LOCKDOWN</p>
+                OUTBREAK OF {alert.toUpperCase()} COULD LEAD TO LOCKDOWN
             </div>
         );
     }

@@ -1,4 +1,5 @@
 import React from 'react'
+import { useParams, withRouter } from 'react-router';
 import './Alert.css'
 
 //import alertImg from './Health-alert.png'
@@ -12,30 +13,29 @@ class Alert extends React.Component {
             alertTitle: "",
             alertText: ""
         }
+    }
 
+    componentDidMount() {
         fetch('/getAlerts').then(res => res.json()).then(data => {
             if (data.alerts.length === 0) {
                 this.setState({alertTitle: "None"});
-                /*this.state = {
-                    alertTitle: "None",
-                    alertText: "No lockdowns seem imminent"
-                }*/
             }
             else {
-                fetch("/getAlertDescription?name=" + data.alerts[0])
+                alert = this.props.match.params.alert;
+                fetch("/getAlertDescription?name=" + alert)
                 .then(res => res.json())
                 .then(data => {
                     this.setState({
                         alertTitle: data.title,
                         alertText: data.text
                     })
-                    /*this.state = {
-                        alertTitle: data.title,
-                        alertText: data.text
-                    }*/
                 });
             }
         });
+    }
+
+    componentDidUpdate() {
+        this.componentDidMount();
     }
 
     render() {
@@ -67,4 +67,4 @@ class Alert extends React.Component {
             </div>
 */
 
-export default Alert;
+export default withRouter(Alert);
