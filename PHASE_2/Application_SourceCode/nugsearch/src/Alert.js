@@ -13,16 +13,15 @@ class Alert extends React.Component {
             alertTitle: "",
             alertText: ""
         }
+    }
 
+    componentDidMount() {
         fetch('/getAlerts').then(res => res.json()).then(data => {
             if (data.alerts.length === 0) {
                 this.setState({alertTitle: "None"});
             }
             else {
                 alert = this.props.match.params.alert;
-                if (alert == "default") {
-                    alert = data.alerts[0];
-                }
                 fetch("/getAlertDescription?name=" + alert)
                 .then(res => res.json())
                 .then(data => {
@@ -33,6 +32,10 @@ class Alert extends React.Component {
                 });
             }
         });
+    }
+
+    componentDidUpdate() {
+        this.componentDidMount();
     }
 
     render() {
