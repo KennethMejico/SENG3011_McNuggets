@@ -19,7 +19,7 @@ def search():
 def getAlerts():
     return {
         # Can't have spaces in these names
-        "alerts": ["Covid-19", "BlackDeath"]
+        "alerts": ["Covid-19", "BlackDeath", "Rabies"]
     }
 
 @app.route('/getAlertDescription')
