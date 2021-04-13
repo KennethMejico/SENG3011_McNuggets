@@ -21,13 +21,15 @@ def currentLocation():
 
 @app.route('/search')
 def search():
-    location = ""
-    dateStart = ""
-    dateEnd = ""
-    kwords = ""
-    reqURL = ""
+    startDate = request.args.get("startDate")
+    endDate = request.args.get("endDate")
+    keywords = request.args.get("keywords")
+    location = request.args.get("location")
     return {
-        "result": "Test result"
+        "startDate": startDate,
+        "endDate": endDate,
+        "keywords": keywords,
+        "location": location
     }
 
 @app.route('/getAlerts')
