@@ -16,12 +16,15 @@ class Alert extends React.Component {
     }
 
     componentDidMount() {
+        this.getAlertInfo(this.props.match.params.alert);
+    }
+
+    getAlertInfo(alert) {
         fetch('/getAlerts').then(res => res.json()).then(data => {
             if (data.alerts.length === 0) {
                 this.setState({alertTitle: "None"});
             }
             else {
-                alert = this.props.match.params.alert;
                 fetch("/getAlertDescription?name=" + alert)
                 .then(res => res.json())
                 .then(data => {
@@ -34,8 +37,8 @@ class Alert extends React.Component {
         });
     }
 
-    componentDidUpdate() {
-        this.componentDidMount();
+    componentWillReceiveProps(nextProps) {
+        this.getAlertInfo(nextProps.match.params.alert);
     }
 
     render() {
