@@ -10,9 +10,11 @@
 
 .Heading {
     display: block;
-    width: 100%;
+    width: 50%;
     height: 134.38px;
     top: 30px;
+    margin-left: auto;
+    margin-right: auto;
 
     font-family: Roboto;
     font-style: normal;
