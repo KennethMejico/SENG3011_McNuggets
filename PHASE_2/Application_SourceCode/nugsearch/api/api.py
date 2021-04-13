@@ -11,6 +11,7 @@ def currentLocation():
     print ("Location Request :)")
     lat = request.args['lat']
     lon = request.args['lon']
+    key = ""
     reqURL = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + str(lat) + "," + str(lon) + "&key=" + key + "&location_type=APPROXIMATE"
     response = requests.get(reqURL)
     resJSON = response.json()
@@ -25,12 +26,11 @@ def search():
     endDate = request.args.get("endDate")
     keywords = request.args.get("keywords")
     location = request.args.get("location")
-    return {
-        "startDate": startDate,
-        "endDate": endDate,
-        "keywords": keywords,
-        "location": location
-    }
+
+    url = f"http://52.15.58.197:8000/v1/articles?start={startDate}&end={endDate}&keywords={keywords}&location={location}"
+    response = requests.get(url)
+    print(response.json())
+    return response.json()
 
 @app.route('/getAlerts')
 def getAlerts():

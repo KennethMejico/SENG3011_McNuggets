@@ -44,7 +44,7 @@ class Search extends React.Component {
     }
 
     handleSubmit(event) {
-        fetch(`/search?startDate=${this.state.fromDate}&endDate=${this.state.toDate}&keywords=${this.state.keywords}&location=${this.state.location}`)
+        fetch(`/search?startDate=${this.state.fromDate.toISOString()}&endDate=${this.state.toDate.toISOString()}&keywords=${this.state.keywords}&location=${this.state.location}`)
         .then(res => res.json())
         .then(data => {
             console.log(data)

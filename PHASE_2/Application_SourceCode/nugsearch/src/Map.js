@@ -15,7 +15,7 @@ class Map extends React.Component {
         <div>
             <div className="ResultBackground">
                 <h2>Map: COVID19 Results in World Between 01/01/2021 and 01/04/2021</h2>
-                <img src={mapImage} alt="img" class="ResultImage"/>
+                <img src={mapImage} alt="img" className="ResultImage"/>
                 <p />
                 <a href="/graph">See Graph</a>
             </div>
