@@ -4,6 +4,14 @@
 * [Deliverable 1](#deliverable1)
   1. [Design Details](#designdetails)
   2. [Management Information](#maninfo)
+* [Deliverable 2](#deliverable2)
+  1. [API Design Details](#apides)
+  2. [API Testing](#apites)
+  3. [API Documentation](#apidoc)
+  4. [API Implementation](#apiimp)
+* [Deliverable 3](#deliverable3)
+* [Deliverable 4](#deliverable4)
+
 ## Project Overview 🍟 <a name="projoverview"></a>
 Ever since COVID-19's breakout, more awareness and emphasis has been placed on the effectiveness of communication and knowledge of disease and outbreaks. The **McNuggets** aim to to develop a platform that would contribute to an alert society with complete access to vital health information. This platform will automate the extraction of data from available sources in order to produce the following information for the public:
 * Outbreak alerts: Important notifications regarding outbreaks of a new disease, existing disease in a new area, etc.
@@ -16,7 +24,6 @@ Ever since COVID-19's breakout, more awareness and emphasis has been placed on t
 | Kenneth Mejico     | z5257133 |
 | Liam Staples       | z5254570 |
 | Luke Junsuo Chen   | z5264602 |
-| Vicknesh Ravikumar | z5255879 |
 
 ## Deliverable 1 🍟 <a name="deliverable1"></a>
 ### Design Details <a name="designdetails"></a>
@@ -36,3 +43,19 @@ Our main software tools currently in use to assist project management are:
 * Selenium / Requests
 
 More information can be found in our [Management Information Report](https://github.com/KennethMejico/SENG3011_McNuggets/blob/main/Reports/Management%20Information.md).
+
+## Deliverable 2 🍟 <a name="deliverable2"></a>
+### API Design Details <a name="apides"></a>
+The final architecture, justification of implementation, and challenges addressed for our project can be found here: [Design Details Report: Deliverable 2](https://github.com/KennethMejico/SENG3011_McNuggets/blob/main/Reports/Design%20Details.md#deliverable2)
+
+Our architecture begins with a scraper that scrapes data from ProMedMail.org, which then stores that data into a MySQL database, (AWS Relational Database Service). We have a Python backend API that is run on AWS Lambda, which then takes user input (HTTP requests) from the Amazon API gateway and uses queries to retrieve data from RDS. It then formats it and returns a JSON response to the user.
+### API Testing <a name="apites"></a>
+A complete guide to our testing methodology can be found here: [Testing Documentation](https://github.com/KennethMejico/SENG3011_McNuggets/blob/main/Reports/Testing%20Documentation.md)
+### API Documentation <a name="apidoc"></a>
+Our API Documentation was completed on Stoplight, and can be found here: [McNuggets Stoplight](https://unsw-seng-mcnuggets.stoplight.io/docs/seng3011-mcnuggets)
+### API Implementation <a name="apiimp"></a>
+The API has been implemented on AWS Lambda, and can be called using our Stoplight's try it out feature. Log files have also been implemented, including details such as team name, accessed time, and data source.
+
+## Deliverable 3 <a name="deliverable3"></a>
+
+## Deliverable 4 <a name="deliverable4"></a>

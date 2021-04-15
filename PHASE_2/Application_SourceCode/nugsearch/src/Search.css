@@ -1,0 +1,131 @@
+.SearchApp {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.92), rgba(0, 0, 0, 0.92)), url(nuggetsBackground.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    text-align: center;
+    height: 100vh;
+    overflow: hidden;
+    width: 100%;
+}
+
+.KeywordText {
+    width: 670px;
+    padding: 5px;
+    padding-left: 28px;
+    outline: none;
+    border: 2px solid #999999;
+    border-radius: 5px;
+    background-color: #FBFBFB;
+    font-family: "Noto Sans", sans-serif;
+    font-size: 16px;
+    background-position: 4px;
+    background-image: url('https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/search-512.png');
+    background-repeat: no-repeat;
+    background-size: 20px;
+}
+
+.Location {
+    display: inline-flex;
+}
+
+.LocationText {
+    width: 260px;
+    padding: 5px;
+    outline: none;
+    border: 2px solid #999999;
+    border-radius: 5px;
+    background-color: #FBFBFB;
+    font-family: "Noto Sans", sans-serif;
+    font-size: 16px;
+}
+
+.LocationButton {
+    width: 260px;
+    padding: 5px;
+    padding-left: 28px;
+    outline: none;
+    border: 2px solid #999999;
+    border-radius: 5px;
+    background-color: #FBFBFB;
+    font-family: "Noto Sans", sans-serif;
+    font-size: 16px;
+    background-position: 4px;
+    background-image: url('https://pics.freeicons.io/uploads/icons/png/19087874111586787864-512.png');
+    background-repeat: no-repeat;
+    background-size: 20px;
+    align-items: center;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.8);
+}
+
+.LocationButton:active {
+    background-color: #8f8f8f;
+}
+
+.Date {
+    display: inline-flex;
+}
+
+.DateText {
+    width: 260px;
+    padding: 5px;
+    outline: none;
+    border: 2px solid #999999;
+    border-radius: 5px;
+    background-color: #FBFBFB;
+    font-family: "Noto Sans", sans-serif;
+    font-size: 16px;
+    background-position: 4px;
+}
+
+input[type=submit] {
+    background: #FF9900;
+    box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.34);
+    border-radius: 16px;
+    width: 150px;
+    height: 35px;
+    font-family: "Noto Sans", sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 20px;
+
+    color: #FFFFFF;
+}
+
+label {
+    font-family: "Noto Sans", sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    align-items: center;
+    text-align: center;
+    color: #FFFFFF;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    padding: 10px;
+}
+
+.MediumLogo {
+    height: 60px;
+    width: 60px;
+    padding: 0px 20px 0px;
+}
+
+h1 {
+    color: #FFFFFF;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    font-family: "Noto Sans", sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 64px;
+    padding: 100px 0px 0px 0px;
+}
+
+h2 {
+    color: #FFFFFF;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    font-family: "Noto Sans", sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+}
