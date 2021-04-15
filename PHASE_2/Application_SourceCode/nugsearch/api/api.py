@@ -27,7 +27,15 @@ def search():
     keywords = request.args.get("keywords")
     location = request.args.get("location")
 
-    url = f"http://52.15.58.197:8000/v1/articles?start={startDate}&end={endDate}&keywords={keywords}&location={location}"
+    # url = f"http://52.15.58.197:8000/v1/articles?start={startDate}&end={endDate}&keywords={keywords}&location={location}"
+
+    formattedStart = startDate[:-5]
+    formattedEnd = endDate[:-5]
+    
+    # url = f"https://4k6yve9rsa.execute-api.ap-southeast-2.amazonaws.com/default/mcnuggets/search?start_date={formattedStart}&end_date={formattedEnd}&key_terms={keywords}&location={location}"
+    
+    url = f"https://api.bugfree.team/articles?start_date={formattedStart}&end_date={formattedEnd}&key_terms={keywords}&locations={location}"
+
     response = requests.get(url)
     print(response.json())
     return response.json()

@@ -9,293 +9,183 @@ import { withRouter } from 'react-router-dom';
 class Graph extends React.Component {
     constructor(props) {
         super(props);
+        console.log(this.props);
         this.state = {
-            data: [
-                {
-                  "id": "japan",
-                  "color": "hsl(130, 70%, 50%)",
-                  "data": [
-                    {
-                      "x": "plane",
-                      "y": 115
-                    },
-                    {
-                      "x": "helicopter",
-                      "y": 160
-                    },
-                    {
-                      "x": "boat",
-                      "y": 264
-                    },
-                    {
-                      "x": "train",
-                      "y": 21
-                    },
-                    {
-                      "x": "subway",
-                      "y": 213
-                    },
-                    {
-                      "x": "bus",
-                      "y": 110
-                    },
-                    {
-                      "x": "car",
-                      "y": 85
-                    },
-                    {
-                      "x": "moto",
-                      "y": 144
-                    },
-                    {
-                      "x": "bicycle",
-                      "y": 154
-                    },
-                    {
-                      "x": "horse",
-                      "y": 295
-                    },
-                    {
-                      "x": "skateboard",
-                      "y": 230
-                    },
-                    {
-                      "x": "others",
-                      "y": 62
-                    }
-                  ]
-                },
-                {
-                  "id": "france",
-                  "color": "hsl(26, 70%, 50%)",
-                  "data": [
-                    {
-                      "x": "plane",
-                      "y": 118
-                    },
-                    {
-                      "x": "helicopter",
-                      "y": 76
-                    },
-                    {
-                      "x": "boat",
-                      "y": 54
-                    },
-                    {
-                      "x": "train",
-                      "y": 7
-                    },
-                    {
-                      "x": "subway",
-                      "y": 201
-                    },
-                    {
-                      "x": "bus",
-                      "y": 63
-                    },
-                    {
-                      "x": "car",
-                      "y": 59
-                    },
-                    {
-                      "x": "moto",
-                      "y": 241
-                    },
-                    {
-                      "x": "bicycle",
-                      "y": 278
-                    },
-                    {
-                      "x": "horse",
-                      "y": 118
-                    },
-                    {
-                      "x": "skateboard",
-                      "y": 37
-                    },
-                    {
-                      "x": "others",
-                      "y": 190
-                    }
-                  ]
-                },
-                {
-                  "id": "us",
-                  "color": "hsl(238, 70%, 50%)",
-                  "data": [
-                    {
-                      "x": "plane",
-                      "y": 97
-                    },
-                    {
-                      "x": "helicopter",
-                      "y": 170
-                    },
-                    {
-                      "x": "boat",
-                      "y": 4
-                    },
-                    {
-                      "x": "train",
-                      "y": 135
-                    },
-                    {
-                      "x": "subway",
-                      "y": 166
-                    },
-                    {
-                      "x": "bus",
-                      "y": 142
-                    },
-                    {
-                      "x": "car",
-                      "y": 240
-                    },
-                    {
-                      "x": "moto",
-                      "y": 159
-                    },
-                    {
-                      "x": "bicycle",
-                      "y": 296
-                    },
-                    {
-                      "x": "horse",
-                      "y": 83
-                    },
-                    {
-                      "x": "skateboard",
-                      "y": 206
-                    },
-                    {
-                      "x": "others",
-                      "y": 279
-                    }
-                  ]
-                },
-                {
-                  "id": "germany",
-                  "color": "hsl(203, 70%, 50%)",
-                  "data": [
-                    {
-                      "x": "plane",
-                      "y": 261
-                    },
-                    {
-                      "x": "helicopter",
-                      "y": 286
-                    },
-                    {
-                      "x": "boat",
-                      "y": 221
-                    },
-                    {
-                      "x": "train",
-                      "y": 206
-                    },
-                    {
-                      "x": "subway",
-                      "y": 280
-                    },
-                    {
-                      "x": "bus",
-                      "y": 220
-                    },
-                    {
-                      "x": "car",
-                      "y": 212
-                    },
-                    {
-                      "x": "moto",
-                      "y": 23
-                    },
-                    {
-                      "x": "bicycle",
-                      "y": 31
-                    },
-                    {
-                      "x": "horse",
-                      "y": 274
-                    },
-                    {
-                      "x": "skateboard",
-                      "y": 147
-                    },
-                    {
-                      "x": "others",
-                      "y": 215
-                    }
-                  ]
-                },
-                {
-                  "id": "norway",
-                  "color": "hsl(355, 70%, 50%)",
-                  "data": [
-                    {
-                      "x": "plane",
-                      "y": 48
-                    },
-                    {
-                      "x": "helicopter",
-                      "y": 151
-                    },
-                    {
-                      "x": "boat",
-                      "y": 159
-                    },
-                    {
-                      "x": "train",
-                      "y": 223
-                    },
-                    {
-                      "x": "subway",
-                      "y": 131
-                    },
-                    {
-                      "x": "bus",
-                      "y": 169
-                    },
-                    {
-                      "x": "car",
-                      "y": 107
-                    },
-                    {
-                      "x": "moto",
-                      "y": 30
-                    },
-                    {
-                      "x": "bicycle",
-                      "y": 128
-                    },
-                    {
-                      "x": "horse",
-                      "y": 135
-                    },
-                    {
-                      "x": "skateboard",
-                      "y": 194
-                    },
-                    {
-                      "x": "others",
-                      "y": 129
-                    }
-                  ]
-                }
-              ]
+            data: this.processData()
         }
+        this.changeData = this.changeData.bind(this);
+        this.processData();
+    }
+
+    processData() {
+      var data = [];
+      var diseases = {};
+      var results = this.props.location.state.data.results;
+      var minDate;
+      var maxDate;
+      for (var articleId in results) { // articles for SourDough, response (I think) for us, results for bugsfree 
+        var article = results[articleId];
+        for (const reportId in article.reports) {
+          var report = article["reports"][reportId]
+          
+          var reportDate = new Date(report.event_date);
+          console.log(minDate);
+          console.log(maxDate);
+          if (minDate) {
+            if (reportDate < minDate) {
+              minDate = reportDate;
+            }
+          } else {
+            minDate = reportDate;
+          }
+          if (maxDate) {
+            if (reportDate > maxDate) {
+              maxDate = reportDate;
+            }
+          } else {
+            maxDate = reportDate;
+          }
+
+          if (report["diseases"].length == 0) {
+            if (diseases.other) {
+              if (!this.incrementDate(report.event_date, diseases.other.data)) {
+                var toInsert = {
+                    "x": report.event_date.substring(0, 10),
+                    "y": 1
+                  }
+                this.insertDate(report.event_date, toInsert, diseases.other.data);
+                // diseases.other.data.push({
+                //   "x": report.event_date.substring(0, 10),
+                //   "y": 1
+                // })
+              }
+            } else {
+              console.log("hit");
+              diseases.other = {
+                "data": [
+                  {
+                    "x": report.event_date.substring(0, 10),
+                    "y": 1
+                  }
+                ],
+              }
+            }
+          } else {
+            for (const diseaseId in report.diseases) {
+              var disease = report["diseases"][diseaseId];
+              if (diseases[disease]) {
+                if (!this.incrementDate(report.event_date, diseases[disease].data)) {
+                  var toInsert = {
+                    "x": report.event_date.substring(0, 10),
+                    "y": 1
+                  }
+                  this.insertDate(report.event_date, toInsert, diseases[disease].data);
+                  // diseases[disease].data.push({
+                  //   "x": report.event_date.substring(0, 10),
+                  //   "y": 1
+                  // })
+                }
+              } else {
+                diseases[disease] = {
+                  "data": [
+                    {
+                      "x": report.event_date.substring(0, 10),
+                      "y": 1
+                    }
+                  ],
+                }
+              }
+            }
+          }
+        }
+      }
+
+      var start = new Date(this.props.location.state.startDate);
+      var end = new Date(this.props.location.state.endDate);
+      // var start = minDate;
+      // var end = maxDate;
+      for (var date = start; date <= end; date.setDate(date.getDate() + 1)) {
+        for (const diseaseName in diseases) {
+          if (!this.hasDate(date.toISOString(), diseases[diseaseName]["data"])) {
+            var toInsert = {
+              "x": date.toISOString().substring(0, 10),
+              "y": 0
+            }
+            this.insertDate(date, toInsert, diseases[diseaseName].data);
+            // diseases[diseaseName].data.push({
+            //   "x": date.toISOString().substring(0, 10),
+            //   "y": 0
+            // })
+          }
+        }
+      }
+
+      for (const diseaseName in diseases) {  
+        data.push({
+          "id": diseaseName,
+          "data": diseases[diseaseName]["data"]
+        })
+      }
+      
+      console.log(data)
+      return data
+    }
+
+    incrementDate(date, data) {
+      var target = date.substring(0, 10);
+      for (const i in data) {
+        var dataPoint = data[i];
+        if (dataPoint.x == target) {
+          dataPoint.y += 1;
+          return true;
+        }
+      }
+      return false;
+    }
+
+    hasDate(date, data) {
+      var target = date.substring(0, 10);
+      for (const i in data) {
+        var dataPoint = data[i];
+        if (dataPoint.x == target) {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    insertDate(date, toInsert, data) {
+      var targetDate = new Date(date);
+      for (const i in data) {
+        var dataPoint = data[i];
+        var d = new Date(dataPoint.x);
+        if (d > targetDate) {
+          data.splice(i, 0, toInsert);
+          return;
+        }
+      }
+      data.push(toInsert);
+    }
+
+    changeData(data) {
+      console.log("change hit")
+      this.setState({data: data}, () => {
+        console.log(this.state.data);
+      })
     }
 
     render() {
         return(
         <div>
             <div className="ResultBackground">
-                <h2>Graph: COVID19 Results in World Between 01/01/2021 and 01/04/2021</h2>
+                <h2>Graph: COVID19 Results in World Between {this.props.location.state.startDate} and {this.props.location.state.endDate}</h2>
                 {/* <img src={graphImage} alt="img" class="GraphImage"/> */}
                 <ResponsiveLine
                     data={this.state.data}
-                    margin={{ top: 50, right: 110, bottom: 100, left: 60 }}
+                    margin={{ top: 50, right: 150, bottom: 100, left: 60 }}
                     xScale={{ type: 'point' }}
-                    yScale={{ type: 'linear', min: 'auto', max: 'auto', stacked: true, reverse: false }}
+                    yScale={{ type: 'linear', min: 'auto', max: 'auto', stacked: false, reverse: false }}
+                    curve="monotoneX"
                     axisTop={null}
                     axisRight={null}
                     axisBottom={{
@@ -303,7 +193,7 @@ class Graph extends React.Component {
                         tickSize: 5,
                         tickPadding: 5,
                         tickRotation: 0,
-                        legend: 'transportation',
+                        legend: 'Date',
                         legendOffset: 36,
                         legendPosition: 'middle'
                     }}
@@ -312,7 +202,7 @@ class Graph extends React.Component {
                         tickSize: 5,
                         tickPadding: 5,
                         tickRotation: 0,
-                        legend: 'count',
+                        legend: 'New Cases',
                         legendOffset: -40,
                         legendPosition: 'middle',
                         fontColor: 'white',
@@ -378,5 +268,10 @@ const theme = {
                 fill: "#ffffff"
             }
         }
+    },
+    legends: {
+      text: {
+        fill: "#ffffff"
+      }
     }
 }
