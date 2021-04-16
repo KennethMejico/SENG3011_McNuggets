@@ -64,7 +64,6 @@ def getAlertDescription():
         "title": "Bad Alert string",
         "text": "Bad Alert string"
     }
-    return {}
 
 @app.route('/getMap')
 def getMap():
