@@ -11,7 +11,8 @@ def currentLocation():
     print ("Location Request :)")
     lat = request.args['lat']
     lon = request.args['lon']
-    key = ""
+    if lat is None or lon is None:
+        abort(400)
     reqURL = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + str(lat) + "," + str(lon) + "&key=" + key + "&location_type=APPROXIMATE"
     response = requests.get(reqURL)
     resJSON = response.json()
