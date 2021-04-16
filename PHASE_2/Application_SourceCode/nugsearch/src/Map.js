@@ -3,6 +3,7 @@ import './Map.css'
 
 import mapImage from './Map.PNG'
 import { withRouter, Link } from 'react-router-dom';
+import GOOGLE_MAP_API_KEY from './GOOGLE_MAP_API_KEY.js';
 
 
 class Map extends React.Component {
@@ -50,8 +51,6 @@ class Map extends React.Component {
             mapTypeId: 'terrain',
             disableDefaultUI: true
         })
-        
-    }
 
 }
 
