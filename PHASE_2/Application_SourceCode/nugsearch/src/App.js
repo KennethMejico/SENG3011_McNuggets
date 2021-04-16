@@ -59,8 +59,7 @@ function App() {
 }
 
 function Home() {
-  //return <Search />;
-  return <Search />
+  return <Search />;
 }
 
 function About() {

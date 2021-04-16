@@ -1,6 +1,6 @@
 .ResultBackground {
     height: 100vh;
-    overflow: hidden;
+    overflow: scroll;
     width: 100%;
     background-color: #181716;
     background-size: cover;

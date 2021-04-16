@@ -12,6 +12,10 @@ class AlertBadges extends React.Component {
 
     componentDidMount() {
         alert = this.props.match.params.alert;
+        this.getAlerts(alert);
+    }
+
+    getAlerts(alert) {
         fetch('/getAlerts').then(res => res.json()).then(data => {
             var index = data.alerts.indexOf(alert);
             if (index !== -1) {
@@ -21,8 +25,8 @@ class AlertBadges extends React.Component {
         })
     }
 
-    componentDidUpdate() {
-        this.componentDidMount();
+    componentWillReceiveProps(nextProps) {
+        this.getAlerts(nextProps.match.params.alert);
     }
 
     navigateToPage = (event) => {
