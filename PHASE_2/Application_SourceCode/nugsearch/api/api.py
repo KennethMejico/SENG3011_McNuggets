@@ -66,6 +66,10 @@ def getAlertDescription():
     }
     return {}
 
+@app.route('/getMap')
+def getMap():
+    return {}
+
 @app.route('/')
 def index():
     return{
