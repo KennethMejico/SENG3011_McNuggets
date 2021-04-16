@@ -48,10 +48,16 @@ class Search extends React.Component {
         .then(res => res.json())
         .then(data => {
             console.log(data)
-            //alert("recieved: " + data.result)
+            this.props.history.push({
+                pathname: '/map',
+                state: {
+                    data: data,
+                    startDate: this.state.fromDate.toDateString(),
+                    endDate: this.state.toDate.toDateString()
+                }
+            });
         });
         event.preventDefault();
-        this.props.history.push('/map');
     }
 
     render() {
