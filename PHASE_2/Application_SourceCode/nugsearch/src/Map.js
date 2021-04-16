@@ -12,8 +12,6 @@ class Map extends React.Component {
         console.log(props);
     }
 
-    googleMap = nothing
-
     componentDidMount() {
         const googleMapScript = document.createElement('script')
         googleScript.src = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAP_API_KEY}&libraries=places`
