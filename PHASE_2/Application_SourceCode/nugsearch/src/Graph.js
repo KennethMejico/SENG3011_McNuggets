@@ -21,11 +21,12 @@ class Graph extends React.Component {
       var results = this.props.location.state.data.results;
       var minDate;
       var maxDate;
-      for (var articleId in results) { // articles for SourDough, response (I think) for us, results for bugsfree 
+      var toInsert;
+      for (var articleId in results) { // articles for SourDough, response (I think) for us, results for bugsfree
         var article = results[articleId];
         for (const reportId in article.reports) {
           var report = article["reports"][reportId]
-          
+
           var reportDate = new Date(report.event_date);
           console.log(minDate);
           console.log(maxDate);
@@ -44,10 +45,10 @@ class Graph extends React.Component {
             maxDate = reportDate;
           }
 
-          if (report["diseases"].length == 0) {
+          if (report["diseases"].length === 0) {
             if (diseases.other) {
               if (!this.incrementDate(report.event_date, diseases.other.data)) {
-                var toInsert = {
+                toInsert = {
                     "x": report.event_date.substring(0, 10),
                     "y": 1
                   }
@@ -73,7 +74,7 @@ class Graph extends React.Component {
               var disease = report["diseases"][diseaseId];
               if (diseases[disease]) {
                 if (!this.incrementDate(report.event_date, diseases[disease].data)) {
-                  var toInsert = {
+                  toInsert = {
                     "x": report.event_date.substring(0, 10),
                     "y": 1
                   }
@@ -105,7 +106,7 @@ class Graph extends React.Component {
       for (var date = start; date <= end; date.setDate(date.getDate() + 1)) {
         for (const diseaseName in diseases) {
           if (!this.hasDate(date.toISOString(), diseases[diseaseName]["data"])) {
-            var toInsert = {
+            toInsert = {
               "x": date.toISOString().substring(0, 10),
               "y": 0
             }
@@ -118,13 +119,13 @@ class Graph extends React.Component {
         }
       }
 
-      for (const diseaseName in diseases) {  
+      for (const diseaseName in diseases) {
         data.push({
           "id": diseaseName,
           "data": diseases[diseaseName]["data"]
         })
       }
-      
+
       console.log(data)
       return data
     }
@@ -133,7 +134,7 @@ class Graph extends React.Component {
       var target = date.substring(0, 10);
       for (const i in data) {
         var dataPoint = data[i];
-        if (dataPoint.x == target) {
+        if (dataPoint.x === target) {
           dataPoint.y += 1;
           return true;
         }
@@ -145,7 +146,7 @@ class Graph extends React.Component {
       var target = date.substring(0, 10);
       for (const i in data) {
         var dataPoint = data[i];
-        if (dataPoint.x == target) {
+        if (dataPoint.x === target) {
           return true;
         }
       }

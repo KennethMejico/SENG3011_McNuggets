@@ -32,9 +32,9 @@ def search():
 
     formattedStart = startDate[:-5]
     formattedEnd = endDate[:-5]
-    
+
     # url = f"https://4k6yve9rsa.execute-api.ap-southeast-2.amazonaws.com/default/mcnuggets/search?start_date={formattedStart}&end_date={formattedEnd}&key_terms={keywords}&location={location}"
-    
+
     url = f"https://api.bugfree.team/articles?start_date={formattedStart}&end_date={formattedEnd}&key_terms={keywords}&locations={location}"
 
     response = requests.get(url)
@@ -45,7 +45,7 @@ def search():
 def getAlerts():
     return {
         # Can't have spaces in these names
-        "alerts": ["Covid-19", "BlackDeath", "Rabies"]
+        "alerts": ["Covid-19", "BlackDeath"]
     }
 
 @app.route('/getAlertDescription')
