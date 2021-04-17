@@ -1,5 +1,6 @@
 from flask import Flask, abort, request
 from apiKey import key
+from mapData import getCaseLocations, getRegions
 import requests
 
 app = Flask(__name__)
@@ -67,7 +68,21 @@ def getAlertDescription():
 
 @app.route('/getMap')
 def getMap():
-    return {}
+    if 'date' not in request.args or 'location' not in request.args:
+        abort(400)
+    print ("Map Data Request")
+    date = request.args['date']
+    location = request.args['location']
+    if date is None or location is None:
+        abort(400)
+    
+    regions = getRegions(location)
+    caseLocations = getCaseLocations(date, location)
+
+    return {
+        "regions": regions,
+        "caseLocations": caseLocations
+    }
 
 @app.route('/')
 def index():

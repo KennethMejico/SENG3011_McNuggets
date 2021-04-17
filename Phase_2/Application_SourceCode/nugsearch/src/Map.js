@@ -53,6 +53,14 @@ class Map extends React.Component {
             disableDefaultUI: true
         })
 
+    fetchData(date, location){
+        fetch('getMap?date='+date+'&location='+location)
+        .then(res => res.json())
+        .then(data => {
+            return data;
+        });
+    }
+
 }
 
 export default withRouter(Map);
