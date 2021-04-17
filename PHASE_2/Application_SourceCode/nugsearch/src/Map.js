@@ -18,7 +18,7 @@ class Map extends React.Component {
         window.document.body.appendChild(googleScript)
     
         googleScript.addEventListener('load', {
-            this.googleMap = this.createMap()
+            this:googleMap = this.createMap()
         });
     }
 
