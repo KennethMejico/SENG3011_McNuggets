@@ -2,7 +2,6 @@ import React from 'react'
 import './Graph.css'
 import { ResponsiveLine } from '@nivo/line'
 
-import graphImage from './Graph.PNG'
 import { withRouter } from 'react-router-dom';
 
 
@@ -14,7 +13,6 @@ class Graph extends React.Component {
             data: this.processData()
         }
         this.changeData = this.changeData.bind(this);
-        this.processData();
     }
 
     processData() {
