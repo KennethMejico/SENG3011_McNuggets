@@ -43,7 +43,7 @@ class Map extends React.Component {
     }
 
     createMap = () => 
-        new google.maps.Map(document.getElementById('map'), {
+        new window.google.maps.Map(document.getElementById('map'), {
             zoom: 9,
             center: {lat: -33.7688, lng: -208.8593},
             mapTypeId: 'terrain',
