@@ -9,16 +9,19 @@ import GOOGLE_MAP_API_KEY from './GOOGLE_MAP_API_KEY.js';
 class Map extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            googleMap: null
+        }
         console.log(props);
     }
 
     componentDidMount() {
         const googleMapScript = document.createElement('script')
-        googleScript.src = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAP_API_KEY}&libraries=places`
-        window.document.body.appendChild(googleScript)
-    
-        googleScript.addEventListener('load', {
-            this:googleMap = this.createMap()
+        googleMapScript.src = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAP_API_KEY}&libraries=places`
+        window.document.body.appendChild(googleMapScript)
+
+        googleMapScript.addEventListener('load', () => {
+            this.setState({googleMap: this.createMap()})
         });
     }
 
@@ -31,10 +34,10 @@ class Map extends React.Component {
                 <p />
                 <Link to={{
                     pathname: '/graph',
-                    state: { 
+                    state: {
                         data: this.props.location.state.data,
                         startDate: this.props.location.state.startDate,
-                        endDate: this.props.location.state.endDate, 
+                        endDate: this.props.location.state.endDate,
                     }
                 }}>See Graph</Link>
             </div>
@@ -42,8 +45,8 @@ class Map extends React.Component {
         )
     }
 
-    createMap = () => 
-        new google.maps.Map(document.getElementById('map'), {
+    createMap = () =>
+        new window.google.maps.Map(document.getElementById('map'), {
             zoom: 9,
             center: {lat: -33.7688, lng: -208.8593},
             mapTypeId: 'terrain',
