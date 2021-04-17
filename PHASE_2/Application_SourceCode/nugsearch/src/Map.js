@@ -11,14 +11,14 @@ class Map extends React.Component {
         super(props);
         this.state = {
             googleMap: null
-        }
+        };
         console.log(props);
     }
 
     componentDidMount() {
-        const googleMapScript = document.createElement('script')
-        googleMapScript.src = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAP_API_KEY}&libraries=places`
-        window.document.body.appendChild(googleMapScript)
+        const googleMapScript = document.createElement('script');
+        googleMapScript.src = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAP_API_KEY}&libraries=places`;
+        window.document.body.appendChild(googleMapScript);
 
         googleMapScript.addEventListener('load', () => {
             this.setState({googleMap: this.createMap()})

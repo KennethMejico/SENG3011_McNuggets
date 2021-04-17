@@ -76,6 +76,7 @@ def index():
             "currentLocation",
             "search",
             "getAlert",
+            "getMap",
             "getAlertDescription"
         ]
     }
