@@ -87,7 +87,7 @@ def getMap():
 
     regions = getRegions(location)
     caseLocations = getCaseLocations(date, location)
-
+    
     return {
         "regions": regions,
         "caseLocations": caseLocations
