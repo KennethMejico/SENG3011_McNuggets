@@ -4,6 +4,8 @@ import Alert from './Alert.js'
 import AlertBadges from './AlertBadges.js'
 import Map from './Map.js'
 import Graph from './Graph.js'
+import About from './About.js'
+import Contact from './Contact.js'
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -60,14 +62,6 @@ function App() {
 
 function Home() {
   return <Search />;
-}
-
-function About() {
-  return <h2>About</h2>;
-}
-
-function Contact() {
-  return <h2>Contact</h2>;
 }
 
 function Alerts() {
