@@ -30,7 +30,7 @@ class Map extends React.Component {
         <div>
             <div className="ResultBackground">
                 <h2>Map: COVID19 Results in World Between {this.props.location.state.startDate} and {this.props.location.state.endDate}</h2>
-                <div id="map" align="center" style="width: 100%; height: 100%; padding: 0%;border-radius: 0%;"> <img src={mapImage} alt="img" className="ResultImage"/> </div>
+                <div id="map" className="mapClass" > <img src={mapImage} alt="img" className="ResultImage"/> </div>
                 <p />
                 <Link to={{
                     pathname: '/graph',

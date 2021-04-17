@@ -4,6 +4,7 @@ import Alert from './Alert.js'
 import AlertBadges from './AlertBadges.js'
 import Map from './Map.js'
 import Graph from './Graph.js'
+import AboutPage from './AboutPage.js'
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -63,7 +64,7 @@ function Home() {
 }
 
 function About() {
-  return <h2>About</h2>;
+  return <AboutPage />;
 }
 
 function Contact() {
