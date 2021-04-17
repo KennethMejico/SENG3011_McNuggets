@@ -13,12 +13,12 @@ class Map extends React.Component {
     }
 
     componentDidMount() {
-        const googleMapScript = document.createElement('script')
+        const googleScript = document.createElement('script')
         googleScript.src = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAP_API_KEY}&libraries=places`
         window.document.body.appendChild(googleScript)
     
         googleScript.addEventListener('load', {
-            this:googleMap = this.createMap()
+            this.googleMap = this.createMap()
         });
     }
 
