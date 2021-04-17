@@ -27,21 +27,21 @@ class Map extends React.Component {
 
     render() {
         return(
-        <div>
-            <div className="ResultBackground">
-                <h2>Map: COVID19 Results in World Between {this.props.location.state.startDate} and {this.props.location.state.endDate}</h2>
-                <div id="map" className="mapClass" > <img src={mapImage} alt="img" className="ResultImage"/> </div>
-                <p />
-                <Link to={{
-                    pathname: '/graph',
-                    state: {
-                        data: this.props.location.state.data,
-                        startDate: this.props.location.state.startDate,
-                        endDate: this.props.location.state.endDate,
-                    }
-                }}>See Graph</Link>
+            <div>
+                <div className="ResultBackground">
+                    <h2>Map: COVID19 Results in World Between {this.props.location.state.startDate} and {this.props.location.state.endDate}</h2>
+                    <div id="map" className="mapClass" > <img src={mapImage} alt="img" className="ResultImage"/> </div>
+                    <p />
+                    <Link to={{
+                        pathname: '/graph',
+                        state: {
+                            data: this.props.location.state.data,
+                            startDate: this.props.location.state.startDate,
+                            endDate: this.props.location.state.endDate,
+                        }
+                    }}>See Graph</Link>
+                </div>
             </div>
-        </div>
         )
     }
 
