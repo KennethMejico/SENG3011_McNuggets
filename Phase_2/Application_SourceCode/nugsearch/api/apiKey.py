@@ -1,3 +1,3 @@
-key = "AIzaSyCoqsAhgvLOPrrHCTHSj4VRZXK2GebFV0s"
+key = none
 
 # git update-index --assume-unchanged apiKey.py
