@@ -10,7 +10,8 @@ def getCaseLocations(date, location):
             }, caseCount:
         }
     """
-    return []
+    toReturn = []
+    return toReturn
 
 def getRegions(date, location):
     """
@@ -19,14 +20,15 @@ def getRegions(date, location):
         Dict format:{
             regionName:,
             regionBounds:{
-                    northEast:{
-                        lat:,
-                        lng:
-                    }, southWest:{
-                        lat:,
-                        lng:
-                    }
+                northEast:{
+                    lat:,
+                    lng:
+                }, southWest:{
+                    lat:,
+                    lng:
+                }
             }, probabilityOfLockdown: (Num 1-100)
         }
     """
-    return []
+    toReturn = []
+    return toReturn
