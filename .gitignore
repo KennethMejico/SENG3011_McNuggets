@@ -127,5 +127,6 @@ dmypy.json
 FeedOutput.txt
 topicalFeedOutput.txt
 
+# API KEY FILES
 apiKey.py
 GOOGLE_MAP_API_KEY.js
