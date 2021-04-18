@@ -85,7 +85,7 @@ def getMap():
     location = resJSON.results[0].geometry.location
     # Location is a dict with two keys, lat and lng
 
-    regions = getRegions(location)
+    regions = getRegions(date, location)
     caseLocations = getCaseLocations(date, location)
     
     return {

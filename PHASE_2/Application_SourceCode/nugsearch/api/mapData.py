@@ -10,7 +10,7 @@ def getCaseLocations(date, location):
     """
     return []
 
-def getRegions(location):
+def getRegions(date, location):
     """
         Gets regions around given location.
         Returns array of dicts.
