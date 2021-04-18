@@ -44,12 +44,17 @@ class Search extends React.Component {
     }
 
     handleSubmit(event) {
+        event.preventDefault();
+        if (this.state.keywords === '') {
+            alert("Please enter one or more keywords");
+            return;
+        }
         fetch(`/search?startDate=${this.state.fromDate.toISOString()}&endDate=${this.state.toDate.toISOString()}&keywords=${this.state.keywords}&location=${this.state.location}`)
         .then(res => res.json())
         .then(data => {
             console.log(data)
             this.props.history.push({
-                pathname: '/map',
+                pathname: '/results',
                 state: {
                     data: data,
                     startDate: this.state.fromDate.toDateString(),
@@ -57,7 +62,6 @@ class Search extends React.Component {
                 }
             });
         });
-        event.preventDefault();
     }
 
     render() {
