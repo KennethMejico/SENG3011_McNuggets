@@ -22,6 +22,7 @@ class Map extends React.Component {
 
         googleMapScript.addEventListener('load', () => {
             this.setState({googleMap: this.createMap()})
+            this.placeMarkersAndBounds(this.fetchData(this.props.date, this.props.location))
         });
     }
 
@@ -59,6 +60,10 @@ class Map extends React.Component {
         .then(data => {
             return data;
         });
+    }
+
+    placeMarkersAndBounds(data){
+
     }
 
 }
