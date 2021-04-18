@@ -54,7 +54,7 @@ class Search extends React.Component {
         .then(data => {
             console.log(data)
             this.props.history.push({
-                pathname: '/map',
+                pathname: '/results',
                 state: {
                     data: data,
                     startDate: this.state.fromDate.toDateString(),

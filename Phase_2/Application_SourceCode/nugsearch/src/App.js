@@ -4,6 +4,7 @@ import Alert from './Alert.js'
 import AlertBadges from './AlertBadges.js'
 import Map from './Map.js'
 import Graph from './Graph.js'
+import ResultsTable from './ResultsTable.js'
 import About from './About.js'
 import Contact from './Contact.js'
 import './App.css';
@@ -42,6 +43,9 @@ function App() {
             <Route path="/alerts/:alert">
               <AlertBadges />
               <Alerts />
+            </Route>
+            <Route path="/results">
+              <ResultsTable />
             </Route>
             <Route path="/map">
               <Map />
