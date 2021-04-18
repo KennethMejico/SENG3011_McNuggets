@@ -4,8 +4,10 @@ def getCaseLocations(date, location):
         Gets all cases in fortnight before given date, in an area around given location (to minimize response time)
         Returns array of dicts
         Dict format:{
-            caseLocation:
-            caseCount:
+            location: {
+                lat:,
+                lng:
+            }, caseCount:
         }
     """
     return []
@@ -15,9 +17,16 @@ def getRegions(date, location):
         Gets regions around given location.
         Returns array of dicts.
         Dict format:{
-            regionName:
-            regionBounds:
-            probabilityOfLockdown:
+            regionName:,
+            regionBounds:{
+                    northEast:{
+                        lat:,
+                        lng:
+                    }, southWest:{
+                        lat:,
+                        lng:
+                    }
+            }, probabilityOfLockdown: (Num 1-100)
         }
     """
     return []

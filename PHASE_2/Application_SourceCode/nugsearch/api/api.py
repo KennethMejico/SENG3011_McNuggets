@@ -89,6 +89,7 @@ def getMap():
     caseLocations = getCaseLocations(date, location)
     
     return {
+        "center": location,
         "regions": regions,
         "caseLocations": caseLocations
     }

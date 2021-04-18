@@ -63,8 +63,48 @@ class Map extends React.Component {
     }
 
     placeMarkersAndBounds(data){
-
+        // Unpack data
+        regions = data.regions;
+        caseLocations = data.caseLocations;
+        // Temp Reference to Map. 
+        gmap = this.state.googleMap;
+        // Set center to requested location
+        gmap.setCenter(new google.maps.LatLng(data.center));
+        // Colours based on how bad things be. Using array so can update colours later.
+        colourArray = ["#00FF00","#85d700","#e59100","#e15300","#FF0000"]
+        // For item in regions:
+        // Highlight the region in a colour symbolizing how likely we think lockdown is.
+        for (var i=0; i < regions.length; i++){
+            var probLevel = this.convert(
+                regions[i].probabilityOfLockdown, [0, colourArray.length-1]
+            );
+            var mbounds = new google.maps.LatLngBounds(
+                new google.maps.LatLng(regions[i].regionBounds.southWest),   //SW
+                new google.maps.LatLng(regions[i].regionBounds.northEast)    //NE
+            );
+            new google.maps.Rectangle({
+                strokeColor: colourArray[probLevel],
+                fillColor: colourArray[probLevel],
+                strokeOpacity: 0.35,
+                fillOpacity: 0.35,
+                strokeWeight: 1,
+                map: gmap,
+                bounds: mbounds
+            })
+        }
+        // For item in case locations:
+        // Place a marker with how many cases were there.
+        for (var i=0; i < caseLocations.length; i++){
+            new google.maps.Marker({
+                position: new google.maps.LatLng(caseLocations[i].location),
+                label: caseLocations[i].caseCount,
+                map: gmap
+            });
+        }
     }
+
+    // Converts number from 0 to 100 to another range
+    convert = (number, range) => (((number * (range[1] - range[0])) / 100) + range[0])
 
 }
 
