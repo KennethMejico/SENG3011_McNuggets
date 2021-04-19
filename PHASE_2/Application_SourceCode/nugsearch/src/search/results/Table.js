@@ -36,12 +36,12 @@ export default function MyTable({ columns, data }) {
                 placeholder={"Search Diseases"}
                 className="Filter"
             />
-            <table {...getTableProps()} className="Table">
+            <table {...getTableProps()} className="Table" hover striped>
                 <thead>
                     {headerGroups.map(headerGroup => (
                         <tr {...headerGroup.getHeaderGroupProps()} className="HeaderRow">
                             {headerGroup.headers.map(column => (
-                                <th {...column.getHeaderProps(column.getSortByToggleProps())}>{column.render("Header")}</th>
+                                <th {...column.getHeaderProps(column.getSortByToggleProps())} className="HeaderCell">{column.render("Header")}</th>
                             ))}
                         </tr>
                     ))}
@@ -52,7 +52,7 @@ export default function MyTable({ columns, data }) {
                         return (
                             <tr {...row.getRowProps()} className="Row">
                                 {row.cells.map(cell => {
-                                    return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
+                                    return <td {...cell.getCellProps()} className="Cell">{cell.render("Cell")}</td>;
                                 })}
                             </tr>
                         );
