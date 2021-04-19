@@ -64,25 +64,25 @@ class Map extends React.Component {
 
     placeMarkersAndBounds(data){
         // Unpack data
-        regions = data.regions;
-        caseLocations = data.caseLocations;
+        var regions = data.regions;
+        var caseLocations = data.caseLocations;
         // Temp Reference to Map. 
-        gmap = this.state.googleMap;
+        var gmap = this.state.googleMap;
         // Set center to requested location
-        gmap.setCenter(new google.maps.LatLng(data.center));
+        gmap.setCenter(new window.google.maps.LatLng(data.center));
         // Colours based on how bad things be. Using array so can update colours later.
-        colourArray = ["#00FF00","#85d700","#e59100","#e15300","#FF0000"]
+        var colourArray = ["#00FF00","#85d700","#e59100","#e15300","#FF0000"]
         // For item in regions:
         // Highlight the region in a colour symbolizing how likely we think lockdown is.
         for (var i=0; i < regions.length; i++){
             var probLevel = this.convert(
                 regions[i].probabilityOfLockdown, [0, colourArray.length-1]
             );
-            var mbounds = new google.maps.LatLngBounds(
-                new google.maps.LatLng(regions[i].regionBounds.southWest),   //SW
-                new google.maps.LatLng(regions[i].regionBounds.northEast)    //NE
+            var mbounds = new window.google.maps.LatLngBounds(
+                new window.google.maps.LatLng(regions[i].regionBounds.southWest),   //SW
+                new window.google.maps.LatLng(regions[i].regionBounds.northEast)    //NE
             );
-            new google.maps.Rectangle({
+            new window.google.maps.Rectangle({
                 strokeColor: colourArray[probLevel],
                 fillColor: colourArray[probLevel],
                 strokeOpacity: 0.35,
@@ -95,7 +95,7 @@ class Map extends React.Component {
         // For item in case locations:
         // Place a marker with how many cases were there.
         for (var i=0; i < caseLocations.length; i++){
-            new google.maps.Marker({
+            new window.google.maps.Marker({
                 position: new google.maps.LatLng(caseLocations[i].location),
                 label: caseLocations[i].caseCount,
                 map: gmap
