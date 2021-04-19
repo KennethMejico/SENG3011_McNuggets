@@ -48,7 +48,7 @@ function App() {
               <ResultsTable />
             </Route>
             <Route path="/map">
-              <Map />
+              <Map date={new Date()} ulocation="Sydney NSW Australia"/>
             </Route>
             <Route path="/graph">
               <Graph />
