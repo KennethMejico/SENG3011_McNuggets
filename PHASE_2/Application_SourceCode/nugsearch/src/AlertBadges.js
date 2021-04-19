@@ -34,12 +34,21 @@ class AlertBadges extends React.Component {
         this.setState({alerts: []});
     }
 
+    checkAlert(alert) {
+        fetch('/checkAlert?alert=covid-19').then(res => res.json()).then(data => {
+            return data.checkAlert;
+        })
+        return false;
+    }
+
     AlertBadge(alert) {
-        return (
-            <div className="AlertBadge" key={alert} data-alertname={alert} onClick={this.navigateToPage}>
-                OUTBREAK OF {alert.toUpperCase()} COULD LEAD TO LOCKDOWN
-            </div>
-        );
+        if (this.checkAlert(alert) == false) { // SHOULD BE TRUE, BUT WILL BE LEFT FALSE FOR DEMO (Alerts won't be shown as they check if average weekly cases are over '1' or latest case over '5')
+            return (
+                <div className="AlertBadge" key={alert} data-alertname={alert} onClick={this.navigateToPage}>
+                    {alert.toUpperCase()}: POTENTIAL COVID-19 LOCKDOWN
+                </div>
+            );
+        }
     }
 
     render() {
