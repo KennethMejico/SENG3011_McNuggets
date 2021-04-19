@@ -2,7 +2,7 @@
     height: 100vh;
     overflow: hidden;
     width: 100%;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.66), rgba(0, 0, 0, 0.66)), url(COVID-19-1080x515.jpg);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.66), rgba(0, 0, 0, 0.66)), url(../images/COVID-19-1080x515.jpg);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
