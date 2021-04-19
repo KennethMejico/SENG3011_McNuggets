@@ -2,72 +2,59 @@ import React from 'react'
 import { withRouter } from 'react-router';
 import './Alert.css'
 
-//import alertImg from './Health-alert.png'
-
-//                <img src={covidImg} alt="img" class="CovidImage"/>
-
 class Alert extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            alertTitle: "",
-            alertText: ""
+            location: "",
+            alertText: "",
+            baseText0: "In the past, this amount of cases has lead to a lockdown in your area. Be prepared for another to happen again. COVID-19 has caused lockdowns to happen way too many times in total.",
+            baseText1: "February 12, 2021, it was announced that a five-day lockdown under Stage 4 restrictions would take effect beginning at 11:59 pm. AEDT, due to a cluster of 13 cases tied to a Holiday Inn quarantine hotel near Melbourne Airport, which have been assumed to be the UK variant. Based on statistics surrounding these cases and current cases in your area, it is possible for a lockdown and further restrictions to occur.",
+            govText: "",
+            lastUpdateDate: ""
         }
     }
 
-    componentDidMount() {
-        this.getAlertInfo(this.props.match.params.alert);
+    setAlertText = (text) => {
+        this.setState({
+            alertText: text
+        })
     }
 
-    getAlertInfo(alert) {
-        fetch('/getAlerts').then(res => res.json()).then(data => {
-            if (data.alerts.length === 0) {
-                this.setState({alertTitle: "None"});
-            }
-            else {
-                fetch("/getAlertDescription?name=" + alert)
-                .then(res => res.json())
-                .then(data => {
-                    this.setState({
-                        alertTitle: data.title,
-                        alertText: data.text
-                    })
-                });
-            }
+    componentDidMount() {
+        this.createAlertText(this.props.match.params.alert);
+    }
+
+    createAlertText(alert) {
+        fetch('/getAlertData?location=' + alert).then(res => res.json()).then(data => {
+            this.setAlertText("There were " + data.latest + " local cases of COVID-19 in " + data.location.toUpperCase() + " today, with a weekly average of " + data.average + " cases.");
+            this.setState({
+                location: data.location,
+                lastUpdateDate: data.time,
+                govText: "https://www." + data.location + ".gov.au/"
+            })
         });
     }
 
     componentWillReceiveProps(nextProps) {
-        this.getAlertInfo(nextProps.match.params.alert);
+        this.createAlertText(nextProps.match.params.alert);
     }
 
     render() {
         return(
-        <div>
+        <div class="page">
+            <h1> COVID-19 Alert: {this.state.location.toUpperCase()} </h1>
+            <p>{this.state.lastUpdateDate}</p>
             <div className="Background">
-                <h1 className="Heading">Alert: {this.state.alertTitle}</h1>
                 <p className="AlertText">{this.state.alertText}</p>
+                <p className="AlertText">{this.state.baseText0}</p>
+                <p className="AlertText">{this.state.baseText1}</p>
+                <p className="AlertText">Further information and announcements may be found here: <a href={this.state.govText} rel="noreferrer">{this.state.govText}</a>
+                </p>
             </div>
         </div>
         )
     }
 }
-/*
-            <div className="OtherAlerts">
-                <div className="Divider"></div>
-                <h2 className="OtherHeading"> Other Alerts </h2>
-                <div className="row">
-                    <div className="column">
-                        <img src={alertImg} alt="alert1" className="Alert1" style={{ width: '80%' }}/>
-                    </div>
-                    <div className="column">
-                        <img src={alertImg} alt="alert2" className="Alert2" style={{ width: '80%' }}/>
-                    </div>
-                    <div className="column">
-                        <img src={alertImg} alt="alert3" className="Alert3" style={{ width: '80%' }}/>
-                    </div>
-                </div>
-            </div>
-*/
 
 export default withRouter(Alert);

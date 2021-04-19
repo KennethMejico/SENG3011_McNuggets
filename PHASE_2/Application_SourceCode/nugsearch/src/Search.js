@@ -25,7 +25,7 @@ class Search extends React.Component {
         this.setState({keywords: keywords})
     }
 
-    changeLocation(location) {
+    changeLocation = (location) => {
         this.setState({location: location})
     }
 
@@ -35,12 +35,6 @@ class Search extends React.Component {
 
     changeToDate(toDate) {
         this.setState({toDate: toDate})
-    }
-
-    setLocation = (location) => {
-        this.setState({
-            location: location
-        })
     }
 
     handleSubmit(event) {
@@ -71,7 +65,7 @@ class Search extends React.Component {
             <h2>Find the latest news about disease reports in your area</h2>
             <KeywordForm onChange={this.changeKeywords} keywords={this.state.keywords}/>
             <p />
-            <LocationForm onChange={this.changeLocation} setLocation={this.setLocation} location={this.state.location}/>
+            <LocationForm onChange={this.changeLocation} location={this.state.location}/>
             <p />
             <DateForm onFromChange={this.changeFromDate} onToChange={this.changeToDate}
                         fromDate={this.state.fromDate} toDate={this.state.toDate}/>
@@ -128,7 +122,7 @@ class LocationForm extends React.Component {
                 .then(res => res.json())
                 .then(data => {
                     //console.log(data)
-                    temp.props.setLocation(data.location)
+                    temp.props.onChange(data.location)
                 });
             },
             function(error) {
