@@ -1,7 +1,7 @@
 import React from 'react'
 import './Contact.css'
 import { withRouter } from 'react-router-dom';
-import nugLogo from './nugSearchLogo300.png';
+import nugLogo from '../images/nugSearchLogo300.png';
 
 class Contact extends React.Component {
 

@@ -21,8 +21,14 @@ const columns = [
           },
           {
             id: 3,
-            Header: "Syndromes",
-            accessor: "show.syndromes"
+            Header: "Article Headline",
+            accessor: "show.articleHeadline"
+          },
+          {
+            id: 4,
+            Header: "Article Link",
+            accessor: "show.articleUrl",
+            Cell: e =><a href={e.value}> {e.value} </a>
           }
     ];
 
@@ -50,7 +56,8 @@ class ResultsTable extends React.Component {
                         "event_date": report.event_date.substring(0, 10),
                         "locations": report.locations.filter(this.onlyUnique).join(", "),
                         "diseases": report.diseases,
-                        "syndromes": report.syndromes
+                        "articleHeadline": article.headline,
+                        "articleUrl": article.url
                     }
                 });
             }

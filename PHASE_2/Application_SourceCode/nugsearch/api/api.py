@@ -103,7 +103,7 @@ def getAlertData():
         return { "location": location,
                  "average": data[location]['average'],
                  "latest": data[location]['latest'],
-                 "time": date.today().strftime("%d/%m/%Y")
+                 "time": data[location]['curTime']
         }
     except IOError:
         pass
@@ -111,27 +111,32 @@ def getAlertData():
 
 @app.route('/checkAlert')
 def checkAlert():
-    location = request.args.get("location")
+    alertList = []
     try:
         with open("covid19Data.json", 'r') as f:
             data = json.load(f)
-        if data[location]['average'] > 1 or data[location]['latest'] > 5:
-            return { "check": True }
+        for location in data:
+            if location in ['qld', 'vic', 'nsw']:
+                if float(data[location]['average']) > 1 or float(data[location]['latest']) > 5:
+                    alertList.append(location)
+            else:
+                if float(data[location]['average']) > 0.2 or float(data[location]['latest']) > 1:
+                    alertList.append(location)
     except IOError:
         pass
     return {
-        "check": False
+        "check": False,
+        "alerts": alertList
     }
 
 @app.route('/sendEmail')
-def sendEmail:
+def sendEmail():
     if 'email' not in request.args:
         abort(400)
     emailTarget = request.args.get('email')
     msg = Message('Hello', sender = emailAddress, recipients = [emailTarget])
     msg.body = "Hello Flask message sent from Flask-Mail"
     mail.send(msg)
-
 
 @app.route('/')
 def index():

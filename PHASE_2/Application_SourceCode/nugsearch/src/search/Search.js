@@ -1,7 +1,7 @@
 import React from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import nugLogo from './nugSearchLogo300.png';
+import nugLogo from '../images/nugSearchLogo300.png';
 import './Search.css';
 import { withRouter } from 'react-router-dom';
 

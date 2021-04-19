@@ -18,7 +18,7 @@ def getLocalCases(state):
     page = session.get(URL)
     soup = BeautifulSoup(page.content, 'html.parser')
     local_cases = soup.find_all('td', class_="COL4 NET")
-    first_10_local = local_cases[:7]
+    first_10_local = local_cases[103:110] # 6 Jan 2021
     cases = []
     for case in first_10_local:
         num = re.search('(<span>|<span class="red">|<span class="green">)(.*)</span>', str(case))
@@ -33,7 +33,7 @@ def statesCases():
         avg = mean(cases)
         avg = "{:.2f}".format(avg)
         latest = cases[0]
-        stateCasesDict[state] = {'average': avg, 'latest': latest, 'curTime': date.today()}
+        stateCasesDict[state] = {'average': avg, 'latest': latest, 'curTime': "2021-01-06"} # str(date.today())} Date hardcoded
     return stateCasesDict
     
 if __name__ == "__main__":
