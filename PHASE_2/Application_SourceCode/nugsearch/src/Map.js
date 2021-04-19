@@ -12,7 +12,6 @@ class Map extends React.Component {
         this.state = {
             googleMap: null
         };
-        console.log(props);
     }
 
     componentDidMount() {
@@ -21,8 +20,11 @@ class Map extends React.Component {
         window.document.body.appendChild(googleMapScript);
 
         googleMapScript.addEventListener('load', () => {
-            this.setState({googleMap: this.createMap()})
-            this.placeMarkersAndBounds(this.fetchData(this.props.date, this.props.location))
+            this.setState({googleMap: this.createMap()});
+            fetch('getMap?date='+this.props.date+'&location='+this.props.ulocation).then(res => res.json()).then(data => {
+                console.log(this.props.ulocation);
+                this.placeMarkersAndBounds(data);
+            });
         });
     }
 
@@ -30,17 +32,16 @@ class Map extends React.Component {
         return(
             <div>
                 <div className="ResultBackground">
-                    <h2>Map: COVID19 Results in World Between {this.props.location.state.startDate} and {this.props.location.state.endDate}</h2>
                     <div id="map" className="mapClass" > <img src={mapImage} alt="img" className="ResultImage"/> </div>
                     <p />
-                    <Link to={{
+                    {/* <Link to={{
                         pathname: '/graph',
                         state: {
                             data: this.props.location.state.data,
                             startDate: this.props.location.state.startDate,
                             endDate: this.props.location.state.endDate,
                         }
-                    }}>See Graph</Link>
+                    }}>See Graph</Link> */}
                 </div>
             </div>
         )
@@ -53,14 +54,6 @@ class Map extends React.Component {
             mapTypeId: 'terrain',
             disableDefaultUI: true
         })
-
-    fetchData(date, location){
-        fetch('getMap?date='+date+'&location='+location)
-        .then(res => res.json())
-        .then(data => {
-            return data;
-        });
-    }
 
     placeMarkersAndBounds(data){
         // Unpack data
@@ -102,6 +95,8 @@ class Map extends React.Component {
                 map: gmap
             });
         }
+
+        console.log("Done");
     }
 
     // Converts number from 0 to 100 to another range
