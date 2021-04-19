@@ -74,7 +74,8 @@ class Map extends React.Component {
         var colourArray = ["#00FF00","#85d700","#e59100","#e15300","#FF0000"]
         // For item in regions:
         // Highlight the region in a colour symbolizing how likely we think lockdown is.
-        for (var i=0; i < regions.length; i++){
+        var i;
+        for (i=0; i < regions.length; i++){
             var probLevel = this.convert(
                 regions[i].probabilityOfLockdown, [0, colourArray.length-1]
             );
@@ -94,7 +95,7 @@ class Map extends React.Component {
         }
         // For item in case locations:
         // Place a marker with how many cases were there.
-        for (var i=0; i < caseLocations.length; i++){
+        for (i=0; i < caseLocations.length; i++){
             new window.google.maps.Marker({
                 position: new window.google.maps.LatLng(caseLocations[i].location),
                 label: caseLocations[i].caseCount,
