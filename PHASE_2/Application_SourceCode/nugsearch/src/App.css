@@ -1,15 +1,12 @@
 .App {
   text-align: center;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.88), rgba(0, 0, 0, 0.88)), url(nuggetsBackground.jpg);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   height: 100vh;
-  overflow: hidden;
+  overflow: scroll;
   width: 100%;
 }
 
 .NavBar {
+  background-color: #111111;
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -29,6 +26,7 @@
   color: white;
   text-align: center;
   text-decoration: none;
+  font-size: 24px;
 }
 
 .NavBarLi a:hover {
@@ -46,15 +44,12 @@
   font-family: "Noto Sans", sans-serif;
   font-style: normal;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 30px;
   line-height: 27px;
   color: #FFFFFF;
   margin: 10px 16px 10px 0px;
   padding: 10px 0px;
 }
-
-
-
 
 
 

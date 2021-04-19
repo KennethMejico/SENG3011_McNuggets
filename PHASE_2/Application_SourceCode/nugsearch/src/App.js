@@ -1,6 +1,15 @@
 import nugLogo from './nugSearchLogo300.png'
 import Search from './Search.js'
 import Alert from './Alert.js'
+import AlertBadges from './AlertBadges.js'
+import Map from './Map.js'
+import Graph from './Graph.js'
+import ResultsTable from './ResultsTable.js'
+import About from './About.js'
+import Contact from './Contact.js'
+import Signup from './Signup.js'
+import SignupFinish from './SignupFinish.js'
+import SignupRemove from './SignupRemove.js'
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -16,26 +25,56 @@ function App() {
         <div>
           <nav>
             <ul className="NavBar">
+              <Link to="/">
               <p className="NavBarLi"><img src={nugLogo} alt="logo" className="SmallLogo"/></p>
-              <p className="NavBarLi LogoText">NugSearch</p>
-              <li className="NavBarLi"><Link to="/">Home</Link></li>
+              <p className="NavBarLi LogoText" >NugSearch</p>
+              </Link>
+              <li className="NavBarLi"><Link to="/">Search</Link></li>
               <li className="NavBarLi"><Link to="/about">About</Link></li>
               <li className="NavBarLi"><Link to="/contact">Contact</Link></li>
-              <li className="NavBarLi"><Link to="/alerts">Alerts</Link></li>
+              <li className="NavBarLi"><Link to="/signup">Sign up to alerts</Link></li>
+              {/*<li className="NavBarLi"><Link to="/alerts/default">Alerts</Link></li>
+              <li className="NavBarLi"><Link to="/map">Map</Link></li>
+              <li className="NavBarLi"><Link to="/graph">Graph</Link></li>*/}
             </ul>
           </nav>
 
           <Switch>
             <Route path="/about">
+              <AlertBadges />
               <About />
             </Route>
             <Route path="/contact">
+              <AlertBadges />
               <Contact />
             </Route>
-            <Route path="/alerts">
+            <Route path="/alerts/:alert">
+              <AlertBadges />
               <Alerts />
             </Route>
+            <Route path="/results">
+              <ResultsTable />
+            </Route>
+            <Route path="/map">
+              <Map date={new Date()} ulocation="Sydney NSW Australia"/>
+            </Route>
+            <Route path="/graph">
+              <Graph />
+            </Route>
+            <Route path="/signupFinish">
+              <AlertBadges />
+              <SignupFinish />
+            </Route>
+            <Route path="/signupRemove">
+              <AlertBadges />
+              <SignupRemove />
+            </Route>
+            <Route path="/signup">
+              <AlertBadges />
+              <Signup />
+            </Route>
             <Route path="/">
+              <AlertBadges />
               <Home />
             </Route>
           </Switch>
@@ -46,16 +85,7 @@ function App() {
 }
 
 function Home() {
-  //return <Search />;
-  return <Search />
-}
-
-function About() {
-  return <h2>About</h2>;
-}
-
-function Contact() {
-  return <h2>Contact</h2>;
+  return <Search />;
 }
 
 function Alerts() {
