@@ -58,7 +58,7 @@ html, body {
 }
 
 .page {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.92), rgba(0, 0, 0, 0.92)), url(nuggetsBackground.jpg);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.92), rgba(0, 0, 0, 0.92)), url(../images/nuggetsBackground.jpg);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
