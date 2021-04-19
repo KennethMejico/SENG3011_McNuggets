@@ -33,7 +33,7 @@ def statesCases():
         avg = mean(cases)
         avg = "{:.2f}".format(avg)
         latest = cases[0]
-        stateCasesDict[state] = {'average': avg, 'latest': latest, 'curTime': "2020-06-20"} # str(date.today())} Date hardcoded
+        stateCasesDict[state] = {'average': avg, 'latest': latest, 'curTime': "2021-01-06"} # str(date.today())} Date hardcoded
     return stateCasesDict
     
 if __name__ == "__main__":
