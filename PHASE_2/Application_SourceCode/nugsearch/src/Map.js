@@ -12,7 +12,6 @@ class Map extends React.Component {
         this.state = {
             googleMap: null
         };
-        console.log(props);
     }
 
     componentDidMount() {
@@ -21,29 +20,41 @@ class Map extends React.Component {
         window.document.body.appendChild(googleMapScript);
 
         googleMapScript.addEventListener('load', () => {
-            this.setState({googleMap: this.createMap()})
-            this.placeMarkersAndBounds(this.fetchData(this.props.date, this.props.location))
+            this.setState({googleMap: this.createMap()});
+            fetch('getMap?date='+this.props.date+'&location='+this.props.ulocation).then(res => res.json()).then(data => {
+                console.log(this.props.ulocation);
+                this.placeMarkersAndBounds(data);
+            });
         });
     }
 
     render() {
-        return(
-            <div>
-                <div className="ResultBackground">
-                    <h2>Map: COVID19 Results in World Between {this.props.location.state.startDate} and {this.props.location.state.endDate}</h2>
-                    <div id="map" className="mapClass" > <img src={mapImage} alt="img" className="ResultImage"/> </div>
-                    <p />
-                    <Link to={{
-                        pathname: '/graph',
-                        state: {
-                            data: this.props.location.state.data,
-                            startDate: this.props.location.state.startDate,
-                            endDate: this.props.location.state.endDate,
-                        }
-                    }}>See Graph</Link>
+        if (typeof this.props.location === 'undefined' || typeof this.props.location.state === 'undefined'){
+            return(
+                <div>
+                    <div className="ResultBackground">
+                        <div id="map" className="mapClass" > <img src={mapImage} alt="img" className="ResultImage"/> </div>
+                    </div>
                 </div>
-            </div>
-        )
+            )
+        } else {
+            return(
+                <div>
+                    <div className="ResultBackground">
+                        <div id="map" className="mapClass" > <img src={mapImage} alt="img" className="ResultImage"/> </div>
+                        <p />
+                        <Link to={{
+                            pathname: '/graph',
+                            state: {
+                                data: this.props.location.state.data,
+                                startDate: this.props.location.state.startDate,
+                                endDate: this.props.location.state.endDate,
+                            }
+                        }}>See Graph</Link>
+                    </div>
+                </div>
+            )
+        }
     }
 
     createMap = () =>
@@ -53,14 +64,6 @@ class Map extends React.Component {
             mapTypeId: 'terrain',
             disableDefaultUI: true
         })
-
-    fetchData(date, location){
-        fetch('getMap?date='+date+'&location='+location)
-        .then(res => res.json())
-        .then(data => {
-            return data;
-        });
-    }
 
     placeMarkersAndBounds(data){
         // Unpack data
@@ -74,7 +77,8 @@ class Map extends React.Component {
         var colourArray = ["#00FF00","#85d700","#e59100","#e15300","#FF0000"]
         // For item in regions:
         // Highlight the region in a colour symbolizing how likely we think lockdown is.
-        for (var i=0; i < regions.length; i++){
+        var i;
+        for (i=0; i < regions.length; i++){
             var probLevel = this.convert(
                 regions[i].probabilityOfLockdown, [0, colourArray.length-1]
             );
@@ -94,13 +98,15 @@ class Map extends React.Component {
         }
         // For item in case locations:
         // Place a marker with how many cases were there.
-        for (var i=0; i < caseLocations.length; i++){
+        for (i=0; i < caseLocations.length; i++){
             new window.google.maps.Marker({
                 position: new window.google.maps.LatLng(caseLocations[i].location),
                 label: caseLocations[i].caseCount,
                 map: gmap
             });
         }
+
+        console.log("Done");
     }
 
     // Converts number from 0 to 100 to another range
