@@ -58,16 +58,17 @@ def getMap():
     print ("Map Data Request")
     date = request.args['date']
     unparsed_location = request.args['location']
+    print("Date: "+date+", location: "+unparsed_location)
     if date is None or unparsed_location is None:
         abort(400)
     
     reqURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + unparsed_location + "&key=" + key
     response = requests.get(reqURL)
     resJSON = response.json()
-    if resJSON.status != 'OK':
+    if resJSON["status"] != 'OK':
         print("Error Occured in google geocoding: " + resJSON.status)
         abort(400)
-    location = resJSON.results[0].geometry.location
+    location = resJSON["results"][0]["geometry"]["location"]
     # Location is a dict with two keys, lat and lng
 
     regions = getRegions(date, location)
