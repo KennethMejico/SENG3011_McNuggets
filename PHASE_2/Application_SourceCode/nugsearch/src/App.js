@@ -37,9 +37,11 @@ function App() {
 
           <Switch>
             <Route path="/about">
+              <AlertBadges />
               <About />
             </Route>
             <Route path="/contact">
+              <AlertBadges />
               <Contact />
             </Route>
             <Route path="/alerts/:alert">
