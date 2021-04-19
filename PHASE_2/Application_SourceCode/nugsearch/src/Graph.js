@@ -2,7 +2,7 @@ import React from 'react'
 import './Graph.css'
 import { ResponsiveLine } from '@nivo/line'
 
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 
 
 class Graph extends React.Component {
@@ -241,7 +241,14 @@ class Graph extends React.Component {
                     theme={theme}
                 />
                 <p />
-                <a href="/map">See Map</a>
+                <Link to={{
+                        pathname: '/graph',
+                        state: {
+                            data: this.props.location.state.data,
+                            startDate: this.props.location.state.startDate,
+                            endDate: this.props.location.state.endDate,
+                        }
+                    }}>See Graph</Link>
             </div>
         </div>
         )
