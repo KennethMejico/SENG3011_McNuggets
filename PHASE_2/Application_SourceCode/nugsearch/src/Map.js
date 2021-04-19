@@ -29,22 +29,32 @@ class Map extends React.Component {
     }
 
     render() {
-        return(
-            <div>
-                <div className="ResultBackground">
-                    <div id="map" className="mapClass" > <img src={mapImage} alt="img" className="ResultImage"/> </div>
-                    <p />
-                    {/* <Link to={{
-                        pathname: '/graph',
-                        state: {
-                            data: this.props.location.state.data,
-                            startDate: this.props.location.state.startDate,
-                            endDate: this.props.location.state.endDate,
-                        }
-                    }}>See Graph</Link> */}
+        if (typeof this.props.location === 'undefined' || typeof this.props.location.state === 'undefined'){
+            return(
+                <div>
+                    <div className="ResultBackground">
+                        <div id="map" className="mapClass" > <img src={mapImage} alt="img" className="ResultImage"/> </div>
+                    </div>
                 </div>
-            </div>
-        )
+            )
+        } else {
+            return(
+                <div>
+                    <div className="ResultBackground">
+                        <div id="map" className="mapClass" > <img src={mapImage} alt="img" className="ResultImage"/> </div>
+                        <p />
+                        <Link to={{
+                            pathname: '/graph',
+                            state: {
+                                data: this.props.location.state.data,
+                                startDate: this.props.location.state.startDate,
+                                endDate: this.props.location.state.endDate,
+                            }
+                        }}>See Graph</Link>
+                    </div>
+                </div>
+            )
+        }
     }
 
     createMap = () =>
