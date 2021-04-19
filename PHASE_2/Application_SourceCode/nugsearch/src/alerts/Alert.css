@@ -53,17 +53,17 @@
 }
 
 html, body {
-    background: #ffd07e;
-    color: rgb(255, 128, 24);
+    background-color: #ffd07e;
+    color: #ff8018;
 }
 
 .page {
     background-image: linear-gradient(rgba(0, 0, 0, 0.92), rgba(0, 0, 0, 0.92)), url(../images/nuggetsBackground.jpg);
+    background-attachment: fixed;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     text-align: center;
-    height: 100vh;
-    overflow: hidden;
+    height: 100%;
     width: 100%;
 }

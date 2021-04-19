@@ -1,7 +1,7 @@
 .App {
   text-align: center;
   height: 100vh;
-  overflow: scroll;
+  overflow-x: hidden;
   width: 100%;
 }
 
@@ -10,7 +10,10 @@
   list-style-type: none;
   margin: 0;
   padding: 0;
-  overflow: hidden;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
 }
 
 .NavBarLi {
