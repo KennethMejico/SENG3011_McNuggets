@@ -1,11 +1,16 @@
 .Background {
     height: 100vh;
-    overflow: hidden;
-    width: 100%;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.66), rgba(0, 0, 0, 0.66)), url(../images/COVID-19-1080x515.jpg);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background-color: #000000;
+    background-repeat: repeat;
+    background-size: 50%;
+    padding: 10px;
+    opacity: 0.7;
+    position: relative;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40em;
+    z-index: 1 !important;
 }
 
 .Heading {
@@ -32,9 +37,9 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 50%;
+    width: 80%;
 
-    font-family: Roboto;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 20px;
@@ -45,83 +50,20 @@
     font-feature-settings: 'cpsp' on, 'ss01' on, 'ss02' on, 'ss05' on, 'ss06' on, 'ss07' on, 'kern' off, 'liga' off;
 
     color: #ffffff;
-
-    /*padding-top: 50px;
-    padding-bottom: 100px;*/
 }
 
-.OtherAlerts {
-    background-color: #111111;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
+html, body {
+    background: #ffd07e;
+    color: rgb(255, 128, 24);
 }
 
-.OtherHeading {
-    width: 100%;
-    height: 34px;
-
-    font-family: Noto Sans;
-    font-style: normal;
-    font-weight: 900;
-    font-size: 24px;
-    line-height: 140.62%;
-    /* identical to box height, or 34px */
-
+.page {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.92), rgba(0, 0, 0, 0.92)), url(../images/nuggetsBackground.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     text-align: center;
-
-    color: #000000;
-
-    /*padding-bottom: 200px;*/
-}
-
-.Divider {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    height: 0px;
-    width: 50%;
-
-    border: 1px solid #000000;
-}
-
-.Alert1 {
-    width: 304px;
-    height: 176px;
-    left: 230px;
-    padding-top: 150px;
-    padding-bottom: 100px;
-}
-
-.Alert2 {
-    width: 304px;
-    height: 176px;
-    left: 565px;
-    padding-top: 1150px;
-    padding-bottom: 100px;
-}
-
-.Alert3 {
-    width: 304px;
-    height: 176px;
-    left: 900px;
-    padding-top: 150px;
-    padding-bottom: 100px;
-}
-
-.row {
-    padding-top: 100px;
-    padding-bottom: 150px;
-}
-
-.column {
-    float: left;
-    width: 33.3%;
-}
-
-.row::after {
-    content: "";
-    clear: both;
-    display: table;
+    height: 100vh;
+    overflow: hidden;
+    width: 100%;
 }

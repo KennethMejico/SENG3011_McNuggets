@@ -1,5 +1,6 @@
 .AlertBadgeArea {
     position: fixed;
+    z-index: 100 !important;
     right: 0px;
 }
 
@@ -14,16 +15,18 @@
     background-position: 4px;
     background-image: url('../images/Alert Image.png');
     background-repeat: no-repeat;
-    background-size: 100px;
+    background-size: 90px;
 
     text-align: left;
     color: white;
     cursor: pointer;
 
-    min-height: 80px;
+    min-height: 60px;
     width: 170px;
+    z-index: 10 !important;
 }
 
 .AlertBadge:hover {
     background-color: rgba(133, 45, 45, 0.25);
+    z-index: 10 !important;
 }
