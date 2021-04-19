@@ -4,8 +4,21 @@ from mapData import getCaseLocations, getRegions
 import requests
 import json
 from datetime import date
+from flask_mail import Mail, Message
 
 app = Flask(__name__)
+mail = Mail(app)
+
+emailAddress = ""
+emailPassword = ""
+
+app.config['MAIL_SERVER']='smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = emailAddress
+app.config['MAIL_PASSWORD'] = emailPassword
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+mail = Mail(app)
 
 @app.route('/currentLocation')
 def currentLocation():
@@ -108,7 +121,17 @@ def checkAlert():
         pass
     return {
         "check": False
-}
+    }
+
+@app.route('/sendEmail')
+def sendEmail:
+    if 'email' not in request.args:
+        abort(400)
+    emailTarget = request.args.get('email')
+    msg = Message('Hello', sender = emailAddress, recipients = [emailTarget])
+    msg.body = "Hello Flask message sent from Flask-Mail"
+    mail.send(msg)
+
 
 @app.route('/')
 def index():
@@ -118,6 +141,8 @@ def index():
             "search",
             "getAlert",
             "getMap",
-            "getAlertDescription"
+            "getAlertDescription",
+            "checkAlert",
+            "sendEmail"
         ]
     }
