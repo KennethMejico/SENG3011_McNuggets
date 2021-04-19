@@ -22,9 +22,11 @@ function App() {
         <div>
           <nav>
             <ul className="NavBar">
+              <Link to="/">
               <p className="NavBarLi"><img src={nugLogo} alt="logo" className="SmallLogo"/></p>
-              <p className="NavBarLi LogoText">NugSearch</p>
-              <li className="NavBarLi"><Link to="/">Home</Link></li>
+              <p className="NavBarLi LogoText" >NugSearch</p>
+              </Link>
+              <li className="NavBarLi"><Link to="/">Search</Link></li>
               <li className="NavBarLi"><Link to="/about">About</Link></li>
               <li className="NavBarLi"><Link to="/contact">Contact</Link></li>
               {/*<li className="NavBarLi"><Link to="/alerts/default">Alerts</Link></li>

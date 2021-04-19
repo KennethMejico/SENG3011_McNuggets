@@ -96,7 +96,7 @@ class Map extends React.Component {
         // Place a marker with how many cases were there.
         for (var i=0; i < caseLocations.length; i++){
             new window.google.maps.Marker({
-                position: new google.maps.LatLng(caseLocations[i].location),
+                position: new window.google.maps.LatLng(caseLocations[i].location),
                 label: caseLocations[i].caseCount,
                 map: gmap
             });
