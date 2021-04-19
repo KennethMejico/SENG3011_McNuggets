@@ -4,6 +4,9 @@ import Alert from './Alert.js'
 import AlertBadges from './AlertBadges.js'
 import Map from './Map.js'
 import Graph from './Graph.js'
+import ResultsTable from './ResultsTable.js'
+import About from './About.js'
+import Contact from './Contact.js'
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -41,6 +44,9 @@ function App() {
               <AlertBadges />
               <Alerts />
             </Route>
+            <Route path="/results">
+              <ResultsTable />
+            </Route>
             <Route path="/map">
               <Map />
             </Route>
@@ -59,16 +65,7 @@ function App() {
 }
 
 function Home() {
-  //return <Search />;
-  return <Search />
-}
-
-function About() {
-  return <h2>About</h2>;
-}
-
-function Contact() {
-  return <h2>Contact</h2>;
+  return <Search />;
 }
 
 function Alerts() {

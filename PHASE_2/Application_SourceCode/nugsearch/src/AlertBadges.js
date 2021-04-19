@@ -11,8 +11,8 @@ class AlertBadges extends React.Component {
     }
 
     componentDidMount() {
-        alert = this.props.match.params.alert;
-        this.getAlerts(alert);
+        let currAlert = this.props.match.params.alert;
+        this.getAlerts(currAlert);
     }
 
     getAlerts(alert) {

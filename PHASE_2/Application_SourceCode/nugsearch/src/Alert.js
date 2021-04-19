@@ -1,5 +1,5 @@
 import React from 'react'
-import { useParams, withRouter } from 'react-router';
+import { withRouter } from 'react-router';
 import './Alert.css'
 
 //import alertImg from './Health-alert.png'
