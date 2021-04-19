@@ -7,6 +7,9 @@ import Graph from './Graph.js'
 import ResultsTable from './ResultsTable.js'
 import About from './About.js'
 import Contact from './Contact.js'
+import Signup from './Signup.js'
+import SignupFinish from './SignupFinish.js'
+import SignupRemove from './SignupRemove.js'
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -29,6 +32,7 @@ function App() {
               <li className="NavBarLi"><Link to="/">Search</Link></li>
               <li className="NavBarLi"><Link to="/about">About</Link></li>
               <li className="NavBarLi"><Link to="/contact">Contact</Link></li>
+              <li className="NavBarLi"><Link to="/signup">Sign up to alerts</Link></li>
               {/*<li className="NavBarLi"><Link to="/alerts/default">Alerts</Link></li>
               <li className="NavBarLi"><Link to="/map">Map</Link></li>
               <li className="NavBarLi"><Link to="/graph">Graph</Link></li>*/}
@@ -56,6 +60,18 @@ function App() {
             </Route>
             <Route path="/graph">
               <Graph />
+            </Route>
+            <Route path="/signupFinish">
+              <AlertBadges />
+              <SignupFinish />
+            </Route>
+            <Route path="/signupRemove">
+              <AlertBadges />
+              <SignupRemove />
+            </Route>
+            <Route path="/signup">
+              <AlertBadges />
+              <Signup />
             </Route>
             <Route path="/">
               <AlertBadges />
