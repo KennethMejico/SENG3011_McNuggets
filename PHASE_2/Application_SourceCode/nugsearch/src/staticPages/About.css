@@ -1,5 +1,5 @@
-.contact {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.92), rgba(0, 0, 0, 0.92)), url(nuggetsBackground.jpg);
+.about {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.92), rgba(0, 0, 0, 0.92)), url(../images/nuggetsBackground.jpg);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -8,13 +8,13 @@
     width: 100%;
 }
 
-.contactInfo {
+.facts {
     text-align: center;
     display: inline-block;
     margin: 0 auto;
 }
 
-.contactInfo li {
+.facts li {
     color: white;
     text-align: left;
     font-size: 20px;
