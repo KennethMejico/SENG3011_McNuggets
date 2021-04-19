@@ -1,6 +1,6 @@
 .Container {
     height: 100vh;
-    overflow:scroll;
+    overflow: hidden;
 }
 
 .Table {
@@ -8,14 +8,17 @@
     margin-left: auto;
     margin-right: auto;
     padding-bottom: 100px;
+    overflow: hidden;
 }
 
 .HeaderRow {
     background: white;
+    overflow: hidden;
 }
 
 .Row {
     background: whitesmoke;
+    overflow: hidden;
 }
 
 .Filter {

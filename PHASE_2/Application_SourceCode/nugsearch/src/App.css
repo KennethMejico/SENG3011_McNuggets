@@ -1,8 +1,9 @@
 .App {
   text-align: center;
   height: 100vh;
-  overflow: scroll;
+  overflow: auto;
   width: 100%;
+  position: fixed;
 }
 
 .NavBar {

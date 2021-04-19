@@ -1,34 +1,42 @@
 {
     "act": {
         "average": "0.00",
+        "curTime": "2020-06-20",
         "latest": 0
     },
     "nsw": {
-        "average": "0.43",
-        "latest": 0
+        "average": "5.14",
+        "curTime": "2020-06-20",
+        "latest": 4
     },
     "nt": {
-        "average": "0.00",
+        "average": "-0.29",
+        "curTime": "2020-06-20",
         "latest": 0
     },
     "qld": {
-        "average": "0.00",
+        "average": "-0.14",
+        "curTime": "2020-06-20",
         "latest": 0
     },
     "sa": {
-        "average": "0.00",
+        "average": "-0.14",
+        "curTime": "2020-06-20",
         "latest": 0
     },
     "tas": {
         "average": "0.00",
+        "curTime": "2020-06-20",
         "latest": 0
     },
     "vic": {
-        "average": "0.00",
-        "latest": 0
+        "average": "4.00",
+        "curTime": "2020-06-20",
+        "latest": 1
     },
     "wa": {
-        "average": "0.00",
+        "average": "0.14",
+        "curTime": "2020-06-20",
         "latest": 0
     }
 }
