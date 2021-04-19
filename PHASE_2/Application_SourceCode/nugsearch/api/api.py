@@ -2,6 +2,8 @@ from flask import Flask, abort, request
 from apiKey import key
 from mapData import getCaseLocations, getRegions
 import requests
+import json
+from datetime import date
 
 app = Flask(__name__)
 
@@ -46,24 +48,7 @@ def search():
 def getAlerts():
     return {
         # Can't have spaces in these names
-        "alerts": ["Covid-19", "BlackDeath"]
-    }
-
-@app.route('/getAlertDescription')
-def getAlertDescription():
-    if "Covid-19" == request.args.get("name"):
-        return {
-            "title": "Covid-19 Outbreak",
-            "text": "There were 17 cases of COVID-19 in Sydney on 10/04/2021. In the past, this amount of cases has lead to a lockdown in your area. Be prepared for another to happen again. COVID-19 has caused a lockdown in your area THREE times before. COVID-19 has caused lockdowns to happen way too many times in total. The last COVID-19 lockdown happened after 15 cases were reported in a day. See government alerts for your area: https://www.nsw.gov.au/"
-        }
-    elif "BlackDeath" == request.args.get("name"):
-        return {
-            "title": "Black Death Resurgeance",
-            "text": "Somehow, the black death has returned"
-        }
-    return {
-        "title": "Bad Alert string",
-        "text": "Bad Alert string"
+        "alerts": ['nsw', 'qld', 'vic', 'wa', 'sa', 'tas', 'act', 'nt']
     }
 
 @app.route('/getMap')
@@ -93,6 +78,36 @@ def getMap():
         "regions": regions,
         "caseLocations": caseLocations
     }
+
+@app.route('/getAlertData')
+def getAlertData():
+    location = request.args.get("location")
+
+    try:
+        with open("covid19Data.json", 'r') as f:
+            data = json.load(f)
+        return { "location": location,
+                 "average": data[location]['average'],
+                 "latest": data[location]['latest'],
+                 "time": date.today().strftime("%d/%m/%Y")
+        }
+    except IOError:
+        pass
+    return None
+
+@app.route('/checkAlert')
+def checkAlert():
+    location = request.args.get("location")
+    try:
+        with open("covid19Data.json", 'r') as f:
+            data = json.load(f)
+        if data[location]['average'] > 1 or data[location]['latest'] > 5:
+            return { "check": True }
+    except IOError:
+        pass
+    return {
+        "check": False
+}
 
 @app.route('/')
 def index():
