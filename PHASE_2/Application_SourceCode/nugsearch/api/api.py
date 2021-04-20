@@ -143,6 +143,8 @@ def sendEmail():
         To Unsubscribe, Please go to <a href="https://localhost:3000/signupRemove?{emailTarget}"> this Link</a>
         </p>
         """
+    with open("mailingList.txt", "a") as file_object:
+        file_object.write(f"{emailTarget}\n")
     mail.send(msg)
 
     return {'ok': True}
