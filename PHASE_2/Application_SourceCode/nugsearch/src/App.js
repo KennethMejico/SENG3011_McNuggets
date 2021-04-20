@@ -10,7 +10,6 @@ import Contact from './staticPages/Contact.js'
 import Signup from './signup/Signup.js'
 import SignupFinish from './signup/SignupFinish.js'
 import SignupRemove from './signup/SignupRemove.js'
-import BottomNav from './search/results/BottomNav.js'
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -55,15 +54,12 @@ function App() {
             </Route>
             <Route path="/results">
               <ResultsTable />
-              <BottomNav />
             </Route>
             <Route path="/map">
               <Map date={new Date()} ulocation="Melbourne, Aus"/>
-              <BottomNav />
             </Route>
             <Route path="/graph">
               <Graph />
-              <BottomNav />
             </Route>
             <Route path="/signupFinish">
               <AlertBadges />

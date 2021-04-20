@@ -1,8 +1,9 @@
 import React from 'react'
 import './Graph.css'
 import { ResponsiveLine } from '@nivo/line'
+import BottomNav from './BottomNav.js'
 
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 
 class Graph extends React.Component {
@@ -241,14 +242,15 @@ class Graph extends React.Component {
                     theme={theme}
                 />
                 <p />
-                <Link to={{
+                <BottomNav location={this.props.location}/>
+                {/*<Link to={{
                         pathname: '/graph',
                         state: {
                             data: this.props.location.state.data,
                             startDate: this.props.location.state.startDate,
                             endDate: this.props.location.state.endDate,
                         }
-                    }}>See Graph</Link>
+                    }}>See Graph</Link>*/}
             </div>
         </div>
         )

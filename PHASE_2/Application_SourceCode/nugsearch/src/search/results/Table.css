@@ -6,13 +6,15 @@
     min-width: 95%;
     margin-left: auto;
     margin-right: auto;
-    padding-bottom: 100px;
+    margin-bottom: 6%;
     border-collapse: collapse;
     table-layout: fixed;
 }
 
+tr:nth-child(even) {background-color: #d3d3d3;}
+
 .HeaderRow {
-    background: white;
+    background: rgb(168, 168, 168);
     color: black;
 }
 

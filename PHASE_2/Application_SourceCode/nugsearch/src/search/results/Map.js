@@ -1,8 +1,9 @@
 import React from 'react'
 import './Map.css'
+import BottomNav from './BottomNav.js'
 
 import mapImage from './Map.PNG'
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import GOOGLE_MAP_API_KEY from './GOOGLE_MAP_API_KEY.js';
 
 class Map extends React.Component {
@@ -42,14 +43,15 @@ class Map extends React.Component {
                     <div className="ResultBackground">
                         <div id="map" className="mapClass" > <img src={mapImage} alt="img" className="ResultImage"/> </div>
                         <p />
-                        <Link to={{
+                        <BottomNav location={this.props.location}/>
+                        {/*<Link to={{
                             pathname: '/graph',
                             state: {
                                 data: this.props.location.state.data,
                                 startDate: this.props.location.state.startDate,
                                 endDate: this.props.location.state.endDate,
                             }
-                        }}>See Graph</Link>
+                        }}>See Graph</Link>*/}
                     </div>
                 </div>
             )
