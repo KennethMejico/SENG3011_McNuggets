@@ -34,6 +34,7 @@
 
 .alertPage {
     background-image: linear-gradient(rgba(0, 0, 0, 0.92), rgba(0, 0, 0, 0.92)), url(../images/nuggetsBackground.jpg);
+    background-attachment: fixed;
     background-size: cover;
     background-position: center;
     background-repeat: repeat;
