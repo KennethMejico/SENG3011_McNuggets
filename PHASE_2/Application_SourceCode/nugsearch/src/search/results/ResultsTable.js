@@ -1,7 +1,9 @@
 import React from 'react'
 import MyTable from './Table.js'
+import BottomNav from './BottomNav.js'
 
-import { withRouter, Link } from 'react-router-dom';
+
+import { withRouter } from 'react-router-dom';
 
 const columns = [
           {
@@ -39,7 +41,7 @@ class ResultsTable extends React.Component {
             data: this.processData()
         }
     }
-    
+
     onlyUnique(value, index, self) {
         return self.indexOf(value) === index;
     }
@@ -72,14 +74,15 @@ class ResultsTable extends React.Component {
                 <h2>Reports Between {this.props.location.state.startDate} and {this.props.location.state.endDate}</h2>
                 <MyTable columns={columns} data={this.state.data} />
                 <p />
-                <Link to={{
+                <BottomNav location={this.props.location}/>
+                {/*<Link to={{
                     pathname: '/map',
-                    state: { 
+                    state: {
                         data: this.props.location.state.data,
                         startDate: this.props.location.state.startDate,
-                        endDate: this.props.location.state.endDate, 
+                        endDate: this.props.location.state.endDate,
                     }
-                }}>See Map</Link>
+                }}>See Map</Link>*/}
             </div>
         </div>
         )

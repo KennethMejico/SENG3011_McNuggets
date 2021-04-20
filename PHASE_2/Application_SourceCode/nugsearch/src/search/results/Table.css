@@ -3,15 +3,18 @@
 }
 
 .Table {
-    width: 80%;
+    min-width: 95%;
     margin-left: auto;
     margin-right: auto;
-    padding-bottom: 100px;
+    margin-bottom: 6%;
     border-collapse: collapse;
+    table-layout: fixed;
 }
 
+tr:nth-child(even) {background-color: #d3d3d3;}
+
 .HeaderRow {
-    background: white;
+    background: rgb(168, 168, 168);
     color: black;
 }
 
@@ -27,6 +30,9 @@
 .Cell {
     color: black;
     border-bottom: 1px solid lightslategray;
+    width: auto;
+    white-space: nowrap;
+    padding: 1px 5px;
 }
 
 .HeaderCell {
@@ -35,5 +41,18 @@
 }
 
 .Filter {
-    width: 79%;
+    width: 87%;
+    padding: 5px;
+    padding-left: 28px;
+    margin-top: 15px;
+    outline: none;
+    border: 2px solid #999999;
+    border-radius: 5px;
+    background-color: #FBFBFB;
+    font-family: "Noto Sans", sans-serif;
+    font-size: 16px;
+    background-position: 4px;
+    background-image: url('https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/search-512.png');
+    background-repeat: no-repeat;
+    background-size: 20px;
 }

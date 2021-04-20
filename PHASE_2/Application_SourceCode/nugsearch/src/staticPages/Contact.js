@@ -10,7 +10,7 @@ class Contact extends React.Component {
             <h1><img src={nugLogo} alt="logo" className="MediumLogo"/>Contact NugSearch</h1>
             <ul className="contactInfo">
                 <li>We're third year Uni students at UNSW doing this for a group project</li>
-                <li>Why would you need to contact us</li>
+                <li>For questions and enquiries, please contact sengmcnuggets@gmail.com</li>
             </ul>
         </div>)
     }
