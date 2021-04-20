@@ -136,10 +136,12 @@ def sendEmail():
         abort(400)
     emailTarget = request.args.get('email')
     msg = Message('Welcome', sender = emailAddress, recipients = [emailTarget])
-    msg.body = """
+    msg.html = f"""
+        <p>
         You have signed up for alerts from NugSearch
-        
-        To Unsubscribe, Please go to https://localhost:3000/signupRemove
+        <br><br>
+        To Unsubscribe, Please go to <a href="https://localhost:3000/signupRemove?{emailTarget}"> this Link</a>
+        </p>
         """
     mail.send(msg)
 
