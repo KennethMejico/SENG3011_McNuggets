@@ -183,12 +183,18 @@ class Graph extends React.Component {
                 <ResponsiveLine
                     data={this.state.data}
                     margin={{ top: 50, right: 150, bottom: 100, left: 60 }}
-                    xScale={{ type: 'point' }}
+                    // xScale={{ type: 'point' }}
+                    xScale={{
+                      type: "time",
+                      format: "%Y-%m-%d"
+                    }}
+                    xFormat="time:%Y-%m-%d"
                     yScale={{ type: 'linear', min: 'auto', max: 'auto', stacked: false, reverse: false }}
                     curve="monotoneX"
                     axisTop={null}
                     axisRight={null}
                     axisBottom={{
+                        format: "%b %d",
                         orient: 'bottom',
                         tickSize: 5,
                         tickPadding: 5,
@@ -207,7 +213,7 @@ class Graph extends React.Component {
                         legendPosition: 'middle',
                         fontColor: 'white',
                     }}
-                    pointSize={10}
+                    pointSize={0}
                     pointColor={{ theme: 'background' }}
                     pointBorderWidth={2}
                     pointBorderColor={{ from: 'serieColor' }}
