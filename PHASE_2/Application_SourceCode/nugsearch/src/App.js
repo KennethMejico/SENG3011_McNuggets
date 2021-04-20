@@ -58,8 +58,7 @@ function App() {
               <BottomNav />
             </Route>
             <Route path="/map">
-              <Map date={new Date()} ulocation="Sydney NSW Australia"/>
-              <Map />
+              <Map date={new Date()} ulocation="Melbourne, Aus"/>
               <BottomNav />
             </Route>
             <Route path="/graph">

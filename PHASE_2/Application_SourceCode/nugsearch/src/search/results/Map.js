@@ -82,8 +82,8 @@ class Map extends React.Component {
                 regions[i].probabilityOfLockdown, [0, colourArray.length-1]
             );
             var mbounds = new window.google.maps.LatLngBounds(
-                new window.google.maps.LatLng(regions[i].regionBounds.southWest),   //SW
-                new window.google.maps.LatLng(regions[i].regionBounds.northEast)    //NE
+                new window.google.maps.LatLng(regions[i].regionBounds.southwest),   //SW
+                new window.google.maps.LatLng(regions[i].regionBounds.northeast)    //NE
             );
             new window.google.maps.Rectangle({
                 strokeColor: colourArray[probLevel],
