@@ -140,7 +140,7 @@ def sendEmail():
         <p>
         You have signed up for alerts from NugSearch
         <br><br>
-        To Unsubscribe, Please go to <a href="https://localhost:3000/signupRemove?{emailTarget}"> this Link</a>
+        To Unsubscribe, Please go to <a href="http://localhost:3000/signupRemove"> this Link</a>
         </p>
         """
     with open("mailingList.txt", "a") as file_object:

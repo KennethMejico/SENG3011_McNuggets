@@ -30,6 +30,7 @@ class Signup extends React.Component {
             alert("Please enter a valid email");
             return;
         }
+        fetch(`/sendEmail?email=${this.state.email}`);
         this.props.history.push({
             pathname: '/signupFinish',
         });
