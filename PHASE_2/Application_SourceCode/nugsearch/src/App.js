@@ -30,6 +30,7 @@ function App() {
               <li className="NavBarLi"><Link to="/">Home</Link></li>
               <li className="NavBarLi"><Link to="/about">About</Link></li>
               <li className="NavBarLi"><Link to="/contact">Contact</Link></li>
+              <li className="NavBarLi"><Link to="/signup">Sign up to alerts</Link></li>
               {/*<li className="NavBarLi"><Link to="/alerts/default">Alerts</Link></li>
               <li className="NavBarLi"><Link to="/map">Map</Link></li>
               <li className="NavBarLi"><Link to="/graph">Graph</Link></li>*/}
@@ -38,9 +39,11 @@ function App() {
 
           <Switch>
             <Route path="/about">
+              <AlertBadges />
               <About />
             </Route>
             <Route path="/contact">
+              <AlertBadges />
               <Contact />
             </Route>
             <Route path="/alerts/:alert">
@@ -51,10 +54,23 @@ function App() {
               <ResultsTable />
             </Route>
             <Route path="/map">
+              <Map date={new Date()} ulocation="Sydney NSW Australia"/>
               <Map />
             </Route>
             <Route path="/graph">
               <Graph />
+            </Route>
+            <Route path="/signupFinish">
+              <AlertBadges />
+              <SignupFinish />
+            </Route>
+            <Route path="/signupRemove">
+              <AlertBadges />
+              <SignupRemove />
+            </Route>
+            <Route path="/signup">
+              <AlertBadges />
+              <Signup />
             </Route>
             <Route path="/">
               <AlertBadges />
