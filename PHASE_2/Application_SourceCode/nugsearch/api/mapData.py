@@ -14,7 +14,6 @@ hardCodedResponseRegions = [
     {'regionName': "Melbourne", "regionBounds" : {"northeast" : {"lat" : -37.5112737,"lng" : 145.5125288},"southwest" : {"lat" : -38.4338593,"lng" : 144.5937418}}, 'probabilityOfLockdown': 100},
     {'regionName': "Mitchell",  "regionBounds" : {"northeast" : {"lat" : -36.8353188,"lng" : 145.4296065},"southwest" : {"lat" : -37.5153787,"lng" : 144.5303438}}, 'probabilityOfLockdown': 50},
     {'regionName': "Yarra Ranges", "regionBounds" : {"northeast" : {"lat" : -37.5250901,"lng" : 146.1925247},"southwest" : {"lat" : -37.9751113,"lng" : 145.2816656}}, 'probabilityOfLockdown': 15},
-    {"regionName": "Gippsland", "regionBounds": {"northeast" : {"lat" : -36.6124369,"lng" : 149.9762909},"southwest" : {"lat" : -39.1365809,"lng" : 145.108231}}, "probabilityOfLockdown": 40}
 ]
 
 def getCaseLocations(date, location):
