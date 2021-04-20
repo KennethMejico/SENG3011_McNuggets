@@ -23,7 +23,7 @@ export default function MyTable({ columns, data }) {
 
     const handleFilterChange = e => {
         const value = e.target.value || undefined;
-        setFilter(2, value); // 2 is the column id for diseases
+        setFilter(3, value); // 2 is the column id for diseases
         setFilterInput(value);
     };
 
@@ -36,7 +36,7 @@ export default function MyTable({ columns, data }) {
                 placeholder={"Search Diseases"}
                 className="Filter"
             />
-            <table {...getTableProps()} className="Table" hover striped>
+            <table {...getTableProps()} className="Table">
                 <thead>
                     {headerGroups.map(headerGroup => (
                         <tr {...headerGroup.getHeaderGroupProps()} className="HeaderRow">

@@ -1,0 +1,33 @@
+.BottomNavBar {
+    display: none;
+    background-color: #111111;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    bottom: 0;
+    height: 10%;
+    width: 100%;
+    z-index: 1000;
+}
+
+.BottomNavBarLi {
+    float: center;
+    list-style-type: none;
+    margin: 10px 16px;
+    padding: 10px 16px;
+    display: inline;
+    width: 20%;
+}
+
+.BottomNavBarLi {
+    display: block;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 24px;
+}
+
+.BottomNavBarLi:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+}

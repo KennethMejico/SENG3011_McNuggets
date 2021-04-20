@@ -10,6 +10,7 @@ import Contact from './staticPages/Contact.js'
 import Signup from './signup/Signup.js'
 import SignupFinish from './signup/SignupFinish.js'
 import SignupRemove from './signup/SignupRemove.js'
+import BottomNav from './search/results/BottomNav.js'
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -25,9 +26,11 @@ function App() {
         <div>
           <nav>
             <ul className="NavBar">
+              <Link to="/">
               <p className="NavBarLi"><img src={nugLogo} alt="logo" className="SmallLogo"/></p>
-              <p className="NavBarLi LogoText">NugSearch</p>
-              <li className="NavBarLi"><Link to="/">Home</Link></li>
+              <p className="NavBarLi LogoText" >NugSearch</p>
+              </Link>
+              <li className="NavBarLi"><Link to="/">Search</Link></li>
               <li className="NavBarLi"><Link to="/about">About</Link></li>
               <li className="NavBarLi"><Link to="/contact">Contact</Link></li>
               <li className="NavBarLi"><Link to="/signup">Sign up to alerts</Link></li>
@@ -52,13 +55,16 @@ function App() {
             </Route>
             <Route path="/results">
               <ResultsTable />
+              <BottomNav />
             </Route>
             <Route path="/map">
               <Map date={new Date()} ulocation="Sydney NSW Australia"/>
               <Map />
+              <BottomNav />
             </Route>
             <Route path="/graph">
               <Graph />
+              <BottomNav />
             </Route>
             <Route path="/signupFinish">
               <AlertBadges />
