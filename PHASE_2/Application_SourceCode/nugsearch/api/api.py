@@ -5,12 +5,13 @@ import requests
 import json
 from datetime import date
 from flask_mail import Mail, Message
+import os
 
 app = Flask(__name__)
 mail = Mail(app)
 
-emailAddress = ""
-emailPassword = ""
+emailAddress = "sengMcNuggets@gmail.com"
+emailPassword = os.environ['EMAIL_PASSWORD']
 
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
@@ -134,9 +135,15 @@ def sendEmail():
     if 'email' not in request.args:
         abort(400)
     emailTarget = request.args.get('email')
-    msg = Message('Hello', sender = emailAddress, recipients = [emailTarget])
-    msg.body = "Hello Flask message sent from Flask-Mail"
+    msg = Message('Welcome', sender = emailAddress, recipients = [emailTarget])
+    msg.body = """
+        You have signed up for alerts from NugSearch
+        
+        To Unsubscribe, Please go to https://localhost:3000/signupRemove
+        """
     mail.send(msg)
+
+    return {'ok': True}
 
 @app.route('/')
 def index():
