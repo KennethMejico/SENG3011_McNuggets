@@ -1,5 +1,5 @@
 .Background {
-    height: 100vh;
+    height: auto;
     background-color: #000000;
     background-repeat: repeat;
     background-size: 50%;
@@ -9,28 +9,8 @@
     text-align: center;
     margin-left: auto;
     margin-right: auto;
-    width: 40em;
+    width: 60em;
     z-index: 1 !important;
-}
-
-.Heading {
-    display: block;
-    width: 50%;
-    height: 134.38px;
-    top: 30px;
-    margin-left: auto;
-    margin-right: auto;
-
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 56px;
-    /* /*line-height: 66px; */
-    text-align: center;
-
-    color: #ffffff;
-
-    opacity: 0.9;
 }
 
 .AlertText {
@@ -52,18 +32,15 @@
     color: #ffffff;
 }
 
-html, body {
-    background-color: #ffd07e;
-    color: #ff8018;
-}
-
-.page {
+.alertPage {
     background-image: linear-gradient(rgba(0, 0, 0, 0.92), rgba(0, 0, 0, 0.92)), url(../images/nuggetsBackground.jpg);
     background-attachment: fixed;
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
+    background-repeat: repeat;
     text-align: center;
+    overflow: auto;
     height: 100%;
     width: 100%;
+    padding-bottom: 50px;
 }

@@ -6,27 +6,16 @@ class AlertBadges extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            alerts: []
+            alerts: [],
         };
     }
 
     componentDidMount() {
-        let currAlert = this.props.match.params.alert;
-        this.getAlerts(currAlert);
-    }
-
-    getAlerts(alert) {
-        fetch('/getAlerts').then(res => res.json()).then(data => {
-            var index = data.alerts.indexOf(alert);
-            if (index !== -1) {
-                data.alerts.splice(index, 1);
-            }
-            this.setState({alerts: data.alerts});
-        })
+        this.checkAlert();
     }
 
     componentWillReceiveProps(nextProps) {
-        this.getAlerts(nextProps.match.params.alert);
+        this.checkAlert(nextProps.match.params.alert);
     }
 
     navigateToPage = (event) => {
@@ -35,20 +24,21 @@ class AlertBadges extends React.Component {
     }
 
     checkAlert(alert) {
-        fetch('/checkAlert?alert=covid-19').then(res => res.json()).then(data => {
-            return data.checkAlert;
+        fetch('/checkAlert').then(res => res.json()).then(data => {
+            var index = data.alerts.indexOf(alert);
+            if (index !== -1) {
+                data.alerts.splice(index, 1);
+            }
+            this.setState({alerts: data.alerts});
         })
-        return false;
     }
 
     AlertBadge(alert) {
-        if (this.checkAlert(alert) == false) { // SHOULD BE TRUE, BUT WILL BE LEFT FALSE FOR DEMO (Alerts won't be shown as they check if average weekly cases are over '1' or latest case over '5')
-            return (
-                <div className="AlertBadge" key={alert} data-alertname={alert} onClick={this.navigateToPage}>
-                    {alert.toUpperCase()}: POTENTIAL COVID-19 LOCKDOWN
-                </div>
-            );
-        }
+        return (
+            <div className="AlertBadge" key={alert} data-alertname={alert} onClick={this.navigateToPage}>
+                {alert.toUpperCase()}: POTENTIAL COVID-19 LOCKDOWN
+            </div>
+        );
     }
 
     render() {

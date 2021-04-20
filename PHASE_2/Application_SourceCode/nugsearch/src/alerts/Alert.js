@@ -8,8 +8,8 @@ class Alert extends React.Component {
         this.state = {
             location: "",
             alertText: "",
-            baseText0: "In the past, this amount of cases has lead to a lockdown in your area. Be prepared for another to happen again. COVID-19 has caused lockdowns to happen way too many times in total.",
-            baseText1: "February 12, 2021, it was announced that a five-day lockdown under Stage 4 restrictions would take effect beginning at 11:59 pm. AEDT, due to a cluster of 13 cases tied to a Holiday Inn quarantine hotel near Melbourne Airport, which have been assumed to be the UK variant. Based on statistics surrounding these cases and current cases in your area, it is possible for a lockdown and further restrictions to occur.",
+            baseText0: "In the past, these numbers of cases has lead to lockdowns in Australia.",
+            baseText1: "Based on statistics surrounding past cases and current cases in your area, it is possible for a lockdown to occur.",
             govText: "",
             lastUpdateDate: ""
         }
@@ -42,14 +42,39 @@ class Alert extends React.Component {
 
     render() {
         return(
-        <div class="page">
+        <div class="alertPage">
             <h1> COVID-19 Alert: {this.state.location.toUpperCase()} </h1>
             <p>{this.state.lastUpdateDate}</p>
             <div className="Background">
-                <p className="AlertText">{this.state.alertText}</p>
-                <p className="AlertText">{this.state.baseText0}</p>
-                <p className="AlertText">{this.state.baseText1}</p>
-                <p className="AlertText">Further information and announcements may be found here: <a href={this.state.govText} rel="noreferrer">{this.state.govText}</a>
+                <p className="AlertText">
+                    {this.state.alertText}
+                    <br></br><br></br>
+                    {this.state.baseText0} {this.state.baseText1}
+                    <br></br><br></br>
+                    Please be cautious and plan accordingly - further restrictions may be enforced in upcoming days.
+                    <br></br><br></br>
+                    <h3>Common COVID-19 symptoms:</h3>
+                    <li>fever</li>
+                    <li>dry cough</li>
+                    <li>tiredness</li>
+                    <h3>Less common symptoms:</h3>
+                    <li>aches and pains</li>
+                    <li>sore throat</li>
+                    <li>diarrhoea</li>
+                    <li>conjunctivitis</li>
+                    <li>headache</li>
+                    <li>loss of taste or smell</li>
+                    <li>a rash on skin, or discolouration of fingers or toes</li>
+                    <h3>Serious symptoms:</h3>
+                    <li>difficulty breathing or shortness of breath</li>
+                    <li>chest pain or pressure</li>
+                    <li>loss of speech or movement</li>
+                    <br></br><br></br>
+                    Seek immediate medical attention if you have serious symptoms. Always call before visiting your doctor or health facility.
+                    People with mild symptoms who are otherwise healthy should manage their symptoms at home.
+                    On average it takes 5–6 days from when someone is infected with the virus for symptoms to show, however it can take up to 14 days.
+                    <br></br><br></br>
+                    Further information and announcements may be found here: <a href={this.state.govText} rel="noreferrer">{this.state.govText}</a>
                 </p>
             </div>
         </div>

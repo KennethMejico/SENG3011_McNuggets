@@ -1,0 +1,26 @@
+.Container {
+    height: 100vh;
+    overflow: hidden;
+}
+
+.Table {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 100px;
+    overflow: hidden;
+}
+
+.HeaderRow {
+    background: white;
+    overflow: hidden;
+}
+
+.Row {
+    background: whitesmoke;
+    overflow: hidden;
+}
+
+.Filter {
+    width: 79%;
+}
