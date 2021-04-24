@@ -1,0 +1,5 @@
+1. Open a terminal in the nugsearch folder
+2. Run yarn start-api
+3. Open another terminal in the nugsearch folder
+4. Run yarn start
+5. App should open in your browser, if it does not go to http://localhost:3000/
