@@ -8,6 +8,11 @@
   1. [Final Architecture](#finarch)
   2. [Implementation Justification](#justif)
   3. [Challenges](#challenges)
+* [Deliverable 4](#deliverable4)
+  1. [Use Cases](#usecases)
+  2. [Requirements](#requirements)
+  3. [Design and Implementations](#desandimp)
+  4. [Justification](#finjust)
 ## Deliverable 1 🥓 <a name="deliverable1"></a>
 ### API Module Development <a name="apidev"></a>
 Question: *Describe how you intend to develop the API module and provide the ability to run it in Web service mode*
@@ -304,7 +309,7 @@ Furthermore, to properly generate multiple reports for a given article would inv
 
 Our team encountered multiple issues while attempting to deploy the API publicly. Our initial plan was to create the API using Flask, and deploy it completely on AWS Elastic Beanstalk. The promises of using Elastic Beanstalk looked enticing - the ability to upload whole packages of code, have it run on a preconfigured server, and a fairly long free trial. However, like a mirage these hopes faded quickly when we ran into numerous issues configuring environment variables, importing external packages and even getting Elastic Beanstalk to identify our main file. When these issues were compounded with the inability to change code in any way other than completely reuploading the whole codebase, several minute long deployment times and a lack of documentation, we gave up on Elastic Beanstalk and looked to another Amazon Webservice, Lambda. We had previously experimented with Lambda in case we ran into issues with Elastic Beanstalk, so we were able to get Lambda working quickly enough to show off an example endpoint for our week five mentor session. We also found that during the switch to Lambda, it was easier to manually direct code to the appropriate endpoints (Using Amazon's API Gateway) than it was to figure out how to integrate Flask, and so the use of Flask was dropped when deploying to Lambda. This, along with a reorganisation of functions, is why we have included a zipped version of the code published to Lambda in our git repository, under the paths "Phase_1/API_SourceCode/lambda_endpoints.zip" and "Phase_1/API_SourceCode/lambda_database_updater.zip." This code integrates with Amazon's API Gateway and environment to receive event information and redirect it to the appropriate functions.
 
-## Deliverable 3 🥓 <a name="deliverable3"></a>
+## Deliverable 4 🥓 <a name="deliverable4"></a>
 ### Use Cases <a name="usecases"></a>
 Covid-19 lockdowns have caused widespread economic recession, and dramatic increases in stress for everyday families. During the lockdown in Melbourne last year, an estimated [1200 jobs were lost daily and there was a 30% increase in demand for mental health services](https://www.bloomberg.com/news/articles/2020-10-28/city-locked-down-for-three-months-has-bleak-lesson-for-the-world). Nevertheless, the effectiveness of the lockdown in curbing cases indicates that lockdowns will continue to be used to control further outbreaks of Covid-19 and any future virulent disease. To both the ordinary person and corporations with a vested interest in the market, knowing when lockdowns are going to happen will greatly improve their chances of surviving them relatively unscathed.
 
@@ -336,12 +341,10 @@ The user interface needs to be clear and simple to understand so that anyone who
 | Graph is simple to understand | The graph should be simple to view and interpret | ![](./Images/graphDraft.png) | ![](./Images/graphComplete.png) |
 | Map is easy to understand | The map should present case locations from the search results visually, with an overlay displaying probability of lockdown. | ![](./Images/mapDraft.png) | |
 
-### System Design and Implementation
+### System Design and Implementation <a name="desandimp"></a>
 #### WebApp Software Architecture
 Our WebApp is made using a Python Flask backend and a React frontend built on JavaScript. The backend calls various external APIs such as the Google Maps Geocoding and Embed APIs as well as team BugsFreeSince93&#39;s API. Additionally, we have a separate scraper that collects data daily from the covidlive website.
-
-![](RackMultipart20210425-4-1edr1b7_html_c3db113721e29214.png)
-
+![](./Images/architecture.png)
 | Component | Choice |
 | --- | --- |
 | Frontend Language | JavaScript, CSS |
@@ -353,7 +356,7 @@ Our WebApp is made using a Python Flask backend and a React frontend built on Ja
 | External Data Source | [https://covidlive.com.au](https://covidlive.com.au/) |
 | JavaScript libraries/React Modules | nivo, react-table, react-router, react-datepicker |
 
-### Justification of Design Choices
+### Justification of Design Choices <a name="finjust"></a>
 
 #### Frontend Language
 
