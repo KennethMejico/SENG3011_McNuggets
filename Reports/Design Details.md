@@ -329,12 +329,12 @@ Below we can see an ordered list of functional requirements. Our MVP is a produc
 The user interface needs to be clear and simple to understand so that anyone who uses our product would be able to understand it - especially considering that our product is designed to be used by the general public.
 | Requirement | Explanation | Example | Final product |
 | --- | --- | --- | --- |
-| Multiple pages and navbar | Our website needs to be simple to navigate it&#39;s multiple pages, with each screen self evident of its purpose | ![](https://lh4.googleusercontent.com/LFRgwUVtQkB1_03oa7-DMJq0Crb-KAmgGrQaHXUD7dlQO1H-gvW9NWODo1yKsOxwM7nUGt7NcFdR8_kGQABEETeEuaafSfeD67f7lil2HdwTqSLO5Fyik-n1jQSadlKpNH8matec) | ![](RackMultipart20210425-4-1edr1b7_html_daa943a7ded1f9c0.png) |
-| Alerts are clear to see | We want alerts to be clear on our website as they will warn users about upcoming lockdowns. | ![](RackMultipart20210425-4-1edr1b7_html_76e1a012a76a234c.gif) | ![](RackMultipart20210425-4-1edr1b7_html_daa943a7ded1f9c0.png) |
-| Search is easy to use | The search function needs to be easy to use, with each field self explanatory of why it is being requested. | ![](RackMultipart20210425-4-1edr1b7_html_f5e0c60020b2f8b7.gif) | ![](RackMultipart20210425-4-1edr1b7_html_daa943a7ded1f9c0.png) |
-| Table is easy to understand | The table of results from the search function should have simple to understand columns and information | ![](RackMultipart20210425-4-1edr1b7_html_99ddc80e3ffdcbf7.gif) | ![](RackMultipart20210425-4-1edr1b7_html_91b00fc3d3f1d0b2.png) |
-| Graph is simple to understand | The graph should be simple to view and interpret | ![](RackMultipart20210425-4-1edr1b7_html_d923630459a8ba10.gif) | ![](RackMultipart20210425-4-1edr1b7_html_dd9c8b99bf0a21f9.png) |
-| Map is easy to understand | The map should present case locations from the search results visually, with an overlay displaying probability of lockdown. | ![](RackMultipart20210425-4-1edr1b7_html_e3d66c3205da0e51.gif) | |
+| Multiple pages and navbar | Our website needs to be simple to navigate it&#39;s multiple pages, with each screen self evident of its purpose | ![](./Images/homeDraft.png) | ![](./Images/homepageComplete.png) |
+| Alerts are clear to see | We want alerts to be clear on our website as they will warn users about upcoming lockdowns. | ![](./Images/alertDraft.png) | ![](./Images/homepageComplete.png) |
+| Search is easy to use | The search function needs to be easy to use, with each field self explanatory of why it is being requested. | ![](./Images/searchDraft.png) | ![](./Images/homepageComplete.png) |
+| Table is easy to understand | The table of results from the search function should have simple to understand columns and information | ![](./Images/tableDraft.png) | ![](./Images/tableComplete.png) |
+| Graph is simple to understand | The graph should be simple to view and interpret | ![](./Images/graphDraft.png) | ![](./Images/graphComplete.png) |
+| Map is easy to understand | The map should present case locations from the search results visually, with an overlay displaying probability of lockdown. | ![](./Images/mapDraft.png) | |
 
 ### System Design and Implementation
 #### WebApp Software Architecture
