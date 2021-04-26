@@ -1,6 +1,7 @@
 # SENG3011_McNuggets 🐔
 ## Table of Contents
 * [Project Overview](#projoverview)
+* [Usage](#usage)
 * [Deliverable 1](#deliverable1)
   1. [Design Details](#designdetails)
   2. [Management Information](#maninfo)
@@ -27,6 +28,19 @@ Ever since COVID-19's breakout, more awareness and emphasis has been placed on t
 | Kenneth Mejico     | z5257133 |
 | Liam Staples       | z5254570 |
 | Luke Junsuo Chen   | z5264602 |
+
+## Usage 🍟 <a name="usage"></a>
+1. Open a terminal in the nugsearch folder: [SENG3011_McNuggets/PHASE_2/Application_SourceCode/nugsearch/](https://github.com/KennethMejico/SENG3011_McNuggets/tree/main/PHASE_2/Application_SourceCode/nugsearch)
+2. Run yarn start-api
+3. Open another terminal in the nugsearch folder
+4. Run yarn start
+5. App should open in your browser, if it does not go to http://localhost:3000/
+
+Note:
+- Modules used can be installed with `pip install -r requirements.txt` in the root folder
+- If issues persist, run `yarn` in nugsearch folder
+- `yarn start-api` may not work, instead, inside nugsearch/api/ folder run `python3 flask -m run`
+- App may not run if there is no 'GOOGLE_MAP_API_KEY.js' file: create missing file with contents `GOOGLE_MAP_API_KEY = none;`
 
 ## Deliverable 1 🍟 <a name="deliverable1"></a>
 ### Design Details <a name="designdetails"></a>
