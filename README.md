@@ -13,6 +13,7 @@
 * [Deliverable 4](#deliverable4)
   1. [Use Cases and Requirements](#usecases)
   2. [System Design and Implementation](#desandimp)
+  3. [Management Information](#maninfo1)
 
 ## Project Overview 🍟 <a name="projoverview"></a>
 Ever since COVID-19's breakout, more awareness and emphasis has been placed on the effectiveness of communication and knowledge of disease and outbreaks. The **McNuggets** aim to to develop a platform that would contribute to an alert society with complete access to vital health information. This platform will automate the extraction of data from available sources in order to produce the following information for the public:
@@ -66,3 +67,5 @@ Our web application, 'NugSearch', has been developed to work as a visualised sea
 More information about the use cases and requirements of our web application can be found here: [Use Cases and Requirements](https://github.com/KennethMejico/SENG3011_McNuggets/blob/main/Reports/Design%20Details.md#usecases)
 ### System Design and Implementation <a name="desandimp"></a>
 More information about our system design and implementation can be found here: [System Design and Implementation](https://github.com/KennethMejico/SENG3011_McNuggets/blob/main/Reports/Design%20Details.md#system-design-and-implementation-)
+### Management Information <a name="maninfo1"></a>
+Information regarding team organisation and appraisal of work can be found here: [Management Information](https://github.com/KennethMejico/SENG3011_McNuggets/blob/main/Reports/Management%20Information.md#deliverable4)
