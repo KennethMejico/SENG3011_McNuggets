@@ -60,6 +60,7 @@ Our API Documentation was completed on Stoplight, and can be found here: [McNugg
 The API has been implemented on AWS Lambda, and can be called using our Stoplight's try it out feature. Log files have also been implemented, including details such as team name, accessed time, and data source.
 
 ## Deliverable 3 🍟 <a name="deliverable3"></a>
+During this deliverable, we had to create a presentation outlining our business model and demonstrating our web application prototype. Our presentation outlining both our architecture, requirements and business value can be found here: [Deliverable 3 Presentation](https://docs.google.com/presentation/d/1cd_tKlDcQYewkqLjIOabo6-QE_HU0cDb2zDdVPh7MIk/edit?usp=sharing)
 
 ## Deliverable 4 🍟 <a name="deliverable4"></a>
 Our web application, 'NugSearch', has been developed to work as a visualised search engine for disease reports found on [ProMedMail.org](https://promedmail.org/). Users can see the reports on diseases of interest and visualise that data in a graph to track the growth of infection and a map to see the areas threatened. They can also sign up to a mailing list to receive notifications if our system detects a lockdown, and gain an edge that allows them to prepare to weather the oncoming events.
