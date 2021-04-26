@@ -303,3 +303,123 @@ Furthermore, to properly generate multiple reports for a given article would inv
 #### Publishing the API
 
 Our team encountered multiple issues while attempting to deploy the API publicly. Our initial plan was to create the API using Flask, and deploy it completely on AWS Elastic Beanstalk. The promises of using Elastic Beanstalk looked enticing - the ability to upload whole packages of code, have it run on a preconfigured server, and a fairly long free trial. However, like a mirage these hopes faded quickly when we ran into numerous issues configuring environment variables, importing external packages and even getting Elastic Beanstalk to identify our main file. When these issues were compounded with the inability to change code in any way other than completely reuploading the whole codebase, several minute long deployment times and a lack of documentation, we gave up on Elastic Beanstalk and looked to another Amazon Webservice, Lambda. We had previously experimented with Lambda in case we ran into issues with Elastic Beanstalk, so we were able to get Lambda working quickly enough to show off an example endpoint for our week five mentor session. We also found that during the switch to Lambda, it was easier to manually direct code to the appropriate endpoints (Using Amazon's API Gateway) than it was to figure out how to integrate Flask, and so the use of Flask was dropped when deploying to Lambda. This, along with a reorganisation of functions, is why we have included a zipped version of the code published to Lambda in our git repository, under the paths "Phase_1/API_SourceCode/lambda_endpoints.zip" and "Phase_1/API_SourceCode/lambda_database_updater.zip." This code integrates with Amazon's API Gateway and environment to receive event information and redirect it to the appropriate functions.
+
+## Deliverable 3 🥓 <a name="deliverable3"></a>
+### Use Cases <a name="usecases"></a>
+Covid-19 lockdowns have caused widespread economic recession, and dramatic increases in stress for everyday families. During the lockdown in Melbourne last year, an estimated [1200 jobs were lost daily and there was a 30% increase in demand for mental health services](https://www.bloomberg.com/news/articles/2020-10-28/city-locked-down-for-three-months-has-bleak-lesson-for-the-world). Nevertheless, the effectiveness of the lockdown in curbing cases indicates that lockdowns will continue to be used to control further outbreaks of Covid-19 and any future virulent disease. To both the ordinary person and corporations with a vested interest in the market, knowing when lockdowns are going to happen will greatly improve their chances of surviving them relatively unscathed.
+
+There are two aspects to consider when predicting lockdowns. The first is the number/frequency of cases, and the second is the previous government response to previous epidemics and pandemics. Our application, Nugsearch, works with both of these aspects to keep users informed about the spread of diseases and the likelihood of lockdowns. Our application is built around a search feature that allows users to visualise the spread of infection and draw their own conclusions, and we also provide a feature that notifies users when our system believes a lockdown to be imminent.
+
+Using our app, users can see the reports on diseases of interest and visualise that data in a graph to track the growth of infection and a map to see the areas threatened. They can sign up to a mailing list to receive notifications if our system detects a lockdown, and gain an edge that allows them to prepare to weather the oncoming events.
+
+### Requirements <a name="requirements"></a>
+#### Functional Requirements
+Below we can see an ordered list of functional requirements. Our MVP is a product that we can use to search, and can display results in a table or graph.
+| Requirement | Description | Result |
+| --- | --- | --- |
+| Search | Users can search for disease-related keywords with restrictions on time period and location. | Fully delivered: users can search for keywords with options to specify a date range and location. Input is made easier by a &quot;Find My Location&quot; button and date picker pop ups. |
+| Reports Table | As a result of the search, users can see information about and links to relevant reports. | Fully delivered: users are able to see search results in a table format containing information regarding the disease report including: date, location, diseases, article headline, and url to the article. Additionally, the user is able to sort each column alphabetically and filter out results based on Article Headline, providing a better user experience. |
+| Graph | Users can visualise the result of the search as a graph of cases over time. | Fully delivered: Users are able to view search results in the form of a Graph showing the number of reports (y axis) for a date (x axis), with each disease being represented by its own line. Users are also able to see the values for a data point by hovering over it. |
+| Map | Users can visualise the result of the search on a map of cases in areas. | Partially delivered: The map works and will generate for any data from the backend - however the backend was not completed due to the high level of difficulty the task would require and time constraints. |
+| Mailing | Users can subscribe to a mailing list to receive alerts. | Partially delivered: while users can sign up to a mailing list, the recurring alert scraper system was not configured to send email alerts yet. |
+| Alert Notifications | Users can receive alerts while in the app. | Fully delivered: users can see notifications appear in the top right of several screens. The notifications contain a brief description of the state the alert is in and the nature of the alert, and can be clicked to go to a page with further details. |
+| Alert Descriptions | Users can find relevant information about current alerts. | Fully delivered: users directed to the alerts page are provided with important data such as the latest local case number and weekly average of local cases for the specific Australian state, alongside potential symptoms to look out for. |
+
+#### User interface requirements
+The user interface needs to be clear and simple to understand so that anyone who uses our product would be able to understand it - especially considering that our product is designed to be used by the general public.
+| Requirement | Explanation | Example | Final product |
+| --- | --- | --- | --- |
+| Multiple pages and navbar | Our website needs to be simple to navigate it&#39;s multiple pages, with each screen self evident of its purpose | ![](https://lh4.googleusercontent.com/LFRgwUVtQkB1_03oa7-DMJq0Crb-KAmgGrQaHXUD7dlQO1H-gvW9NWODo1yKsOxwM7nUGt7NcFdR8_kGQABEETeEuaafSfeD67f7lil2HdwTqSLO5Fyik-n1jQSadlKpNH8matec) | ![](RackMultipart20210425-4-1edr1b7_html_daa943a7ded1f9c0.png) |
+| Alerts are clear to see | We want alerts to be clear on our website as they will warn users about upcoming lockdowns. | ![](RackMultipart20210425-4-1edr1b7_html_76e1a012a76a234c.gif) | ![](RackMultipart20210425-4-1edr1b7_html_daa943a7ded1f9c0.png) |
+| Search is easy to use | The search function needs to be easy to use, with each field self explanatory of why it is being requested. | ![](RackMultipart20210425-4-1edr1b7_html_f5e0c60020b2f8b7.gif) | ![](RackMultipart20210425-4-1edr1b7_html_daa943a7ded1f9c0.png) |
+| Table is easy to understand | The table of results from the search function should have simple to understand columns and information | ![](RackMultipart20210425-4-1edr1b7_html_99ddc80e3ffdcbf7.gif) | ![](RackMultipart20210425-4-1edr1b7_html_91b00fc3d3f1d0b2.png) |
+| Graph is simple to understand | The graph should be simple to view and interpret | ![](RackMultipart20210425-4-1edr1b7_html_d923630459a8ba10.gif) | ![](RackMultipart20210425-4-1edr1b7_html_dd9c8b99bf0a21f9.png) |
+| Map is easy to understand | The map should present case locations from the search results visually, with an overlay displaying probability of lockdown. | ![](RackMultipart20210425-4-1edr1b7_html_e3d66c3205da0e51.gif) | |
+
+### System Design and Implementation
+#### WebApp Software Architecture
+Our WebApp is made using a Python Flask backend and a React frontend built on JavaScript. The backend calls various external APIs such as the Google Maps Geocoding and Embed APIs as well as team BugsFreeSince93&#39;s API. Additionally, we have a separate scraper that collects data daily from the covidlive website.
+
+![](RackMultipart20210425-4-1edr1b7_html_c3db113721e29214.png)
+
+| Component | Choice |
+| --- | --- |
+| Frontend Language | JavaScript, CSS |
+| Frontend Framework | React |
+| Backend Language | Python |
+| Backend Web Framework | Flask |
+| External APIs | Google Maps Geocoding API, Google Maps Embed API |
+| SENG3011 Team API | BugsFreeSince93 |
+| External Data Source | [https://covidlive.com.au](https://covidlive.com.au/) |
+| JavaScript libraries/React Modules | nivo, react-table, react-router, react-datepicker |
+
+### Justification of Design Choices
+
+#### Frontend Language
+
+The choice of using JavaScript and CSS for the frontend of our web app was a natural and easy choice as there are not many alternatives to JavaScript that provide the same range of features and support as it does. Additionally, the extensive range of libraries available with JavaScript and available online support make development much faster and easier, making JavaScript the obvious choice.
+
+#### Frontend Framework
+
+For frontend development, there are many frameworks available in JavaScript that offer features that would reduce development time and the code required to write such features. We evaluated the frameworks of Vue and React along with Vanilla JavaScript (using no framework) in the table below. Both Vue and React are quite comparable in the features they offer and although Vue is easier to use and set up than React, our team decided to use React simply due to the team&#39;s prior experience with these frameworks which would eliminate part of the learning curve that comes with React.
+
+| **Feature** | **Vanilla JavaScript** | **Vue** | **React** | **Relevance** |
+| --- | --- | --- | --- | --- |
+| **Ease of use** | Poor - have to manually write in features such as state management | Good - lightweight, easy to use | Good - although slightly steeper learning curve compared to Vue | High |
+| **Maintainability** | Poor - have to manually keep UI in sync with state - a lot of code, low readability | Good with separate JavaScript, HTML, CSS files | Good - use react components | High |
+| **State Management** | No | Yes | Yes | High |
+| **Routing** | No | Yes | Yes | High |
+| **Virtual DOMs** | No | Yes | Yes | Moderate |
+| **Documentation** | Moderate | Good | Good with large community | Moderate |
+| **Scalability** | Poor - hard to scale up | Good - scales well both up and down | Good - scales up well, down not so good | Moderate |
+
+#### Backend Language
+
+We chose to use Python for our backend mainly due to its readability, modularity, portability, and extensive library support making it a suitable choice for developing a web app in such a short period of time. Additionally, Python is the language that everyone in the team has the most experience with which makes it the natural choice for this project as it would be unreasonable for a team member to have to learn a new language in a few weeks. Of course, the pros and cons of each language that we evaluated in the Deliverable 2 report (table below) still apply and as with Deliverable 2, we chose to use Python for our backend development.
+
+| Language | Pros | Cons |
+|----------|------|------|
+| Python | <ul><li>Easy API calls</li><li>Readability</li><li>Supports procedural and object-oriented programming</li><li>Can be run on multiple platforms</li><li>Automatic memory management</li><li>Simplified unit testing</li></ul> | <ul><li>Relatively slow performance</li><li>High memory consumption due to flexibility of data types</li><li>Has errors that only show up in runtime</li><li>Needs large degree of unit testing</li></ul> |
+| Java/C# | <ul><li>Relatively high performance</li><li>Compiled</li><li>Statically typed so errors can be detected during runtime</li><li>Object oriented - offers maintainability and modularity</li></ul> | <ul><li>Not as readable and beginner friendly as python</li></ul> |
+| JavaScript | <ul><li>Covers full stack of development</li><li>Manages backend and frontend</li><li>Common language allows for better team efficiency with less resources</li><li>Extensive code reusability</li><li>Relatively high performance</li></ul> | <ul><li>Insufficiency with computation-heavy back end</li><li>The drawback of each item in the stack causes framework to have to inherit the flaws of each part</li></ul> |
+| C/C++ | <ul><li>High performance and efficient</li><li>Statically typed so errors can be detected during runtime</li></ul> | <ul><li>Need to manually manage memory</li><li>Commonly used to be platform specific</li><li>Can be more complex and therefore harder to use</li></ul> |
+
+#### Backend Web Framework
+
+With choosing Python as our backend language, the main python web frameworks that are widely used are Flask and Django. A comparison of the two frameworks and the features they offer is included below. After evaluating each framework, we decided to use Flask due to its ease of use and set up making it suitable for making a small web app in the given time period. Additionally, the advantages and features Django have over Flask such as built-in input handling and validation were not required due to the small scale of our app. Hence, we chose the more lightweight Flask as our backend web framework.
+
+| **Feature** | **Flask** | **Django** | **Relevance to Project** |
+| --- | --- | --- | --- |
+| **Mapping URLs to views** | Yes with support for function and class-based views | Yes with support for function and class-based views | High |
+| **Ease of use** | Good - easy to use and set up | Moderate - harder than Flask | High |
+| **Flexibility** | Good - flexible app structure; large availability of extensions | Moderate - requires consistent app structure | Moderate |
+| **Performance** | Good - smaller and has fewer layers than Django | Not as good as Flask but comparable | Moderate |
+| **Input handling, client and server side validation of forms** | No, but can be done through extensions | Yes with handling of various security concerns such as CSRF, XSS, and SQL injection | Moderate - Low |
+
+#### External APIs
+
+##### Google Maps Javascript Mapping API
+
+The Google Maps Javascript Mapping API allows us to generate a dynamic map for our user at runtime depending on their selection criteria and chosen data points. Whilst there are alternatives to this API for mapping, such as Openlayers and TomTom, they don&#39;t feature all the functionality that we require and have as much ease of use. For example: you cannot search for locations through the Openlayers API and whilst there is documentation for the TomTom API, there isn&#39;t much community support for it - making developing in it, relatively speaking, very difficult. Alongside this, we are also already using the Google API suite for another function, hence minimizing the services that we require by using this API. Hence the choice of using the Google Maps Javascript Mapping API becomes a natural one.
+
+##### Google Geocoding API
+
+One feature that we wanted to implement in our program was the ability for a user to easily enter their location, maybe even with the click of a button, so that they would receive results tailored to them. To do this, we would need to do geo-encoding and geo-decoding. There are a lot of options out there, such as the Australian Geocoder API and the Mapbox Geocoding API. We decided to go with the Google Geocoding API for a variety of reasons. Firstly: it allows for generalization of our product. Even though we are starting only in Australia, we would eventually want to expand the product worldwide. Which means the Australian Geocoder API would not be suitable. Secondly, the Google Geocoding API is quick to start with and has a large amount of both documentation and community support. This means that the effects of the learning curve are minimized and the development speed is faster - which in a time sensitive project like this one is important. This is what makes it better for our project then the Mapbox Geocoding API. Last but not least, we are using the Google Maps Javascript Mapping API already to display user results, so using this API minimizes the number of services we require - allowing for faster development and more streamlined code.
+
+##### SENG3011 Team API
+
+For our web app, we chose to use team BugsFreeSince93 API for our search results as their API returns a large number of results within the provided time period from the Promed data source. However, the results disease and syndrome list were often empty and the API seemed to lack any form of key terms searching. Although other teams provided better search functionality and quality of results, they often did not return many results, sometimes only 1 report within a month&#39;s time period. As one of the main functionality of our web app is to display the search results in a table, graph, and map, we decided that the many results from the BugsFreeSince93 API would be most suitable for demonstrating this functionality. To mitigate the limited filtering of the API, we implemented filter and search functionality on our results page, allowing users to filter out any unwanted results.
+
+#### External Data Sources
+
+##### Covid Live
+
+[Covidlive](https://covidlive.com.au/) is a website that helps inform users about COVID-19 cases, which is updated daily. The site mainly shows Australian data and includes information from different states. The website would deem useful for our project as it had data for the number of local cases of the virus each day, this would help us in creating triggers for our alerts and our prediction system. We had used a scraper to extract the data and calculated specific thresholds for the latest local case number and weekly average for each state, all of which was based on recent lockdowns. As the data is scraped daily, the alert system will display alerts for the user from different states which may have surpassed the threshold.
+
+##### JavaScript Libraries/React Modules
+
+Nivo was used for generating the line graph in our web app for two main reasons. Firstly, Nivo has an interactive documentation with examples containing source code, allowing it to be easily used without needing to spend long periods of time reading documentation. The second reason was that Nivo has built-in styling, reducing the time spent on writing CSS for the graph.
+
+With many table libraries available for generating tables in React, we chose to use React-table as it is simple and lightweight compared to many of its alternatives. It also provides easy customisation and features such as searching and sorting. However, due to it&#39;s lightweight nature, it does feature a simple design with minimal styling which was a disadvantage of using the library. This was easily fixed with applying our own CSS to the component. Similarly, React-Datepicker was used as a simple react extension that lets us add a date selection form without much hassle.
+
+React-Router was used to create the appearance of multiple pages within our app. By using routes our app was able to support switching between a number of paths to display different react components while keeping a consistent navigation bar at the top of the screen. React-Router lets us treat each path as its own independent component while allowing us to change between components in sensible ways. As it has a simple to grasp syntax and a solid amount of documentation and support, it was the natural choice for serving up a multi page application.
