@@ -342,7 +342,7 @@ The user interface needs to be clear and simple to understand so that anyone who
 | Alerts are clear to see | We want alerts to be clear on our website as they will warn users about upcoming lockdowns. | ![](./Images/alertDraft.png) | ![](./Images/homepageComplete.png) |
 | Search is easy to use | The search function needs to be easy to use, with each field self explanatory of why it is being requested. | ![](./Images/searchDraft.png) | ![](./Images/homepageComplete.png) |
 | Table is easy to understand | The table of results from the search function should have simple to understand columns and information | ![](./Images/tableDraft.png) | ![](./Images/tableComplete.png) |
-| Graph is simple to understand | The graph should be simple to view and interpret | ![](./Images/graphDraft.png) | ![](./Images/graphComplete.png) |
+| Graph is simple to understand | The graph should be simple to view and interpret | ![](./Images/graphDraft.png) | ![](./Images/graphComplete1.png) |
 | Map is easy to understand | The map should present case locations from the search results visually, with an overlay displaying probability of lockdown. | ![](./Images/mapDraft.png) | |
 
 ### System Design and Implementation <a name="desandimp"></a>
