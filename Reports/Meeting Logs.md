@@ -60,3 +60,17 @@
 ## Meeting 11 (Thursday, 25th of Mar, 22:00 - 23:00)
 * Finalisation for Deliverable 2
 * Planning Friday submission
+
+## Meeting 12 (Tuesday, 30th of Mar, 14:20 - 15:00)
+* Brainstorming deliverable 3 ideas
+* Business values
+
+## Meeting 13 (Wednesday, 31st of Mar, 21:00 - 22:00)
+* Deliverable 3 breakdown and delegation
+* Further brainstorming
+
+## Meeting 14 (Thursday, 1st of Apr, 22:00 - 22:20)
+* Document and presentation creation and outline
+
+## Meeting 15 (Tuesday, 13th of Apr, 14:20 - 15:00)
+* Deliverable 4 breakdown and delegation
