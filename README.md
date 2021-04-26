@@ -11,6 +11,8 @@
   4. [API Implementation](#apiimp)
 * [Deliverable 3](#deliverable3)
 * [Deliverable 4](#deliverable4)
+  1. [Use Cases and Requirements](#usecases)
+  2. [System Design and Implementation](#desandimp)
 
 ## Project Overview 🍟 <a name="projoverview"></a>
 Ever since COVID-19's breakout, more awareness and emphasis has been placed on the effectiveness of communication and knowledge of disease and outbreaks. The **McNuggets** aim to to develop a platform that would contribute to an alert society with complete access to vital health information. This platform will automate the extraction of data from available sources in order to produce the following information for the public:
@@ -56,6 +58,11 @@ Our API Documentation was completed on Stoplight, and can be found here: [McNugg
 ### API Implementation <a name="apiimp"></a>
 The API has been implemented on AWS Lambda, and can be called using our Stoplight's try it out feature. Log files have also been implemented, including details such as team name, accessed time, and data source.
 
-## Deliverable 3 <a name="deliverable3"></a>
+## Deliverable 3 🍟 <a name="deliverable3"></a>
 
-## Deliverable 4 <a name="deliverable4"></a>
+## Deliverable 4 🍟 <a name="deliverable4"></a>
+Our web application, 'NugSearch', has been developed to work as a visualised search engine for disease reports found on [ProMedMail.org](https://promedmail.org/). Users can see the reports on diseases of interest and visualise that data in a graph to track the growth of infection and a map to see the areas threatened. They can also sign up to a mailing list to receive notifications if our system detects a lockdown, and gain an edge that allows them to prepare to weather the oncoming events.
+### Use Cases and Requirements <a name="usecases"></a>
+More information about the use cases and requirements of our web application can be found here: [Use Cases and Requirements](https://github.com/KennethMejico/SENG3011_McNuggets/blob/main/Reports/Design%20Details.md#usecases)
+### System Design and Implementation <a name="desandimp"></a>
+More information about our system design and implementation can be found here: [System Design and Implementation](https://github.com/KennethMejico/SENG3011_McNuggets/blob/main/Reports/Design%20Details.md#system-design-and-implementation-)
